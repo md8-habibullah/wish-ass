@@ -50,7 +50,7 @@ export default function SellerOrdersPage() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    const role = (session?.user as any).role;
+    const role = (session?.user as any)?.role;
     if (!sessionLoading && (!session || (role !== "SELLER" && role !== "ADMIN"))) {
       router.push("/");
     }
@@ -81,7 +81,7 @@ export default function SellerOrdersPage() {
   if (sessionLoading || isLoading) {
     return (
       <div className="flex h-[calc(100vh-64px)] items-center justify-center">
-        <Loader2 className="h-10 w-10 animate-spin text-teal-600" />
+        <Loader2 className="h-10 w-10 animate-spin text-primary" />
       </div>
     );
   }
@@ -94,14 +94,14 @@ export default function SellerOrdersPage() {
   return (
     <div className="container px-4 py-8 md:px-8">
       <div className="flex items-center gap-2 text-sm text-zinc-500 mb-6">
-        <Link href="/seller/dashboard" className="hover:text-teal-600 transition-colors">Dashboard</Link>
+        <Link href="/seller/dashboard" className="hover:text-primary transition-colors">Dashboard</Link>
         <ChevronRight className="h-4 w-4" />
-        <span className="text-zinc-900 font-bold">Manage Orders</span>
+        <span className="text-white font-bold">Manage Orders</span>
       </div>
 
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
         <div className="space-y-1">
-          <h1 className="text-3xl font-bold text-zinc-900 font-heading">Incoming Orders</h1>
+          <h1 className="text-3xl font-bold text-white font-heading">Incoming Orders</h1>
           <p className="text-zinc-500">View and update the status of orders from your customers</p>
         </div>
         <div className="flex gap-3">
@@ -122,23 +122,23 @@ export default function SellerOrdersPage() {
 
       <div className="space-y-6">
         {!filteredOrders || filteredOrders.length === 0 ? (
-           <div className="py-20 text-center text-zinc-400 bg-white rounded-3xl border border-dashed border-zinc-200">
+           <div className="py-20 text-center text-zinc-400 bg-card rounded-3xl border border-dashed border-zinc-200">
              <Package className="h-10 w-10 mx-auto opacity-20 mb-2" />
              <p className="text-sm font-medium">No orders found</p>
            </div>
         ) : (
           filteredOrders.map((order: any) => (
-            <Card key={order.id} className="rounded-3xl border-zinc-100 shadow-sm overflow-hidden hover:border-teal-200 transition-all">
-              <CardHeader className="bg-zinc-50/50 p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-zinc-100">
+            <Card key={order.id} className="rounded-3xl border-white/5 shadow-sm overflow-hidden hover:border-teal-200 transition-all">
+              <CardHeader className="bg-background/50 p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-white/5">
                 <div className="flex flex-wrap items-center gap-6 md:gap-10">
                   <div className="space-y-1">
                     <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400">Order ID</p>
-                    <p className="text-sm font-bold text-zinc-900">#{order.id.slice(0, 8)}</p>
+                    <p className="text-sm font-bold text-white">#{order.id.slice(0, 8)}</p>
                   </div>
                   <div className="space-y-1">
                     <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400">Customer</p>
-                    <div className="flex items-center gap-2 text-sm font-bold text-zinc-900">
-                      <div className="h-6 w-6 rounded-full bg-teal-100 text-teal-700 flex items-center justify-center text-[10px]">
+                    <div className="flex items-center gap-2 text-sm font-bold text-white">
+                      <div className="h-6 w-6 rounded-full bg-primary/10 text-primary flex items-center justify-center text-[10px]">
                         {order.user?.name?.charAt(0) || "U"}
                       </div>
                       {order.user?.name || "Anonymous User"}
@@ -153,7 +153,7 @@ export default function SellerOrdersPage() {
                   </div>
                   <div className="space-y-1">
                     <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400">Total Price</p>
-                    <p className="text-sm font-bold text-teal-700">${(Number(order.totalPrice) / 100).toFixed(2)}</p>
+                    <p className="text-sm font-bold text-primary">${(Number(order.totalPrice) / 100).toFixed(2)}</p>
                   </div>
                 </div>
 
@@ -207,10 +207,10 @@ export default function SellerOrdersPage() {
                       <p className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Order Items</p>
                       <div className="space-y-3">
                          {order.orderItems?.map((item: any) => (
-                           <div key={item.id} className="flex items-center justify-between p-3 rounded-xl bg-zinc-50 border border-zinc-100">
+                           <div key={item.id} className="flex items-center justify-between p-3 rounded-xl bg-background border border-white/5">
                              <div className="flex items-center gap-3">
-                               <div className="h-8 w-8 bg-white rounded-lg border border-zinc-100" />
-                               <span className="text-sm font-bold text-zinc-900">{item.medicine?.name || "Medicine"}</span>
+                               <div className="h-8 w-8 bg-card rounded-lg border border-white/5" />
+                               <span className="text-sm font-bold text-white">{item.medicine?.name || "Medicine"}</span>
                              </div>
                              <span className="text-xs font-medium text-zinc-500">Qty: {item.quantity}</span>
                            </div>
@@ -219,17 +219,17 @@ export default function SellerOrdersPage() {
                    </div>
                    <div className="space-y-4">
                       <p className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Customer Details</p>
-                      <div className="p-5 rounded-2xl border border-zinc-100 space-y-3">
+                      <div className="p-5 rounded-2xl border border-white/5 space-y-3">
                          <div className="flex items-start gap-3">
                             <User className="h-4 w-4 text-zinc-400 mt-0.5" />
                             <div className="text-sm">
-                               <p className="font-bold text-zinc-900">{order.user?.name}</p>
+                               <p className="font-bold text-white">{order.user?.name}</p>
                                <p className="text-zinc-500">{order.user?.email}</p>
                             </div>
                          </div>
                          <div className="flex items-start gap-3">
                             <Truck className="h-4 w-4 text-zinc-400 mt-0.5" />
-                            <p className="text-sm text-zinc-600 leading-relaxed">
+                            <p className="text-sm text-zinc-400 leading-relaxed">
                                {order.shippingAddress || "No address provided"}
                             </p>
                          </div>

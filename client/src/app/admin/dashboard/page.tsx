@@ -92,7 +92,7 @@ export default function AdminDashboard() {
 
        return {
          totalOrders: orders.length,
-         totalRevenue: orders.reduce((acc: number, curr: any) => acc + Number(curr.totalPrice), 0) / 100,
+         totalRevenue: orders.reduce((acc: number, curr: any) => acc + Number(curr.totalPrice), 0),
          totalMedicines: medicines.length || 0,
        };
     },
@@ -102,14 +102,14 @@ export default function AdminDashboard() {
   if (sessionLoading || usersLoading || platformStatsLoading) {
     return (
       <div className="flex h-[calc(100vh-64px)] items-center justify-center">
-        <Loader2 className="h-10 w-10 animate-spin text-teal-600" />
+        <Loader2 className="h-10 w-10 animate-spin text-primary" />
       </div>
     );
   }
 
   const stats = [
     { title: "Total Users", value: users?.length || 0, icon: Users, color: "text-blue-600", bg: "bg-blue-50" },
-    { title: "Platform Revenue", value: `$${platformStats?.totalRevenue.toFixed(2)}`, icon: TrendingUp, color: "text-teal-600", bg: "bg-teal-50" },
+    { title: "Platform Revenue", value: `$${platformStats?.totalRevenue.toFixed(2)}`, icon: TrendingUp, color: "text-primary", bg: "bg-primary/10" },
     { title: "Total Orders", value: platformStats?.totalOrders || 0, icon: ShoppingBag, color: "text-orange-600", bg: "bg-orange-50" },
     { title: "Medicines", value: platformStats?.totalMedicines || 0, icon: Pill, color: "text-purple-600", bg: "bg-purple-50" },
   ];
@@ -147,7 +147,7 @@ export default function AdminDashboard() {
                  All Systems Normal
               </div>
            </div>
-           <Button className="bg-white text-zinc-950 hover:bg-zinc-200 h-16 px-10 rounded-3xl font-extrabold text-lg shadow-xl transition-all hover:scale-105 active:scale-95">
+           <Button className="bg-card text-zinc-950 hover:bg-zinc-200 h-16 px-10 rounded-3xl font-extrabold text-lg shadow-xl transition-all hover:scale-105 active:scale-95">
               System Settings
            </Button>
         </div>
@@ -160,14 +160,14 @@ export default function AdminDashboard() {
       {/* Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {stats.map((stat) => (
-          <Card key={stat.title} className="group rounded-[48px] border-zinc-100 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+          <Card key={stat.title} className="group rounded-[48px] border-white/5 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
             <CardContent className="p-10 space-y-8">
               <div className={`p-4 rounded-[24px] w-fit ${stat.bg} ${stat.color} group-hover:scale-110 transition-transform`}>
                 <stat.icon className="h-8 w-8" />
               </div>
               <div className="space-y-1">
                 <p className="text-xs font-bold text-zinc-400 uppercase tracking-widest">{stat.title}</p>
-                <h3 className="text-4xl font-extrabold text-zinc-900 font-heading tracking-tight">{stat.value}</h3>
+                <h3 className="text-4xl font-extrabold text-white font-heading tracking-tight">{stat.value}</h3>
               </div>
             </CardContent>
           </Card>
@@ -175,23 +175,23 @@ export default function AdminDashboard() {
       </div>
 
       {/* User Management */}
-      <Card className="rounded-[60px] border-zinc-100 shadow-sm overflow-hidden bg-white">
-        <CardHeader className="p-10 border-b border-zinc-50 flex flex-col md:flex-row md:items-center justify-between gap-8">
+      <Card className="rounded-[60px] border-white/5 shadow-sm overflow-hidden bg-card">
+        <CardHeader className="p-10 border-b border-background flex flex-col md:flex-row md:items-center justify-between gap-8">
           <div className="space-y-1">
             <CardTitle className="text-3xl font-bold font-heading">User Directory</CardTitle>
-            <p className="text-zinc-500">Monitor and manage all accounts registered on MediStore</p>
+            <p className="text-zinc-500">Monitor and manage all accounts registered on MediSync</p>
           </div>
           <div className="flex flex-wrap items-center gap-4">
              <div className="relative w-full md:w-80">
                 <Search className="absolute left-4 top-3.5 h-5 w-5 text-zinc-400" />
                 <Input 
                   placeholder="Search users by name or email..." 
-                  className="pl-12 h-14 rounded-2xl bg-zinc-50 border-none text-sm focus-visible:ring-purple-500 shadow-inner"
+                  className="pl-12 h-14 rounded-2xl bg-background border-none text-sm focus-visible:ring-purple-500 shadow-inner"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                 />
              </div>
-             <Button variant="outline" size="icon" className="h-14 w-14 rounded-2xl border-zinc-100 bg-white hover:bg-zinc-50 shadow-sm">
+             <Button variant="outline" size="icon" className="h-14 w-14 rounded-2xl border-white/5 bg-card hover:bg-background shadow-sm">
                 <Filter className="h-5 w-5 text-zinc-500" />
              </Button>
           </div>
@@ -199,25 +199,25 @@ export default function AdminDashboard() {
         <CardContent className="p-0">
           <div className="overflow-x-auto">
             <Table>
-              <TableHeader className="bg-zinc-50/50">
-                <TableRow className="border-zinc-100">
-                  <TableHead className="p-8 font-bold text-zinc-900 uppercase tracking-widest text-[10px]">User</TableHead>
-                  <TableHead className="p-8 font-bold text-zinc-900 uppercase tracking-widest text-[10px]">Role</TableHead>
-                  <TableHead className="p-8 font-bold text-zinc-900 uppercase tracking-widest text-[10px]">Status</TableHead>
-                  <TableHead className="p-8 font-bold text-zinc-900 uppercase tracking-widest text-[10px]">Joined</TableHead>
-                  <TableHead className="p-8 font-bold text-zinc-900 uppercase tracking-widest text-[10px] text-right">Actions</TableHead>
+              <TableHeader className="bg-background/50">
+                <TableRow className="border-white/5">
+                  <TableHead className="p-8 font-bold text-white uppercase tracking-widest text-[10px]">User</TableHead>
+                  <TableHead className="p-8 font-bold text-white uppercase tracking-widest text-[10px]">Role</TableHead>
+                  <TableHead className="p-8 font-bold text-white uppercase tracking-widest text-[10px]">Status</TableHead>
+                  <TableHead className="p-8 font-bold text-white uppercase tracking-widest text-[10px]">Joined</TableHead>
+                  <TableHead className="p-8 font-bold text-white uppercase tracking-widest text-[10px] text-right">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {filteredUsers?.map((user: any) => (
-                  <TableRow key={user.id} className="border-zinc-50 hover:bg-zinc-50/50 transition-colors">
+                  <TableRow key={user.id} className="border-background hover:bg-background/50 transition-colors">
                     <TableCell className="p-8">
                       <div className="flex items-center gap-4">
-                        <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-zinc-100 to-zinc-200 flex items-center justify-center font-extrabold text-zinc-500 shadow-sm">
+                        <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-white/5 to-zinc-200 flex items-center justify-center font-extrabold text-zinc-500 shadow-sm">
                           {user.name.charAt(0)}
                         </div>
                         <div className="flex flex-col">
-                          <span className="font-bold text-zinc-900 text-lg">{user.name}</span>
+                          <span className="font-bold text-white text-lg">{user.name}</span>
                           <span className="text-sm text-zinc-400 flex items-center gap-1.5">
                             <Mail className="h-3 w-3" />
                             {user.email}
@@ -228,7 +228,7 @@ export default function AdminDashboard() {
                     <TableCell className="p-8">
                       <Badge className={`rounded-full px-4 py-1 font-bold text-[10px] tracking-widest border-none ${
                         user.role === "ADMIN" ? "bg-purple-100 text-purple-700" : 
-                        user.role === "SELLER" ? "bg-teal-100 text-teal-700" : 
+                        user.role === "SELLER" ? "bg-primary/10 text-primary" : 
                         "bg-blue-100 text-blue-700"
                       }`}>
                         {user.role}
@@ -251,7 +251,7 @@ export default function AdminDashboard() {
                     <TableCell className="p-8 text-right">
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" size="icon" className="h-10 w-10 rounded-full hover:bg-zinc-100">
+                          <Button variant="ghost" size="icon" className="h-10 w-10 rounded-full hover:bg-white/5">
                             <MoreVertical className="h-5 w-5 text-zinc-400" />
                           </Button>
                         </DropdownMenuTrigger>
@@ -269,7 +269,7 @@ export default function AdminDashboard() {
                              <Shield className="h-4 w-4" /> Make Admin
                           </DropdownMenuItem>
                           <DropdownMenuItem 
-                            className="rounded-xl h-12 cursor-pointer font-bold gap-3 text-teal-600 focus:text-teal-600 focus:bg-teal-50"
+                            className="rounded-xl h-12 cursor-pointer font-bold gap-3 text-primary focus:text-primary focus:bg-primary/10"
                             onClick={() => roleMutation.mutate({ userId: user.id, role: "SELLER" })}
                           >
                              <ShieldCheck className="h-4 w-4" /> Make Seller
@@ -290,11 +290,11 @@ export default function AdminDashboard() {
           </div>
           {filteredUsers?.length === 0 && (
             <div className="py-32 text-center space-y-6">
-               <div className="p-8 bg-zinc-50 rounded-full w-fit mx-auto shadow-sm border border-dashed border-zinc-200">
+               <div className="p-8 bg-background rounded-full w-fit mx-auto shadow-sm border border-dashed border-zinc-200">
                  <Users className="h-12 w-12 text-zinc-200" />
                </div>
                <div className="space-y-1">
-                 <h3 className="text-2xl font-bold text-zinc-900 font-heading">No users found</h3>
+                 <h3 className="text-2xl font-bold text-white font-heading">No users found</h3>
                  <p className="text-zinc-500">No accounts match your current search criteria.</p>
                </div>
             </div>

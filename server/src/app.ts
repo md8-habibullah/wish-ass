@@ -20,7 +20,12 @@ app.use("/api/auth", toNodeHandler(auth));
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.status(200).send('Alhamdullah. API is running perfectly.By the way, you hit root "/" path.');
+    res.status(200).json({
+        success: true,
+        message: "MediSync API | Central Control System Active",
+        engineer: "Habibullah",
+        status: "Online"
+    });
 });
 
 app.use("/medicine", medicineRouter);

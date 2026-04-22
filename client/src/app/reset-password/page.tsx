@@ -13,7 +13,7 @@ import { Suspense } from "react";
 
 export default function ResetPasswordPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><Loader2 className="h-8 w-8 animate-spin text-teal-600" /></div>}>
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><Loader2 className="h-8 w-8 animate-spin text-primary" /></div>}>
       <ResetPasswordForm />
     </Suspense>
   );
@@ -60,10 +60,10 @@ function ResetPasswordForm() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-64px)] flex items-center justify-center px-4 bg-zinc-50/50">
-      <Card className="w-full max-w-md rounded-[40px] border-zinc-100 shadow-2xl overflow-hidden bg-white">
+    <div className="min-h-[calc(100vh-64px)] flex items-center justify-center px-4 bg-background/50">
+      <Card className="w-full max-w-md rounded-[40px] border-white/5 shadow-2xl overflow-hidden bg-card">
         <CardHeader className="p-10 text-center space-y-4">
-          <div className="p-4 rounded-3xl bg-teal-50 text-teal-600 w-fit mx-auto mb-2">
+          <div className="p-4 rounded-3xl bg-primary/10 text-primary w-fit mx-auto mb-2">
             <Lock className="h-8 w-8" />
           </div>
           <CardTitle className="text-3xl font-bold font-heading">Set New Password</CardTitle>
@@ -78,11 +78,11 @@ function ResetPasswordForm() {
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-zinc-400 ml-1">New Password</label>
                   <div className="relative group">
-                    <Lock className="absolute left-4 top-3.5 h-5 w-5 text-zinc-400 group-focus-within:text-teal-600 transition-colors" />
+                    <Lock className="absolute left-4 top-3.5 h-5 w-5 text-zinc-400 group-focus-within:text-primary transition-colors" />
                     <Input 
                       type="password" 
                       placeholder="••••••••" 
-                      className="pl-12 h-14 rounded-2xl bg-zinc-50 border-none focus-visible:ring-teal-500 shadow-inner"
+                      className="pl-12 h-14 rounded-2xl bg-background border-none focus-visible:ring-primary shadow-inner"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
@@ -92,11 +92,11 @@ function ResetPasswordForm() {
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-zinc-400 ml-1">Confirm Password</label>
                   <div className="relative group">
-                    <Lock className="absolute left-4 top-3.5 h-5 w-5 text-zinc-400 group-focus-within:text-teal-600 transition-colors" />
+                    <Lock className="absolute left-4 top-3.5 h-5 w-5 text-zinc-400 group-focus-within:text-primary transition-colors" />
                     <Input 
                       type="password" 
                       placeholder="••••••••" 
-                      className="pl-12 h-14 rounded-2xl bg-zinc-50 border-none focus-visible:ring-teal-500 shadow-inner"
+                      className="pl-12 h-14 rounded-2xl bg-background border-none focus-visible:ring-primary shadow-inner"
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       required
@@ -106,7 +106,7 @@ function ResetPasswordForm() {
               </div>
               <Button 
                 type="submit" 
-                className="w-full h-14 rounded-2xl bg-teal-600 hover:bg-teal-700 text-white font-extrabold text-lg shadow-xl shadow-teal-500/20 transition-all active:scale-95"
+                className="w-full h-14 rounded-2xl bg-primary hover:bg-primary text-white font-extrabold text-lg shadow-xl shadow-primary/20 transition-all active:scale-95"
                 disabled={isLoading}
               >
                 {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : "Reset Password"}
@@ -118,12 +118,12 @@ function ResetPasswordForm() {
                 <CheckCircle2 className="h-10 w-10" />
               </div>
               <div className="space-y-2">
-                 <h4 className="font-bold text-zinc-900">Password reset!</h4>
+                 <h4 className="font-bold text-white">Password reset!</h4>
                  <p className="text-sm text-zinc-500 leading-relaxed">
                    Your password has been successfully reset. Redirecting you to the login page...
                  </p>
               </div>
-              <Loader2 className="h-6 w-6 animate-spin text-teal-600 mx-auto" />
+              <Loader2 className="h-6 w-6 animate-spin text-primary mx-auto" />
             </div>
           )}
         </CardContent>

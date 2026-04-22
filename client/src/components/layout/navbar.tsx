@@ -7,7 +7,7 @@ import { useRequisitionStore } from "@/lib/cart-store";
 import { Button } from "@/components/ui/button";
 import { usePathname, useRouter } from "next/navigation";
 import { 
-  Pill, 
+  Zap,
   ClipboardList, 
   PlusSquare,
   User, 
@@ -18,7 +18,8 @@ import {
   X,
   Bell,
   Heart,
-  Shield
+  Shield,
+  Monitor
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -42,24 +43,25 @@ export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
+  const handleSearch = (e?: React.FormEvent) => {
+    e?.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/shop?search=${encodeURIComponent(searchQuery.trim())}`);
+      setIsMobileMenuOpen(false);
+    }
+  };
+
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
-        document.getElementById("desktop-search")?.focus();
+        document.getElementById("navbar-search")?.focus();
       }
     };
+
     document.addEventListener("keydown", down);
     return () => document.removeEventListener("keydown", down);
   }, []);
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      router.push(`/shop?search=${encodeURIComponent(searchQuery)}`);
-      setIsMobileMenuOpen(false);
-    }
-  };
 
   useEffect(() => {
     setMounted(true);
@@ -73,46 +75,59 @@ export function Navbar() {
   const cartItemCount = mounted ? items.reduce((total, item) => total + item.quantity, 0) : 0;
 
   const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "Central Inventory", href: "/shop" },
+    { name: "Inventory", href: "/shop" },
     { name: "Categories", href: "/categories" },
     { name: "About", href: "/about" },
   ];
 
   return (
     <header className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-      isScrolled ? "bg-white/80 backdrop-blur-xl border-b border-zinc-100 shadow-sm py-2" : "bg-white border-b border-transparent py-4"
+      isScrolled ? "bg-zinc-950/80 backdrop-blur-xl border-b border-white/5 py-2" : "bg-transparent py-4"
     }`}>
       <div className="container flex h-16 items-center justify-between px-4 md:px-8">
         <div className="flex items-center gap-10">
           <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="rounded-2xl bg-teal-600 p-2 text-white shadow-lg shadow-teal-500/20 group-hover:scale-110 transition-transform">
-              <Pill className="h-6 w-6" />
+            <div className="rounded-xl bg-primary p-2 text-primary-foreground shadow-[0_0_15px_-3px_rgba(34,211,238,0.5)] group-hover:scale-110 transition-transform">
+              <Zap className="h-5 w-5 fill-current" />
             </div>
-            <span className="text-2xl font-black tracking-tighter text-zinc-900 font-heading">
-              Medi<span className="text-teal-600">Sync.</span>
-            </span>
+            <div className="flex flex-col">
+              <span className="text-xl font-black tracking-tighter text-white font-heading leading-none">
+                Medi<span className="text-primary">Sync</span>
+              </span>
+              <span className="text-[10px] font-bold text-zinc-500 tracking-[0.2em] uppercase">
+                habibullah.dev
+              </span>
+            </div>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-8">
+          {/* Mobile Menu Button */}
+          <div className="flex lg:hidden">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="rounded-xl h-11 w-11 hover:bg-white/5 text-zinc-400"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </Button>
+          </div>
+
+          <nav className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link 
                   key={link.name} 
                   href={link.href} 
-                  className={`text-sm font-bold transition-all uppercase tracking-widest relative group/link ${
+                  className={`text-xs font-bold transition-all uppercase tracking-[0.15em] relative group/link ${
                     isActive 
-                      ? "text-teal-600" 
-                      : "text-zinc-500 hover:text-teal-600"
+                      ? "text-primary" 
+                      : "text-zinc-400 hover:text-white"
                   }`}
                 >
                   {link.name}
                   {isActive && (
-                    <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-teal-600 rounded-full" />
-                  )}
-                  {!isActive && (
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-teal-600 rounded-full transition-all group-hover/link:w-full" />
+                    <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary rounded-full shadow-[0_0_10px_rgba(34,211,238,0.5)]" />
                   )}
                 </Link>
               );
@@ -120,146 +135,113 @@ export function Navbar() {
           </nav>
         </div>
 
-        <div className="hidden lg:flex flex-1 max-w-2xl mx-12">
+        {/* Desktop Search Bar */}
+        <div className="hidden md:flex flex-1 max-w-md mx-8">
           <form onSubmit={handleSearch} className="relative w-full group">
-            <Search className="absolute left-4 top-3.5 h-5 w-5 text-zinc-400 group-focus-within:text-teal-600 transition-colors" />
-            <input 
-              id="desktop-search"
-              type="text" 
-              placeholder="Search for medicines, health products, brands..."
+            <Search className="absolute left-4 top-3 h-4 w-4 text-zinc-500 group-focus-within:text-primary transition-colors" />
+            <input
+              id="navbar-search"
+              type="text"
+              placeholder="Search medications..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full h-12 pl-12 pr-4 rounded-2xl bg-zinc-50 border-none focus:ring-2 focus:ring-teal-500/20 focus:bg-white transition-all text-sm font-medium shadow-inner"
+              className="w-full bg-white/5 border border-white/5 rounded-xl h-10 pl-11 pr-12 text-xs font-medium text-white focus:outline-none focus:ring-1 focus:ring-primary/50 focus:bg-white/10 transition-all placeholder:text-zinc-600"
             />
-            <div className="absolute right-3 top-2.5 h-7 px-2 rounded-lg bg-zinc-200 text-zinc-500 text-[10px] font-bold flex items-center gap-1">
-               <span className="border border-zinc-300 rounded px-1">⌘</span> K
+            <div className="absolute right-3 top-2 flex items-center gap-1">
+               {searchQuery && (
+                 <button 
+                  type="button"
+                  onClick={() => setSearchQuery("")}
+                  className="p-1 hover:bg-white/10 rounded-md text-zinc-500 hover:text-white"
+                 >
+                   <X className="h-3 w-3" />
+                 </button>
+               )}
+               <kbd className="hidden sm:inline-flex h-5 select-none items-center gap-1 rounded border border-white/10 bg-white/5 px-1.5 font-mono text-[10px] font-medium text-zinc-500">
+                 <span className="text-xs">⌘</span>K
+               </kbd>
             </div>
           </form>
         </div>
 
         <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2 lg:hidden">
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              className="text-zinc-400 hover:text-teal-600 rounded-2xl h-11 w-11 hover:bg-teal-50"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
-              {isMobileMenuOpen ? <X className="h-6 w-6 text-zinc-900" /> : <Menu className="h-6 w-6 text-zinc-900" />}
-            </Button>
-          </div>
-          <div className="hidden md:flex items-center gap-2">
-            <Button variant="ghost" size="icon" className="text-zinc-400 hover:text-teal-600 rounded-2xl h-11 w-11 hover:bg-teal-50">
-              <Heart className="h-5 w-5" />
-            </Button>
-          </div>
-          
           <Link href="/cart">
-            <Button className="rounded-2xl h-12 px-3 sm:px-6 bg-zinc-950 hover:bg-zinc-800 text-white shadow-xl shadow-zinc-200 transition-all hover:scale-105 active:scale-95 group">
-              <div className="flex items-center gap-2.5">
-                <div className="relative">
-                  <ClipboardList className="h-5 w-5" />
-                  {cartItemCount > 0 && (
-                    <span className="absolute -top-2 -right-2 h-4 w-4 rounded-full bg-teal-500 text-[10px] font-bold flex items-center justify-center border-2 border-zinc-950">
-                      {cartItemCount}
-                    </span>
-                  )}
-                </div>
-                <span className="font-extrabold text-sm hidden sm:inline">Requisition</span>
-              </div>
+            <Button variant="ghost" className="relative rounded-xl h-11 w-11 p-0 hover:bg-white/5 text-zinc-400 hover:text-primary transition-colors">
+              <ClipboardList className="h-5 w-5" />
+              {cartItemCount > 0 && (
+                <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-primary text-[10px] font-bold flex items-center justify-center text-primary-foreground">
+                  {cartItemCount}
+                </span>
+              )}
             </Button>
           </Link>
 
-          <div className="h-8 w-px bg-zinc-100 mx-2 hidden md:block" />
+          <div className="h-6 w-px bg-white/10 mx-2 hidden md:block" />
 
           {session ? (
-            <div className="flex items-center gap-3">
-               <Button variant="ghost" size="icon" className="text-zinc-400 hover:text-teal-600 rounded-2xl h-11 w-11 hover:bg-teal-50 hidden md:flex">
-                  <Bell className="h-5 w-5" />
-               </Button>
-               
-               <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="relative h-11 w-11 rounded-2xl border border-zinc-100 p-0 hover:bg-zinc-50 overflow-hidden shadow-sm">
-                    <Avatar className="h-full w-full rounded-none">
-                      <AvatarImage src={session.user.image || ""} alt={session.user.name} />
-                      <AvatarFallback className="bg-zinc-50 text-zinc-500 font-bold">
-                        {session.user.name?.charAt(0)}
-                      </AvatarFallback>
-                    </Avatar>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-64 rounded-3xl p-2 shadow-2xl border-zinc-100" align="end" forceMount>
-                  <DropdownMenuLabel className="p-4">
-                    <div className="flex flex-col space-y-1">
-                      <p className="text-sm font-bold leading-none text-zinc-900">{session.user.name}</p>
-                      <p className="text-xs leading-none text-zinc-400 font-medium">
-                        {session.user.email}
-                      </p>
-                    </div>
-                  </DropdownMenuLabel>
-                  <DropdownMenuSeparator className="bg-zinc-50" />
-                  <DropdownMenuGroup className="p-2">
-                    <DropdownMenuItem asChild>
-                      <Link href="/profile" className="rounded-xl h-12 cursor-pointer transition-all hover:bg-teal-50 hover:text-teal-700">
-                        <User className="mr-3 h-4 w-4" />
-                        <span className="font-bold text-sm">Account Profile</span>
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                      <Link href="/orders" className="rounded-xl h-12 cursor-pointer transition-all hover:bg-teal-50 hover:text-teal-700">
-                        <PlusSquare className="mr-3 h-4 w-4" />
-                        <span className="font-bold text-sm">Procurement History</span>
-                      </Link>
-                    </DropdownMenuItem>
-                    
-                    {((session.user as any).role === "SELLER" || (session.user as any).role === "ADMIN") && (
-                      <DropdownMenuItem asChild>
-                        <Link href="/seller/dashboard" className="rounded-xl h-12 cursor-pointer bg-teal-50 text-teal-700 mt-2 hover:bg-teal-100">
-                          <LayoutDashboard className="mr-3 h-4 w-4" />
-                          <span className="font-bold text-sm">Seller Dashboard</span>
-                        </Link>
-                      </DropdownMenuItem>
-                    )}
-                    
-                    {(session.user as any).role === "ADMIN" && (
-                      <DropdownMenuItem asChild>
-                        <Link href="/admin/dashboard" className="rounded-xl h-12 cursor-pointer bg-purple-50 text-purple-700 mt-2 hover:bg-purple-100">
-                          <Shield className="mr-3 h-4 w-4" />
-                          <span className="font-bold text-sm">Admin Dashboard</span>
-                        </Link>
-                      </DropdownMenuItem>
-                    )}
-                  </DropdownMenuGroup>
-                  <DropdownMenuSeparator className="bg-zinc-50" />
-                  <div className="p-2">
-                    <DropdownMenuItem 
-                      className="rounded-xl h-12 cursor-pointer text-red-600 focus:text-red-600 focus:bg-red-50"
-                      onClick={() => signOut({
-                        fetchOptions: {
-                          onSuccess: () => {
-                            router.push("/");
-                            router.refresh();
-                          }
-                        }
-                      })}
-                    >
-                      <LogOut className="mr-3 h-4 w-4" />
-                      <span className="font-bold text-sm">Sign Out Account</span>
-                    </DropdownMenuItem>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="relative h-11 w-11 rounded-xl border border-white/5 p-0 hover:bg-white/5 overflow-hidden">
+                  <Avatar className="h-full w-full rounded-none">
+                    <AvatarImage src={session.user.image || ""} alt={session.user.name} />
+                    <AvatarFallback className="bg-zinc-900 text-zinc-400 font-bold">
+                      {session.user.name?.charAt(0)}
+                    </AvatarFallback>
+                  </Avatar>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-64 rounded-2xl p-2 bg-zinc-900 border-white/5 shadow-2xl" align="end">
+                <DropdownMenuLabel className="p-4">
+                  <div className="flex flex-col space-y-1">
+                    <p className="text-sm font-bold text-white">{session.user.name}</p>
+                    <p className="text-xs text-zinc-500 font-medium">{session.user.email}</p>
                   </div>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator className="bg-white/5" />
+                <DropdownMenuGroup className="p-2">
+                  <DropdownMenuItem asChild>
+                    <Link href="/profile" className="rounded-lg h-10 cursor-pointer hover:bg-white/5 text-zinc-300">
+                      <User className="mr-3 h-4 w-4" />
+                      <span className="font-bold text-xs">Profile</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  {((session.user as any).role === "SELLER" || (session.user as any).role === "ADMIN") && (
+                    <DropdownMenuItem asChild>
+                      <Link href="/seller/dashboard" className="rounded-lg h-10 cursor-pointer bg-primary/10 text-primary mt-1 hover:bg-primary/20">
+                        <LayoutDashboard className="mr-3 h-4 w-4" />
+                        <span className="font-bold text-xs">Dashboard</span>
+                      </Link>
+                    </DropdownMenuItem>
+                  )}
+                </DropdownMenuGroup>
+                <DropdownMenuSeparator className="bg-white/5" />
+                <div className="p-2">
+                  <DropdownMenuItem 
+                    className="rounded-lg h-10 cursor-pointer text-red-400 focus:text-red-400 focus:bg-red-400/10"
+                    onClick={() => signOut({
+                      fetchOptions: {
+                        onSuccess: () => {
+                          router.push("/");
+                          router.refresh();
+                        }
+                      }
+                    })}
+                  >
+                    <LogOut className="mr-3 h-4 w-4" />
+                    <span className="font-bold text-xs">Sign Out</span>
+                  </DropdownMenuItem>
+                </div>
+              </DropdownMenuContent>
+            </DropdownMenu>
           ) : (
             <div className="flex items-center gap-3">
               <Link href="/login" className="hidden sm:block">
-                <Button variant="ghost" className="text-zinc-500 font-bold hover:text-teal-600 hover:bg-teal-50 rounded-2xl h-11 px-6">
+                <Button variant="ghost" className="text-zinc-400 font-bold hover:text-white hover:bg-white/5 rounded-xl h-11 px-6 text-xs uppercase tracking-widest">
                   Log In
                 </Button>
               </Link>
               <Link href="/register">
-                <Button className="bg-zinc-900 hover:bg-zinc-800 text-white shadow-xl shadow-zinc-200 rounded-2xl h-11 px-8 font-bold">
+                <Button className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/20 rounded-xl h-11 px-8 font-bold text-xs uppercase tracking-widest transition-all hover:scale-105 active:scale-95">
                   Get Started
                 </Button>
               </Link>
@@ -268,48 +250,49 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Navigation Drawer */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden absolute top-full left-0 w-full bg-white border-b border-zinc-100 shadow-lg p-4 flex flex-col gap-4 max-h-[calc(100vh-64px)] overflow-y-auto">
-          <form onSubmit={handleSearch} className="flex items-center bg-zinc-50 rounded-2xl px-4 py-3 mb-2">
-            <Search className="h-5 w-5 text-zinc-400 mr-2" />
-            <input 
-              type="text" 
-              placeholder="Search..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-transparent border-none focus:outline-none text-sm font-medium"
-            />
-          </form>
-          <nav className="flex flex-col gap-2">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className={`p-3 rounded-xl font-bold uppercase tracking-widest text-sm transition-colors ${
-                  pathname === link.href ? "bg-teal-50 text-teal-600" : "text-zinc-600 hover:bg-zinc-50"
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </nav>
-          
-          {!session && (
-            <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-zinc-100 sm:hidden">
-              <Link href="/login" onClick={() => setIsMobileMenuOpen(false)}>
-                <Button variant="outline" className="w-full justify-center rounded-xl h-12 font-bold border-zinc-200">
-                  Log In
-                </Button>
-              </Link>
-              <Link href="/register" onClick={() => setIsMobileMenuOpen(false)}>
-                <Button className="w-full justify-center bg-zinc-900 hover:bg-zinc-800 text-white rounded-xl h-12 font-bold">
-                  Get Started
-                </Button>
-              </Link>
+        <div className="lg:hidden absolute top-full left-0 w-full bg-zinc-950/95 backdrop-blur-3xl border-b border-white/5 py-8 px-6 animate-in fade-in slide-in-from-top-4 duration-300">
+          <nav className="flex flex-col gap-6">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className={`text-lg font-black uppercase tracking-[0.2em] transition-all ${
+                    isActive ? "text-primary" : "text-zinc-500 hover:text-white"
+                  }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
+            <div className="h-px bg-white/5 my-4" />
+            <div className="flex flex-col gap-4">
+              {!session ? (
+                <>
+                  <Link href="/login" onClick={() => setIsMobileMenuOpen(false)}>
+                    <Button variant="outline" className="w-full h-14 rounded-2xl border-white/5 bg-white/5 font-bold">
+                      LOG IN
+                    </Button>
+                  </Link>
+                  <Link href="/register" onClick={() => setIsMobileMenuOpen(false)}>
+                    <Button className="w-full h-14 rounded-2xl bg-primary font-bold">
+                      GET STARTED
+                    </Button>
+                  </Link>
+                </>
+              ) : (
+                 <Link href="/seller/dashboard" onClick={() => setIsMobileMenuOpen(false)}>
+                    <Button className="w-full h-14 rounded-2xl bg-primary/10 text-primary border-primary/20 font-bold">
+                       CONTROL CENTER
+                    </Button>
+                 </Link>
+              )}
             </div>
-          )}
+          </nav>
         </div>
       )}
     </header>

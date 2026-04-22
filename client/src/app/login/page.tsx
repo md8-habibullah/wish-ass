@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Pill, Mail, Lock, Loader2, ArrowRight } from "lucide-react";
+import { Zap, Mail, Lock, Loader2, ArrowRight } from "lucide-react";
 import { signIn } from "@/lib/auth-client";
 import { toast } from "sonner";
 
@@ -15,7 +15,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -38,7 +37,7 @@ import { Suspense } from "react";
 
 export default function LoginPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><Loader2 className="h-8 w-8 animate-spin text-teal-600" /></div>}>
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-background"><Loader2 className="h-8 w-8 animate-spin text-primary" /></div>}>
       <LoginForm />
     </Suspense>
   );
@@ -85,24 +84,27 @@ function LoginForm() {
   }
 
   return (
-    <div className="min-h-[calc(100vh-64px)] flex items-center justify-center px-4 bg-zinc-50/50 relative overflow-hidden">
-      {/* Background Blobs */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-teal-500/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/4" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/4" />
+    <div className="min-h-[calc(100vh-64px)] flex items-center justify-center px-4 bg-background relative overflow-hidden">
+      {/* Tech Grid Background */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
+      
+      {/* Glows */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] -translate-y-1/2" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[120px] translate-y-1/2" />
 
-      <Card className="w-full max-w-lg rounded-[60px] border-zinc-100 shadow-2xl overflow-hidden bg-white relative z-10">
-        <CardHeader className="p-12 text-center space-y-6">
+      <Card className="w-full max-w-lg rounded-[48px] border-white/5 shadow-2xl overflow-hidden bg-card/60 backdrop-blur-3xl relative z-10">
+        <CardHeader className="p-12 text-center space-y-8">
           <div className="flex justify-center">
-            <div className="rounded-3xl bg-teal-600 p-4 text-white shadow-2xl shadow-teal-500/30 group hover:scale-110 transition-transform">
-              <Pill className="h-10 w-10" />
+            <div className="rounded-2xl bg-primary p-4 text-primary-foreground shadow-[0_0_30px_-5px_rgba(34,211,238,0.5)]">
+              <Zap className="h-8 w-8 fill-current" />
             </div>
           </div>
-          <div className="space-y-2">
-            <CardTitle className="text-4xl font-black tracking-tight text-zinc-900 font-heading">
-              Welcome Back.
+          <div className="space-y-3">
+            <CardTitle className="text-4xl font-black tracking-tighter text-white font-heading">
+              Secure Login
             </CardTitle>
-            <CardDescription className="text-zinc-500 text-lg font-medium">
-              Access your personalized pharmacy dashboard.
+            <CardDescription className="text-zinc-400 text-lg font-medium">
+              Access the clinical control center.
             </CardDescription>
           </div>
         </CardHeader>
@@ -114,13 +116,13 @@ function LoginForm() {
                 name="email"
                 render={({ field }) => (
                   <FormItem className="space-y-3">
-                    <FormLabel className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400 ml-1">Email Address</FormLabel>
+                    <FormLabel className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-500 ml-1">Terminal ID (Email)</FormLabel>
                     <FormControl>
                       <div className="relative group">
-                        <Mail className="absolute left-4 top-4 h-5 w-5 text-zinc-400 group-focus-within:text-teal-600 transition-colors" />
+                        <Mail className="absolute left-4 top-4 h-5 w-5 text-zinc-400 group-focus-within:text-primary transition-colors" />
                         <Input 
                           placeholder="name@example.com" 
-                          className="pl-12 h-14 rounded-2xl bg-zinc-50 border-none focus-visible:ring-2 focus-visible:ring-teal-500/20 shadow-inner text-base" 
+                          className="pl-12 h-14 rounded-2xl bg-zinc-950/50 border-white/5 focus-visible:ring-2 focus-visible:ring-primary/20 text-white" 
                           {...field} 
                         />
                       </div>
@@ -135,21 +137,21 @@ function LoginForm() {
                 render={({ field }) => (
                   <FormItem className="space-y-3">
                     <div className="flex items-center justify-between ml-1">
-                      <FormLabel className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400">Security Password</FormLabel>
+                      <FormLabel className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-500">Access Key (Password)</FormLabel>
                       <Link 
                         href="/forgot-password" 
-                        className="text-xs font-bold text-teal-600 hover:text-teal-700 transition-colors"
+                        className="text-[10px] font-bold text-primary hover:underline transition-all uppercase tracking-widest"
                       >
-                        Forgot password?
+                        Recovery?
                       </Link>
                     </div>
                     <FormControl>
                       <div className="relative group">
-                        <Lock className="absolute left-4 top-4 h-5 w-5 text-zinc-400 group-focus-within:text-teal-600 transition-colors" />
+                        <Lock className="absolute left-4 top-4 h-5 w-5 text-zinc-400 group-focus-within:text-primary transition-colors" />
                         <Input 
                           type="password" 
                           placeholder="••••••••" 
-                          className="pl-12 h-14 rounded-2xl bg-zinc-50 border-none focus-visible:ring-2 focus-visible:ring-teal-500/20 shadow-inner text-base" 
+                          className="pl-12 h-14 rounded-2xl bg-zinc-950/50 border-white/5 focus-visible:ring-2 focus-visible:ring-primary/20 text-white" 
                           {...field} 
                         />
                       </div>
@@ -158,12 +160,12 @@ function LoginForm() {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full bg-zinc-950 hover:bg-zinc-800 text-white mt-4 h-16 rounded-3xl font-black text-xl shadow-2xl shadow-zinc-200 transition-all active:scale-95 group" disabled={isLoading}>
+              <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground mt-4 h-16 rounded-[32px] font-black text-xl shadow-xl shadow-primary/20 transition-all active:scale-95 group" disabled={isLoading}>
                 {isLoading ? (
                   <Loader2 className="h-6 w-6 animate-spin" />
                 ) : (
                   <>
-                    Sign In to Account
+                    Initialize Session
                     <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-2" />
                   </>
                 )}
@@ -173,16 +175,16 @@ function LoginForm() {
 
           <div className="relative my-10">
             <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t border-zinc-100" />
+              <span className="w-full border-t border-white/5" />
             </div>
-            <div className="relative flex justify-center text-[10px] font-bold uppercase tracking-widest">
-              <span className="bg-white px-6 text-zinc-400">Or Secure Login with</span>
+            <div className="relative flex justify-center text-[10px] font-bold uppercase tracking-[0.3em]">
+              <span className="bg-card px-6 text-zinc-500 tracking-[0.3em]">Auth Protocols</span>
             </div>
           </div>
 
           <Button 
             variant="outline" 
-            className="w-full h-14 rounded-2xl border-zinc-100 hover:bg-zinc-50 hover:border-zinc-200 transition-all font-bold text-zinc-600" 
+            className="w-full h-14 rounded-2xl border-white/5 bg-white/5 text-white hover:bg-white/10 transition-all font-bold" 
             type="button" 
             disabled={isLoading}
             onClick={() => signIn.social({ provider: "google" })}
@@ -205,13 +207,13 @@ function LoginForm() {
                 fill="#EA4335"
               />
             </svg>
-            Google OAuth
+            Continue with Google
           </Button>
 
-          <p className="mt-10 text-center text-sm font-medium text-zinc-500">
-            Don&apos;t have an account?{" "}
-            <Link href="/register" className="font-bold text-teal-600 hover:text-teal-700 transition-colors">
-              Create one for free
+          <p className="mt-10 text-center text-xs font-bold uppercase tracking-widest text-zinc-500">
+            Unauthorized?{" "}
+            <Link href="/register" className="text-primary hover:underline transition-all">
+              Request Access
             </Link>
           </p>
         </CardContent>

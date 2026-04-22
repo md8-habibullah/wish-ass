@@ -46,7 +46,7 @@ const categoryMeta: Record<string, any> = {
   },
   "others": { 
     icon: Pill, 
-    color: "bg-zinc-50 text-zinc-600", 
+    color: "bg-background text-zinc-400", 
     description: "Miscellaneous health supplies and general pharmacy items."
   },
 };
@@ -75,8 +75,8 @@ export default function CategoriesPage() {
   return (
     <div className="container px-4 py-12 md:px-8">
       <div className="max-w-3xl mb-16 space-y-4">
-        <h1 className="text-4xl font-extrabold text-zinc-900 font-heading">Explore Categories</h1>
-        <p className="text-lg text-zinc-600 leading-relaxed">
+        <h1 className="text-4xl font-extrabold text-white font-heading">Explore Categories</h1>
+        <p className="text-lg text-zinc-400 leading-relaxed">
           Find exactly what you need by browsing our specialized healthcare categories. All products are verified for quality and safety.
         </p>
       </div>
@@ -84,7 +84,7 @@ export default function CategoriesPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {loading ? (
           Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="h-64 rounded-3xl bg-zinc-100 animate-pulse" />
+            <div key={i} className="h-64 rounded-3xl bg-white/5 animate-pulse" />
           ))
         ) : (
           categories.map((cat) => {
@@ -95,21 +95,21 @@ export default function CategoriesPage() {
               <Link 
                 key={cat.name} 
                 href={`/shop?category=${cat.name}`}
-                className="group flex flex-col p-8 rounded-3xl bg-white border border-zinc-100 transition-all hover:shadow-2xl hover:-translate-y-2 hover:border-teal-200"
+                className="group flex flex-col p-8 rounded-3xl bg-card border border-white/5 transition-all hover:shadow-2xl hover:-translate-y-2 hover:border-teal-200"
               >
                 <div className="flex justify-between items-start mb-6">
                   <div className={`p-4 rounded-2xl w-fit ${meta.color} group-hover:scale-110 transition-transform shadow-sm`}>
                     <Icon className="h-7 w-7" />
                   </div>
                   {medicine && (
-                    <div className="bg-teal-50 text-teal-700 px-3 py-1 rounded-full text-xs font-bold border border-teal-100 shadow-sm flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 bg-teal-500 rounded-full animate-pulse"></span>
+                    <div className="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold border border-white/5 shadow-sm flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse"></span>
                       In Stock
                     </div>
                   )}
                 </div>
                 <div className="space-y-3 mb-6">
-                   <h3 className="text-xl font-bold text-zinc-900 font-heading group-hover:text-teal-600 transition-colors capitalize">
+                   <h3 className="text-xl font-bold text-white font-heading group-hover:text-primary transition-colors capitalize">
                     {cat.name}
                   </h3>
                   <p className="text-sm text-zinc-500 leading-relaxed line-clamp-2">
@@ -122,13 +122,13 @@ export default function CategoriesPage() {
                   {medicine && (
                     <div className="pt-2">
                       <p className="text-sm font-medium text-zinc-400">Starting from</p>
-                      <p className="text-lg font-bold text-teal-600">${medicine.price}</p>
+                      <p className="text-lg font-bold text-primary">${medicine.price}</p>
                     </div>
                   )}
                 </div>
                 <div className="mt-auto flex items-center justify-between">
                   <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Explore Products</span>
-                  <div className="rounded-full bg-zinc-50 p-2 text-zinc-400 group-hover:bg-teal-600 group-hover:text-white transition-all">
+                  <div className="rounded-full bg-background p-2 text-zinc-400 group-hover:bg-primary group-hover:text-white transition-all">
                     <ArrowRight className="h-4 w-4" />
                   </div>
                 </div>
@@ -150,15 +150,15 @@ export default function CategoriesPage() {
               </p>
            </div>
            <Link href="/shop">
-              <Button size="lg" className="bg-teal-600 hover:bg-teal-700 h-14 px-8 rounded-full font-bold shadow-xl shadow-teal-500/20">
+              <Button size="lg" className="bg-primary hover:bg-primary h-14 px-8 rounded-full font-bold shadow-xl shadow-primary/20">
                 Browse Full Shop
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
            </Link>
         </div>
         {/* Abstract shapes */}
-        <div className="absolute -top-24 -right-24 h-64 w-64 bg-teal-600/10 rounded-full blur-3xl" />
-        <div className="absolute -bottom-24 -left-24 h-64 w-64 bg-teal-600/10 rounded-full blur-3xl" />
+        <div className="absolute -top-24 -right-24 h-64 w-64 bg-primary/10 rounded-full blur-3xl" />
+        <div className="absolute -bottom-24 -left-24 h-64 w-64 bg-primary/10 rounded-full blur-3xl" />
       </div>
     </div>
   );

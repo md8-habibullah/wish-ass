@@ -18,7 +18,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="flex min-h-[calc(100vh-64px)] flex-col items-center justify-center bg-zinc-50 px-4">
+    <div className="flex min-h-[calc(100vh-64px)] flex-col items-center justify-center bg-background px-4">
       <div className="relative mb-8 flex items-center justify-center">
         {/* Urgent red glow */}
         <div className="absolute h-64 w-64 animate-pulse rounded-full bg-red-100/50 blur-3xl" />
@@ -27,7 +27,7 @@ export default function Error({
           <div className="mb-6 rounded-[40px] bg-red-600 p-8 shadow-2xl shadow-red-200">
              <ShieldAlert className="h-20 w-20 text-white animate-pulse" />
           </div>
-          <h1 className="text-5xl font-black tracking-tighter text-zinc-900 font-heading text-center">
+          <h1 className="text-5xl font-black tracking-tighter text-white font-heading text-center">
             Critical <span className="text-red-600">Error.</span>
           </h1>
         </div>
@@ -35,14 +35,14 @@ export default function Error({
 
       <div className="max-w-md space-y-8 text-center">
         <div className="space-y-3">
-          <h2 className="text-2xl font-bold tracking-tight text-zinc-900 font-heading">Something went wrong!</h2>
+          <h2 className="text-2xl font-bold tracking-tight text-white font-heading">Something went wrong!</h2>
           <p className="text-zinc-500 font-medium">
             We encountered a medical emergency in our system. Don&apos;t worry, our specialists are on it.
           </p>
           
-          <div className="mx-auto mt-4 max-w-xs rounded-2xl bg-white border border-zinc-200 p-4 shadow-sm">
+          <div className="mx-auto mt-4 max-w-xs rounded-2xl bg-card border border-zinc-200 p-4 shadow-sm">
              <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1">Diagnosis</p>
-             <p className="text-xs font-mono text-zinc-600 break-all bg-zinc-50 p-2 rounded-lg border border-zinc-100">
+             <p className="text-xs font-mono text-zinc-400 break-all bg-background p-2 rounded-lg border border-white/5">
                 {error.message || "An unexpected error occurred during operation."}
              </p>
           </div>
@@ -57,7 +57,7 @@ export default function Error({
             Try Resuscitation
           </Button>
           <Link href="/">
-            <Button variant="outline" className="h-14 rounded-2xl border-zinc-200 bg-white px-8 font-bold text-zinc-600 hover:bg-zinc-50 transition-all">
+            <Button variant="outline" className="h-14 rounded-2xl border-zinc-200 bg-card px-8 font-bold text-zinc-400 hover:bg-background transition-all">
               <Home className="mr-2 h-5 w-5" />
               Return Home
             </Button>

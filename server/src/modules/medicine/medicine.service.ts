@@ -1,5 +1,4 @@
-import { start } from "node:repl";
-import type { MedicineWhereInput } from "../../../generated/prisma/models";
+import { Prisma } from "@prisma/client";
 import { prisma } from "../../../lib/prisma";
 
 const getAllMedicine = async (search: (string), filerTags: string[], isStock: number, sellerID: string, manufacturer: string, currentPage: number, itemsPerPage: number, orderby: string, category: string) => {
@@ -8,7 +7,7 @@ const getAllMedicine = async (search: (string), filerTags: string[], isStock: nu
 
     // Prisma planner below then query is executed
 
-    const planner: MedicineWhereInput[] = []
+    const planner: Prisma.MedicineWhereInput[] = []
 
     // Category based 
     if (category) {

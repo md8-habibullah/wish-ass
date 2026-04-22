@@ -1,7 +1,7 @@
 
 import { Router, type NextFunction, type Request, type Response } from "express";
 import { medicineController } from "./medicine.controller";
-import { authVerify, Roles } from "../../middlewire/authVerify";
+import { authVerify, Roles } from "../../middleware/authVerify";
 
 const router: Router = Router();
 

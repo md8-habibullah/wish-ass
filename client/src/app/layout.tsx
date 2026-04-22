@@ -3,6 +3,7 @@ import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { PageTransition } from "@/components/layout/page-transition";
 import { Toaster } from "@/components/ui/sonner";
 import QueryProvider from "@/providers/query-provider";
 
@@ -17,8 +18,10 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "MediStore | Your Trusted Online Pharmacy",
-  description: "Shop for verified OTC medicines, supplements, and healthcare products at MediStore.",
+  title: "MediSync | Engineered by habibullah.dev",
+  description: "A premium hospital procurement and resource management system, architected by Habibullah.",
+  authors: [{ name: "Habibullah", url: "https://habibullah.dev" }],
+  keywords: ["Medical Supply Chain", "Hospital Inventory", "DevOps", "Habibullah", "Healthcare IT"],
 };
 
 export default function RootLayout({
@@ -27,15 +30,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} ${outfit.variable} antialiased font-sans bg-zinc-50`}>
+    <html lang="en" className="dark">
+      <body className={`${inter.variable} ${outfit.variable} antialiased font-sans bg-background text-foreground`}>
         <QueryProvider>
-          <Navbar />
-          <main className="min-h-[calc(100vh-64px-300px)]">
-            {children}
-          </main>
-          <Footer />
-          <Toaster position="top-right" richColors />
+          <div className="relative flex min-h-screen flex-col">
+            <Navbar />
+            <main className="flex-1">
+              <PageTransition>
+                {children}
+              </PageTransition>
+            </main>
+            <Footer />
+          </div>
+          <Toaster position="top-right" richColors closeButton />
         </QueryProvider>
       </body>
     </html>

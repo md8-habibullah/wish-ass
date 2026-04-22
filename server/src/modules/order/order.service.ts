@@ -40,8 +40,7 @@ const createOrder = async (userId: string, items: { medicineId: string; quantity
         const newOrder = await tx.order.create({
             data: {
                 userId: userId,
-                // totalPrice: BigInt(totalPrice), // Schema uses BigInt
-                totalPrice: BigInt(Math.round(totalPrice * 100)), // Store as cents in BigInt for precision
+                totalPrice: totalPrice, // Store as Float (dollars) now that schema is updated
                 status: "PENDING", // Default status
                 priority: priority,
                 orderItems: {

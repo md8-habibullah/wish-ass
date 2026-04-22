@@ -40,20 +40,20 @@ export default function FAQPage() {
   return (
     <div className="container px-4 py-16 md:px-8 max-w-4xl">
       <div className="text-center space-y-4 mb-16">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 text-teal-600 text-xs font-bold uppercase tracking-wider">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
           Support Center
         </div>
-        <h1 className="text-4xl md:text-6xl font-extrabold text-zinc-900 font-heading">Frequently Asked <span className="text-teal-600">Questions.</span></h1>
+        <h1 className="text-4xl md:text-6xl font-extrabold text-white font-heading">Frequently Asked <span className="text-primary">Questions.</span></h1>
         <p className="text-zinc-500 text-lg max-w-xl mx-auto">
-          Everything you need to know about MediStore. Can't find what you're looking for? Reach out to our team.
+          Everything you need to know about MediSync. Can't find what you're looking for? Reach out to our team.
         </p>
       </div>
 
-      <div className="bg-white rounded-[40px] border border-zinc-100 p-6 md:p-10 shadow-sm mb-16">
+      <div className="bg-card rounded-[40px] border border-white/5 p-6 md:p-10 shadow-sm mb-16">
         <Accordion type="single" collapsible className="w-full">
           {faqs.map((faq, i) => (
-            <AccordionItem key={i} value={`item-${i}`} className="border-zinc-100 py-2">
-              <AccordionTrigger className="text-left font-bold text-lg hover:text-teal-600 hover:no-underline transition-colors">
+            <AccordionItem key={i} value={`item-${i}`} className="border-white/5 py-2">
+              <AccordionTrigger className="text-left font-bold text-lg hover:text-primary hover:no-underline transition-colors">
                 {faq.question}
               </AccordionTrigger>
               <AccordionContent className="text-zinc-500 text-base leading-relaxed pt-2 pb-4">
@@ -65,30 +65,30 @@ export default function FAQPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="p-8 rounded-3xl bg-zinc-50 border border-zinc-100 flex flex-col items-center text-center space-y-4">
-           <div className="h-12 w-12 rounded-2xl bg-white shadow-sm flex items-center justify-center text-teal-600">
+        <div className="p-8 rounded-3xl bg-background border border-white/5 flex flex-col items-center text-center space-y-4">
+           <div className="h-12 w-12 rounded-2xl bg-card shadow-sm flex items-center justify-center text-primary">
               <Mail className="h-6 w-6" />
            </div>
            <div>
-              <p className="font-bold text-zinc-900">Email Us</p>
+              <p className="font-bold text-white">Email Us</p>
               <p className="text-sm text-zinc-500">medi@habibullah.dev</p>
            </div>
         </div>
-        <div className="p-8 rounded-3xl bg-zinc-50 border border-zinc-100 flex flex-col items-center text-center space-y-4">
-           <div className="h-12 w-12 rounded-2xl bg-white shadow-sm flex items-center justify-center text-teal-600">
+        <div className="p-8 rounded-3xl bg-background border border-white/5 flex flex-col items-center text-center space-y-4">
+           <div className="h-12 w-12 rounded-2xl bg-card shadow-sm flex items-center justify-center text-primary">
               <Phone className="h-6 w-6" />
            </div>
            <div>
-              <p className="font-bold text-zinc-900">Call Us</p>
-              <p className="text-sm text-zinc-500">+880 1712-345678</p>
+              <p className="font-bold text-white">Call Us</p>
+              <p className="text-sm text-zinc-500">+880 1700 000000</p>
            </div>
         </div>
-        <div className="p-8 rounded-3xl bg-zinc-50 border border-zinc-100 flex flex-col items-center text-center space-y-4">
-           <div className="h-12 w-12 rounded-2xl bg-white shadow-sm flex items-center justify-center text-teal-600">
+        <div className="p-8 rounded-3xl bg-background border border-white/5 flex flex-col items-center text-center space-y-4">
+           <div className="h-12 w-12 rounded-2xl bg-card shadow-sm flex items-center justify-center text-primary">
               <MessageCircle className="h-6 w-6" />
            </div>
            <div>
-              <p className="font-bold text-zinc-900">Live Chat</p>
+              <p className="font-bold text-white">Live Chat</p>
               <p className="text-sm text-zinc-500">Available 24/7</p>
            </div>
         </div>

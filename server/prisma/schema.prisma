@@ -73,7 +73,7 @@ enum Priority {
 
 model Order {
   id         String   @id @default(uuid())
-  totalPrice BigInt
+  totalPrice Float
   status     Status
   priority   Priority @default(LOW)
   userId     String

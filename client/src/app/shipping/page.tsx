@@ -10,7 +10,7 @@ export default function ShippingPage() {
       cost: "$5.00",
       description: "Available in major city areas for urgent medications.",
       icon: Clock,
-      color: "bg-teal-50 text-teal-600"
+      color: "bg-primary/10 text-primary"
     },
     {
       title: "Standard Shipping",
@@ -33,7 +33,7 @@ export default function ShippingPage() {
   return (
     <div className="container px-4 py-16 md:px-8 max-w-5xl">
       <div className="space-y-4 mb-16">
-        <h1 className="text-4xl md:text-6xl font-extrabold text-zinc-900 font-heading">Shipping Information</h1>
+        <h1 className="text-4xl md:text-6xl font-extrabold text-white font-heading">Shipping Information</h1>
         <p className="text-lg text-zinc-500 max-w-2xl leading-relaxed">
           We pride ourselves on fast, secure, and temperature-controlled medical delivery to ensure your health never waits.
         </p>
@@ -43,13 +43,13 @@ export default function ShippingPage() {
         {deliveryOptions.map((option, i) => {
           const Icon = option.icon;
           return (
-            <div key={i} className="p-8 rounded-[40px] bg-white border border-zinc-100 shadow-sm space-y-6">
+            <div key={i} className="p-8 rounded-[40px] bg-card border border-white/5 shadow-sm space-y-6">
               <div className={`p-4 rounded-2xl w-fit ${option.color}`}>
                 <Icon className="h-6 w-6" />
               </div>
               <div className="space-y-1">
-                <h3 className="text-xl font-bold text-zinc-900">{option.title}</h3>
-                <p className="text-teal-600 font-bold">{option.time} • {option.cost}</p>
+                <h3 className="text-xl font-bold text-white">{option.title}</h3>
+                <p className="text-primary font-bold">{option.time} • {option.cost}</p>
               </div>
               <p className="text-sm text-zinc-500 leading-relaxed">{option.description}</p>
             </div>
@@ -59,19 +59,19 @@ export default function ShippingPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <div className="space-y-8">
-          <h2 className="text-3xl font-bold text-zinc-900 font-heading tracking-tight">Delivery Zones</h2>
+          <h2 className="text-3xl font-bold text-white font-heading tracking-tight">Delivery Zones</h2>
           <div className="space-y-4">
-            <div className="flex gap-4 p-6 rounded-3xl bg-zinc-50 border border-zinc-100">
-               <MapPin className="h-6 w-6 text-teal-600 shrink-0" />
+            <div className="flex gap-4 p-6 rounded-3xl bg-background border border-white/5">
+               <MapPin className="h-6 w-6 text-primary shrink-0" />
                <div className="space-y-1">
-                 <p className="font-bold text-zinc-900">Tier 1 Cities (Metros)</p>
+                 <p className="font-bold text-white">Tier 1 Cities (Metros)</p>
                  <p className="text-sm text-zinc-500">Full access to Express and Standard delivery. Available 7 days a week.</p>
                </div>
             </div>
-            <div className="flex gap-4 p-6 rounded-3xl bg-zinc-50 border border-zinc-100">
+            <div className="flex gap-4 p-6 rounded-3xl bg-background border border-white/5">
                <Globe className="h-6 w-6 text-zinc-400 shrink-0" />
                <div className="space-y-1">
-                 <p className="font-bold text-zinc-900">National Coverage</p>
+                 <p className="font-bold text-white">National Coverage</p>
                  <p className="text-sm text-zinc-500">Standard shipping available to all regions with verified medical addresses.</p>
                </div>
             </div>
@@ -85,19 +85,19 @@ export default function ShippingPage() {
            </p>
            <ul className="space-y-3">
              <li className="flex items-center gap-2 text-sm font-medium">
-               <div className="h-1.5 w-1.5 rounded-full bg-teal-500" />
+               <div className="h-1.5 w-1.5 rounded-full bg-primary" />
                Real-time Temperature Monitoring
              </li>
              <li className="flex items-center gap-2 text-sm font-medium">
-               <div className="h-1.5 w-1.5 rounded-full bg-teal-500" />
+               <div className="h-1.5 w-1.5 rounded-full bg-primary" />
                Insulated Medical-Grade Boxes
              </li>
              <li className="flex items-center gap-2 text-sm font-medium">
-               <div className="h-1.5 w-1.5 rounded-full bg-teal-500" />
+               <div className="h-1.5 w-1.5 rounded-full bg-primary" />
                Priority Handling for Cold Chain
              </li>
            </ul>
-           <div className="absolute -bottom-8 -right-8 h-32 w-32 bg-white/5 rounded-full blur-2xl" />
+           <div className="absolute -bottom-8 -right-8 h-32 w-32 bg-card/5 rounded-full blur-2xl" />
         </div>
       </div>
     </div>

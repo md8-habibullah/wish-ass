@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Pill, User, Mail, Lock, Store, Loader2 } from "lucide-react";
+import { Zap, User, Mail, Lock, Shield, Loader2, ArrowRight } from "lucide-react";
 import { signUp, signIn } from "@/lib/auth-client";
 import { toast } from "sonner";
 
@@ -15,7 +15,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -47,7 +46,7 @@ import { Suspense } from "react";
 
 export default function RegisterPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><Loader2 className="h-8 w-8 animate-spin text-teal-600" /></div>}>
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-background"><Loader2 className="h-8 w-8 animate-spin text-primary" /></div>}>
       <RegisterForm />
     </Suspense>
   );
@@ -76,7 +75,7 @@ function RegisterForm() {
         email: values.email,
         password: values.password,
         name: values.name,
-        role: values.role, // Pass role as an additional field
+        role: values.role, 
         callbackURL: "/login",
       } as any);
 
@@ -86,7 +85,7 @@ function RegisterForm() {
         return;
       }
 
-      toast.success("Account created! Redirecting to login...");
+      toast.success("Account created! Verify your email to continue.");
       router.push("/login");
     } catch (err: any) {
       console.error("Unexpected registration error:", err);
@@ -97,24 +96,27 @@ function RegisterForm() {
   }
 
   return (
-    <div className="min-h-[calc(100vh-64px)] flex items-center justify-center px-4 bg-zinc-50/50 relative overflow-hidden py-20">
-      {/* Background Blobs */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-teal-500/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/4" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-emerald-500/5 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/4" />
+    <div className="min-h-[calc(100vh-64px)] flex items-center justify-center px-4 bg-background relative overflow-hidden py-24">
+      {/* Tech Grid Background */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
+      
+      {/* Glows */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] -translate-y-1/2" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-emerald-500/5 rounded-full blur-[120px] translate-y-1/2" />
 
-      <Card className="w-full max-w-lg rounded-[60px] border-zinc-100 shadow-2xl overflow-hidden bg-white relative z-10">
-        <CardHeader className="p-12 text-center space-y-6">
+      <Card className="w-full max-w-lg rounded-[48px] border-white/5 shadow-2xl overflow-hidden bg-card/60 backdrop-blur-3xl relative z-10">
+        <CardHeader className="p-12 text-center space-y-8">
           <div className="flex justify-center">
-            <div className="rounded-3xl bg-teal-600 p-4 text-white shadow-2xl shadow-teal-500/30 group hover:scale-110 transition-transform">
-              <Pill className="h-10 w-10" />
+            <div className="rounded-2xl bg-primary p-4 text-primary-foreground shadow-[0_0_30px_-5px_rgba(34,211,238,0.5)]">
+              <Zap className="h-8 w-8 fill-current" />
             </div>
           </div>
-          <div className="space-y-2">
-            <CardTitle className="text-4xl font-black tracking-tight text-zinc-900 font-heading">
-              Join MediStore.
+          <div className="space-y-3">
+            <CardTitle className="text-4xl font-black tracking-tighter text-white font-heading">
+              Create Identity
             </CardTitle>
-            <CardDescription className="text-zinc-500 text-lg font-medium">
-              Start your journey as a customer or seller today.
+            <CardDescription className="text-zinc-400 text-lg font-medium">
+              Join the MediSync central network.
             </CardDescription>
           </div>
         </CardHeader>
@@ -126,11 +128,11 @@ function RegisterForm() {
                 name="name"
                 render={({ field }) => (
                   <FormItem className="space-y-2">
-                    <FormLabel className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400 ml-1">Full Identity</FormLabel>
+                    <FormLabel className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-500 ml-1">Full Name</FormLabel>
                     <FormControl>
                       <div className="relative group">
-                        <User className="absolute left-4 top-3.5 h-5 w-5 text-zinc-400 group-focus-within:text-teal-600 transition-colors" />
-                        <Input placeholder="John Doe" className="pl-12 h-12 rounded-2xl bg-zinc-50 border-none focus-visible:ring-2 focus-visible:ring-teal-500/20 shadow-inner" {...field} />
+                        <User className="absolute left-4 top-3.5 h-5 w-5 text-zinc-400 group-focus-within:text-primary transition-colors" />
+                        <Input placeholder="John Doe" className="pl-12 h-12 rounded-2xl bg-zinc-950/50 border-white/5 text-white focus-visible:ring-2 focus-visible:ring-primary/20" {...field} />
                       </div>
                     </FormControl>
                     <FormMessage />
@@ -142,11 +144,11 @@ function RegisterForm() {
                 name="email"
                 render={({ field }) => (
                   <FormItem className="space-y-2">
-                    <FormLabel className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400 ml-1">Email Address</FormLabel>
+                    <FormLabel className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-500 ml-1">Work Email</FormLabel>
                     <FormControl>
                       <div className="relative group">
-                        <Mail className="absolute left-4 top-3.5 h-5 w-5 text-zinc-400 group-focus-within:text-teal-600 transition-colors" />
-                        <Input placeholder="name@example.com" className="pl-12 h-12 rounded-2xl bg-zinc-50 border-none focus-visible:ring-2 focus-visible:ring-teal-500/20 shadow-inner" {...field} />
+                        <Mail className="absolute left-4 top-3.5 h-5 w-5 text-zinc-400 group-focus-within:text-primary transition-colors" />
+                        <Input placeholder="name@example.com" className="pl-12 h-12 rounded-2xl bg-zinc-950/50 border-white/5 text-white focus-visible:ring-2 focus-visible:ring-primary/20" {...field} />
                       </div>
                     </FormControl>
                     <FormMessage />
@@ -158,11 +160,11 @@ function RegisterForm() {
                 name="password"
                 render={({ field }) => (
                   <FormItem className="space-y-2">
-                    <FormLabel className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400 ml-1">Security Key</FormLabel>
+                    <FormLabel className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-500 ml-1">Security Key</FormLabel>
                     <FormControl>
                       <div className="relative group">
-                        <Lock className="absolute left-4 top-3.5 h-5 w-5 text-zinc-400 group-focus-within:text-teal-600 transition-colors" />
-                        <Input type="password" placeholder="••••••••" className="pl-12 h-12 rounded-2xl bg-zinc-50 border-none focus-visible:ring-2 focus-visible:ring-teal-500/20 shadow-inner" {...field} />
+                        <Lock className="absolute left-4 top-3.5 h-5 w-5 text-zinc-400 group-focus-within:text-primary transition-colors" />
+                        <Input type="password" placeholder="••••••••" className="pl-12 h-12 rounded-2xl bg-zinc-950/50 border-white/5 text-white focus-visible:ring-2 focus-visible:ring-primary/20" {...field} />
                       </div>
                     </FormControl>
                     <FormMessage />
@@ -174,28 +176,24 @@ function RegisterForm() {
                 name="role"
                 render={({ field }) => (
                   <FormItem className="space-y-2">
-                    <FormLabel className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400 ml-1">Account Purpose</FormLabel>
+                    <FormLabel className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-500 ml-1">System Role</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
-                        <SelectTrigger className="h-12 rounded-2xl bg-zinc-50 border-none focus:ring-2 focus:ring-teal-500/20 shadow-inner">
-                          <SelectValue placeholder="Select your role" />
+                        <SelectTrigger className="h-12 rounded-2xl bg-zinc-950/50 border-white/5 text-zinc-400 focus:ring-2 focus:ring-primary/20">
+                          <SelectValue placeholder="Select role" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent className="rounded-2xl shadow-2xl border-zinc-100">
-                        <SelectItem value="CUSTOMER" className="rounded-xl h-12 cursor-pointer">
+                      <SelectContent className="rounded-2xl bg-zinc-900 border-white/5 text-white shadow-2xl">
+                        <SelectItem value="CUSTOMER" className="rounded-xl h-12 cursor-pointer focus:bg-primary/10 focus:text-primary">
                           <div className="flex items-center gap-3">
-                            <div className="p-2 rounded-lg bg-blue-50 text-blue-600">
-                              <User className="h-4 w-4" />
-                            </div>
-                            <span className="font-bold">Buy Medicines (Customer)</span>
+                             <User className="h-4 w-4" />
+                             <span className="font-bold text-xs uppercase tracking-widest">Medical Staff (Nurse)</span>
                           </div>
                         </SelectItem>
-                        <SelectItem value="SELLER" className="rounded-xl h-12 cursor-pointer">
+                        <SelectItem value="SELLER" className="rounded-xl h-12 cursor-pointer focus:bg-primary/10 focus:text-primary">
                           <div className="flex items-center gap-3">
-                            <div className="p-2 rounded-lg bg-teal-50 text-teal-600">
-                              <Store className="h-4 w-4" />
-                            </div>
-                            <span className="font-bold">Sell Medicines (Seller)</span>
+                             <Shield className="h-4 w-4" />
+                             <span className="font-bold text-xs uppercase tracking-widest">Pharmacist Controller</span>
                           </div>
                         </SelectItem>
                       </SelectContent>
@@ -204,24 +202,31 @@ function RegisterForm() {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full bg-teal-600 hover:bg-teal-700 mt-4 h-16 rounded-3xl font-black text-xl shadow-2xl shadow-teal-500/20 transition-all active:scale-95" disabled={isLoading}>
-                {isLoading ? <Loader2 className="h-6 w-6 animate-spin" /> : "Create My Account"}
+              <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground mt-4 h-16 rounded-[32px] font-black text-xl shadow-xl shadow-primary/20 transition-all active:scale-95 group" disabled={isLoading}>
+                {isLoading ? (
+                  <Loader2 className="h-6 w-6 animate-spin" />
+                ) : (
+                  <>
+                    Initialize Profile
+                    <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-2" />
+                  </>
+                )}
               </Button>
             </form>
           </Form>
 
           <div className="relative my-10">
             <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t border-zinc-100" />
+              <span className="w-full border-t border-white/5" />
             </div>
-            <div className="relative flex justify-center text-[10px] font-bold uppercase tracking-widest">
-              <span className="bg-white px-6 text-zinc-400">Or Join with</span>
+            <div className="relative flex justify-center text-[10px] font-bold uppercase tracking-[0.3em]">
+              <span className="bg-card px-6 text-zinc-500 tracking-[0.3em]">Quick Entry</span>
             </div>
           </div>
 
           <Button 
             variant="outline" 
-            className="w-full h-14 rounded-2xl border-zinc-100 hover:bg-zinc-50 hover:border-zinc-200 transition-all font-bold text-zinc-600" 
+            className="w-full h-14 rounded-2xl border-white/5 bg-white/5 text-white hover:bg-white/10 transition-all font-bold" 
             type="button" 
             disabled={isLoading}
             onClick={() => signIn.social({ provider: "google" })}
@@ -244,13 +249,13 @@ function RegisterForm() {
                 fill="#EA4335"
               />
             </svg>
-            Google Identity
+            Continue with Google
           </Button>
 
-          <p className="mt-10 text-center text-sm font-medium text-zinc-500">
-            Already have an account?{" "}
-            <Link href="/login" className="font-bold text-teal-600 hover:text-teal-700 transition-colors">
-              Sign In here
+          <p className="mt-10 text-center text-xs font-bold uppercase tracking-widest text-zinc-500">
+            Already verified?{" "}
+            <Link href="/login" className="text-primary hover:underline transition-all">
+              Initialize Session
             </Link>
           </p>
         </CardContent>

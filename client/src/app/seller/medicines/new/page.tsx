@@ -123,7 +123,7 @@ export default function MedicineFormPage() {
   if (sessionLoading || isFetching) {
     return (
       <div className="flex h-[calc(100vh-64px)] items-center justify-center">
-        <Loader2 className="h-10 w-10 animate-spin text-teal-600" />
+        <Loader2 className="h-10 w-10 animate-spin text-primary" />
       </div>
     );
   }
@@ -137,7 +137,7 @@ export default function MedicineFormPage() {
             Back to Inventory
           </Button>
         </Link>
-        <h1 className="text-3xl font-bold text-zinc-900 font-heading">
+        <h1 className="text-3xl font-bold text-white font-heading">
           {isEdit ? "Edit Medicine" : "Add New Medicine"}
         </h1>
       </div>
@@ -146,10 +146,10 @@ export default function MedicineFormPage() {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="md:col-span-2 space-y-8">
-              <Card className="rounded-3xl border-zinc-100 shadow-sm overflow-hidden">
-                <CardHeader className="bg-zinc-50/50 border-b border-zinc-100">
+              <Card className="rounded-3xl border-white/5 shadow-sm overflow-hidden">
+                <CardHeader className="bg-background/50 border-b border-white/5">
                   <CardTitle className="text-lg flex items-center gap-2 font-heading">
-                    <Info className="h-5 w-5 text-teal-600" />
+                    <Info className="h-5 w-5 text-primary" />
                     Basic Information
                   </CardTitle>
                 </CardHeader>
@@ -227,10 +227,10 @@ export default function MedicineFormPage() {
                 </CardContent>
               </Card>
 
-              <Card className="rounded-3xl border-zinc-100 shadow-sm overflow-hidden">
-                <CardHeader className="bg-zinc-50/50 border-b border-zinc-100">
+              <Card className="rounded-3xl border-white/5 shadow-sm overflow-hidden">
+                <CardHeader className="bg-background/50 border-b border-white/5">
                   <CardTitle className="text-lg flex items-center gap-2 font-heading">
-                    <Package className="h-5 w-5 text-teal-600" />
+                    <Package className="h-5 w-5 text-primary" />
                     Inventory & Pricing
                   </CardTitle>
                 </CardHeader>
@@ -285,17 +285,17 @@ export default function MedicineFormPage() {
             </div>
 
             <div className="space-y-8">
-              <Card className="rounded-3xl border-zinc-100 shadow-sm overflow-hidden">
-                <CardHeader className="bg-zinc-50/50 border-b border-zinc-100">
+              <Card className="rounded-3xl border-white/5 shadow-sm overflow-hidden">
+                <CardHeader className="bg-background/50 border-b border-white/5">
                   <CardTitle className="text-lg flex items-center gap-2 font-heading">
-                    <Upload className="h-5 w-5 text-teal-600" />
+                    <Upload className="h-5 w-5 text-primary" />
                     Product Image
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="p-8">
-                  <div className="aspect-square bg-zinc-50 rounded-2xl border-2 border-dashed border-zinc-200 flex flex-col items-center justify-center text-center p-6 hover:bg-zinc-100 transition-colors cursor-pointer group">
-                    <Upload className="h-10 w-10 text-zinc-300 group-hover:text-teal-500 transition-colors mb-4" />
-                    <p className="text-sm font-medium text-zinc-600">Click to upload image</p>
+                  <div className="aspect-square bg-background rounded-2xl border-2 border-dashed border-zinc-200 flex flex-col items-center justify-center text-center p-6 hover:bg-white/5 transition-colors cursor-pointer group">
+                    <Upload className="h-10 w-10 text-zinc-300 group-hover:text-primary transition-colors mb-4" />
+                    <p className="text-sm font-medium text-zinc-400">Click to upload image</p>
                     <p className="text-xs text-zinc-400 mt-1">Supports JPG, PNG (Max 5MB)</p>
                   </div>
                 </CardContent>
@@ -304,7 +304,7 @@ export default function MedicineFormPage() {
               <div className="sticky top-24 space-y-4">
                  <Button 
                   type="submit" 
-                  className="w-full bg-teal-600 hover:bg-teal-700 h-14 rounded-2xl text-lg font-bold shadow-xl shadow-teal-100"
+                  className="w-full bg-primary hover:bg-primary h-14 rounded-2xl text-lg font-bold shadow-xl shadow-primary/20"
                   disabled={isLoading}
                  >
                    {isLoading ? (
@@ -317,7 +317,7 @@ export default function MedicineFormPage() {
                    )}
                  </Button>
                  <Link href="/seller/medicines" className="block">
-                   <Button variant="ghost" className="w-full h-14 rounded-2xl text-zinc-500 hover:bg-zinc-100 font-bold">
+                   <Button variant="ghost" className="w-full h-14 rounded-2xl text-zinc-500 hover:bg-white/5 font-bold">
                      Cancel
                    </Button>
                  </Link>

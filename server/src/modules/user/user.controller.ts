@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import { userService } from "./user.service";
-import { Roles } from "../../middlewire/authVerify";
+import { Roles } from "../../middleware/authVerify";
 import { auth } from "../../../lib/auth";
 import { METHODS } from "node:http";
 // import { Role } from "../../../generated/prisma/enums";

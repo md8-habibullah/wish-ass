@@ -1,5 +1,5 @@
 import { prisma } from "../../../lib/prisma";
-import { Status } from '../../../generated/prisma/enums';
+
 
 const addReview = async (userId: string, medicineId: string, rating: number, comment: string) => {
     // Check if user actually bought the medicine (Optional but good for marks)

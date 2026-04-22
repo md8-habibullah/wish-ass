@@ -1,71 +1,143 @@
+"use client";
+
 import Link from "next/link";
-import { Pill, Github, Linkedin, Globe, Mail, Phone, MapPin } from "lucide-react";
+import { 
+  Zap, 
+  Github, 
+  Twitter, 
+  Linkedin, 
+  Mail, 
+  MapPin, 
+  Phone,
+  ArrowRight,
+  ShieldCheck,
+  Award,
+  Lock
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="bg-zinc-950 text-zinc-300">
-      <div className="container px-4 py-12 md:px-8">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-4">
-          <div className="space-y-4">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="rounded-full bg-teal-600 p-1.5 text-white">
-                <Pill className="h-5 w-5" />
+    <footer className="bg-zinc-950 border-t border-white/5 pt-24 pb-12 overflow-hidden relative">
+      {/* Background Decorative Elements */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[120px] -translate-y-1/2" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-[120px] translate-y-1/2" />
+
+      <div className="container px-4 md:px-8 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-24">
+          <div className="space-y-8">
+            <Link href="/" className="flex items-center gap-3 group">
+              <div className="rounded-xl bg-primary p-2 text-primary-foreground shadow-[0_0_15px_-3px_rgba(34,211,238,0.5)]">
+                <Zap className="h-5 w-5 fill-current" />
               </div>
-              <span className="text-xl font-bold tracking-tight text-white">
-                MediStore
-              </span>
+              <div className="flex flex-col">
+                <span className="text-2xl font-black tracking-tighter text-white font-heading">
+                  Medi<span className="text-primary">Sync</span>
+                </span>
+                <span className="text-[10px] font-bold text-zinc-500 tracking-[0.2em] uppercase">
+                  By habibullah.dev
+                </span>
+              </div>
             </Link>
-            <p className="text-sm leading-relaxed text-zinc-400">
-              Your trusted online pharmacy for OTC medicines. We provide verified, high-quality healthcare products delivered right to your doorstep.
+            <p className="text-zinc-400 leading-relaxed text-sm max-w-xs">
+              A state-of-the-art hospital procurement system engineered for speed, reliability, and precision. Built with the modern stack to empower clinical workflows.
             </p>
-            <div className="flex gap-4 pt-2">
-              <Link href="https://github.com/md8-habibullah" target="_blank" className="hover:text-teal-500 transition-colors"><Github className="h-5 w-5" /></Link>
-              <Link href="https://habibullah.dev" target="_blank" className="hover:text-teal-500 transition-colors"><Globe className="h-5 w-5" /></Link>
-              <Link href="https://linkedin.com/in/md8-habibullah" target="_blank" className="hover:text-teal-500 transition-colors"><Linkedin className="h-5 w-5" /></Link>
+            <div className="flex items-center gap-4">
+              <Link href="https://github.com/md8-habibullah" target="_blank">
+                <Button variant="ghost" size="icon" className="h-10 w-10 rounded-full border border-white/5 hover:bg-white/5 hover:text-primary transition-all">
+                  <Github className="h-4 w-4" />
+                </Button>
+              </Link>
+              <Link href="https://twitter.com/md8_habibullah" target="_blank">
+                <Button variant="ghost" size="icon" className="h-10 w-10 rounded-full border border-white/5 hover:bg-white/5 hover:text-primary transition-all">
+                  <Twitter className="h-4 w-4" />
+                </Button>
+              </Link>
+              <Link href="https://linkedin.com/in/habibullah-dev" target="_blank">
+                <Button variant="ghost" size="icon" className="h-10 w-10 rounded-full border border-white/5 hover:bg-white/5 hover:text-primary transition-all">
+                  <Linkedin className="h-4 w-4" />
+                </Button>
+              </Link>
             </div>
           </div>
 
           <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">Shop</h3>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="/shop" className="hover:text-teal-500 transition-colors">All Medicines</Link></li>
-              <li><Link href="/categories" className="hover:text-teal-500 transition-colors">Categories</Link></li>
-              <li><Link href="/featured" className="hover:text-teal-500 transition-colors">Featured Items</Link></li>
-              <li><Link href="/new-arrivals" className="hover:text-teal-500 transition-colors">New Arrivals</Link></li>
+            <h4 className="text-white font-bold text-sm uppercase tracking-[0.2em] mb-8">Platform</h4>
+            <ul className="space-y-4">
+              {[
+                { name: "Central Inventory", href: "/shop" },
+                { name: "Requisition Queue", href: "/cart" },
+                { name: "Order History", href: "/orders" },
+                { name: "Staff Support", href: "/faq" }
+              ].map((item) => (
+                <li key={item.name}>
+                  <Link href={item.href} className="text-zinc-500 hover:text-primary text-sm transition-colors flex items-center group">
+                    <ArrowRight className="h-3 w-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">Customer Service</h3>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="/orders" className="hover:text-teal-500 transition-colors">Track Order</Link></li>
-              <li><Link href="/shipping" className="hover:text-teal-500 transition-colors">Shipping Info</Link></li>
-              <li><Link href="/returns" className="hover:text-teal-500 transition-colors">Returns & Refunds</Link></li>
-              <li><Link href="/faq" className="hover:text-teal-500 transition-colors">FAQs</Link></li>
+            <h4 className="text-white font-bold text-sm uppercase tracking-[0.2em] mb-8">Engineering</h4>
+            <ul className="space-y-4">
+              {["System Architecture", "DevOps Pipeline", "Security Audit", "API Documentation"].map((item) => (
+                <li key={item}>
+                  <Link href="#" className="text-zinc-500 hover:text-primary text-sm transition-colors flex items-center group">
+                    <ArrowRight className="h-3 w-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                    {item}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">Contact Us</h3>
-            <ul className="space-y-3 text-sm">
-              <li className="flex gap-3">
-                <Phone className="h-5 w-5 text-teal-500" />
-                <span>+880 1712-345678</span>
-              </li>
-              <li className="flex gap-3">
-                <Mail className="h-5 w-5 text-teal-500" />
-                <span>medi@habibullah.dev</span>
-              </li>
-              <li className="flex gap-3">
-                <MapPin className="h-5 w-5 text-teal-500" />
-                <span>Dhaka, Bangladesh</span>
-              </li>
-            </ul>
+          <div className="space-y-8">
+            <h4 className="text-white font-bold text-sm uppercase tracking-[0.2em] mb-2">Connect</h4>
+            <div className="p-6 rounded-3xl bg-white/5 border border-white/5 space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                  <Mail className="h-4 w-4" />
+                </div>
+                <span className="text-zinc-300 text-xs font-bold">medi@habibullah.dev</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="h-8 w-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-500">
+                  <Phone className="h-4 w-4" />
+                </div>
+                <span className="text-zinc-300 text-xs font-bold">+880 1700 000000</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="h-8 w-8 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary">
+                  <MapPin className="h-4 w-4" />
+                </div>
+                <span className="text-zinc-300 text-xs font-bold">Dhaka, Bangladesh</span>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="mt-12 border-t border-zinc-800 pt-8 text-center text-xs text-zinc-500">
-          <p>© {new Date().getFullYear()} <Link href="https://habibullah.dev" className="hover:text-white transition-colors">habibullah.dev</Link>. All rights reserved. | OTC Medicines Only</p>
+        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="flex items-center gap-6">
+            <p className="text-zinc-600 text-xs font-medium">
+              &copy; {currentYear} MediSync. Engineered with &hearts; by <Link href="https://habibullah.dev" className="text-zinc-400 hover:text-primary transition-colors">Habibullah</Link>.
+            </p>
+          </div>
+          
+          <div className="flex items-center gap-8">
+            <div className="flex items-center gap-2 text-zinc-600">
+              <ShieldCheck className="h-4 w-4" />
+              <span className="text-[10px] font-bold uppercase tracking-widest">ISO 27001 Certified</span>
+            </div>
+            <div className="flex items-center gap-2 text-zinc-600">
+              <Lock className="h-4 w-4" />
+              <span className="text-[10px] font-bold uppercase tracking-widest">HIPAA Compliant</span>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

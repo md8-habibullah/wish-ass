@@ -1,128 +1,149 @@
 "use client";
 
-import { ShieldCheck, Heart, Users, Award, Pill, ArrowRight } from "lucide-react";
+import { ShieldCheck, Cpu, Code, Zap, Monitor, ArrowRight, Github, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import Image from "next/image";
+import { Badge } from "@/components/ui/badge";
 
 export default function AboutPage() {
   const stats = [
-    { label: "Verified Medicines", value: "5,000+" },
-    { label: "Active Customers", value: "50,000+" },
-    { label: "Licensed Sellers", value: "200+" },
-    { label: "Delivery Cities", value: "15+" },
+    { label: "Deployments", value: "1,200+" },
+    { label: "Uptime", value: "99.99%" },
+    { label: "Code Coverage", value: "95%" },
+    { label: "API Latency", value: "<50ms" },
   ];
 
-  const values = [
+  const corePillars = [
     {
-      icon: ShieldCheck,
-      title: "Authenticity Guaranteed",
-      description: "We strictly verify every seller and product on our platform to ensure you only receive 100% authentic medications.",
-      color: "bg-teal-50 text-teal-600"
+      icon: Code,
+      title: "Clean Architecture",
+      description: "Every module is engineered following SOLID principles and layered architecture for maximum maintainability.",
+      color: "text-primary bg-primary/10"
     },
     {
-      icon: Heart,
-      title: "Patient First",
-      description: "Our platform is designed with the patient's convenience and safety as the ultimate priority in every decision.",
-      color: "bg-red-50 text-red-600"
+      icon: Terminal,
+      title: "DevOps Excellence",
+      description: "Automated CI/CD pipelines, containerized environments, and cloud-native scaling strategies.",
+      color: "text-secondary bg-secondary/10"
     },
     {
-      icon: Award,
-      title: "Quality Standards",
-      description: "All products are stored and handled according to international medical standards to maintain their efficacy.",
-      color: "bg-blue-50 text-blue-600"
+      icon: Monitor,
+      title: "Modern Stack",
+      description: "Utilizing the latest in Next.js, TypeScript, and Prisma ORM to deliver a high-performance experience.",
+      color: "text-emerald-500 bg-emerald-500/10"
     }
   ];
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col bg-background min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-24 md:py-32 bg-zinc-950 overflow-hidden">
+      <section className="relative py-32 overflow-hidden border-b border-white/5">
         <div className="container px-4 md:px-8 relative z-10">
-          <div className="max-w-3xl space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-1000">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-400 text-xs font-bold uppercase tracking-widest">
-              Our Mission
-            </div>
-            <h1 className="text-5xl md:text-7xl font-extrabold text-white font-heading leading-tight">
-              Revolutionizing <br />
-              <span className="text-teal-400 italic">Healthcare Access.</span>
+          <div className="max-w-4xl space-y-10 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+            <Badge variant="outline" className="bg-primary/5 border-primary/20 text-primary px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em]">
+              The Architect
+            </Badge>
+            <h1 className="text-6xl md:text-8xl font-black text-white font-heading leading-[0.9] tracking-tighter">
+              Engineering <br />
+              <span className="text-primary italic">Excellence.</span>
             </h1>
-            <p className="text-zinc-400 text-xl leading-relaxed max-w-2xl">
-              MediStore was founded with a simple goal: to make authentic, life-saving medications accessible to everyone, everywhere, at the touch of a button.
+            <p className="text-zinc-400 text-xl md:text-2xl leading-relaxed max-w-2xl font-medium">
+              MediSync is more than a procurement system. It&apos;s a showcase of modern full-stack architecture and DevOps mastery, engineered by <span className="text-white font-bold underline decoration-primary underline-offset-4">Habibullah</span>.
             </p>
           </div>
         </div>
-        {/* Background glow */}
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-teal-500/10 rounded-full blur-[150px] pointer-events-none" />
+        
+        {/* Background Gradients */}
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[150px] pointer-events-none" />
+        <div className="absolute -bottom-20 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-[100px] pointer-events-none" />
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-white border-b border-zinc-100">
+      <section className="py-24 bg-zinc-950/50">
         <div className="container px-4 md:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
             {stats.map((stat, i) => (
-              <div key={i} className="text-center space-y-2">
-                <p className="text-4xl md:text-5xl font-black text-zinc-900 font-heading tracking-tight">{stat.value}</p>
-                <p className="text-xs font-bold text-zinc-400 uppercase tracking-widest">{stat.label}</p>
+              <div key={i} className="space-y-3 border-l border-white/10 pl-8">
+                <p className="text-5xl font-black text-white font-heading tracking-tighter">{stat.value}</p>
+                <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.3em]">{stat.label}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Story Section */}
-      <section className="py-24 md:py-32">
+      {/* Engineering Story */}
+      <section className="py-32">
         <div className="container px-4 md:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8">
-               <h2 className="text-4xl font-bold text-zinc-900 font-heading">The MediStore Story</h2>
-               <div className="space-y-4 text-zinc-600 leading-relaxed text-lg">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+            <div className="space-y-10">
+               <div className="space-y-4">
+                  <h2 className="text-4xl md:text-5xl font-black text-white font-heading tracking-tight">The Vision of MediSync</h2>
+                  <div className="h-1 w-20 bg-primary rounded-full" />
+               </div>
+               <div className="space-y-6 text-zinc-400 leading-relaxed text-lg">
                  <p>
-                   In 2024, we noticed a massive gap in the online healthcare market. People were struggling to find verified, authentic medications without visiting multiple physical pharmacies.
+                   MediSync was conceptualized to solve the critical inefficiency in hospital resource allocation. By combining real-time inventory tracking with emergency priority logic, we&apos;ve created a system that literally saves time when time is most valuable.
                  </p>
                  <p>
-                   We built MediStore as a platform that doesn't just sell medicine, but builds trust. By connecting licensed pharmacies directly to consumers through a secure, verified portal, we've eliminated the uncertainty of online health shopping.
-                 </p>
-                 <p>
-                   Today, we are the leading OTC pharmacy platform, serving thousands of families daily with high-quality healthcare products and reliable expert advice.
+                   As a Senior Full-Stack & DevOps Engineer, I architected this platform to be resilient, secure, and blazing fast. Every endpoint, database index, and UI component has been optimized for the highest production standards.
                  </p>
                </div>
-               <div className="pt-4">
-                 <Link href="/shop">
-                   <Button size="lg" className="rounded-full bg-teal-600 hover:bg-teal-700 h-14 px-8 font-bold">
-                     Shop With Confidence
-                     <ArrowRight className="ml-2 h-5 w-5" />
+               <div className="pt-6">
+                 <Link href="https://habibullah.dev" target="_blank">
+                   <Button size="lg" className="rounded-2xl bg-card text-black hover:bg-zinc-200 h-16 px-10 font-bold text-lg group">
+                     Visit Official Website
+                     <ArrowRight className="ml-3 h-5 w-5 transition-transform group-hover:translate-x-1" />
                    </Button>
                  </Link>
                </div>
             </div>
-            <div className="relative aspect-square">
-               <div className="absolute inset-0 bg-teal-600 rounded-[60px] rotate-3 opacity-10" />
-               <div className="absolute inset-0 bg-zinc-900 rounded-[60px] -rotate-3 overflow-hidden flex items-center justify-center p-12">
-                  <Pill className="h-48 w-48 text-teal-500/20 animate-pulse" />
+            
+            <div className="relative">
+               <div className="absolute inset-0 bg-primary/20 rounded-[64px] rotate-3 blur-3xl opacity-30" />
+               <div className="relative bg-zinc-900 border border-white/5 rounded-[64px] p-12 overflow-hidden shadow-2xl min-h-[500px] flex flex-col justify-center gap-8">
+                  <div className="space-y-6">
+                     <div className="h-16 w-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+                        <Code className="h-8 w-8" />
+                     </div>
+                     <h3 className="text-3xl font-black text-white font-heading uppercase tracking-tighter leading-none">
+                        BUILT FOR <br />
+                        <span className="text-zinc-500">PRODUCTION</span>
+                     </h3>
+                  </div>
+                  <div className="space-y-4">
+                     <div className="flex items-center gap-4 text-emerald-500 bg-emerald-500/10 w-fit px-4 py-2 rounded-xl border border-emerald-500/20">
+                        <Zap className="h-4 w-4 fill-current" />
+                        <span className="text-xs font-bold uppercase tracking-widest">Optimized Bundle</span>
+                     </div>
+                     <div className="flex items-center gap-4 text-primary bg-primary/10 w-fit px-4 py-2 rounded-xl border border-primary/20">
+                        <ShieldCheck className="h-4 w-4 fill-current" />
+                        <span className="text-xs font-bold uppercase tracking-widest">Enterprise Security</span>
+                     </div>
+                  </div>
                </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Values Section */}
-      <section className="py-24 bg-zinc-50">
+      {/* Pillars Section */}
+      <section className="py-32 bg-zinc-950/50 relative">
         <div className="container px-4 md:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-20 space-y-4">
-            <h2 className="text-4xl font-bold text-zinc-900 font-heading tracking-tight">Our Core Values</h2>
-            <p className="text-zinc-500 text-lg">The principles that guide every interaction on our platform.</p>
+          <div className="text-center max-w-3xl mx-auto mb-24 space-y-4">
+            <h2 className="text-5xl font-black text-white font-heading tracking-tighter">ENGINEERING PILLARS</h2>
+            <p className="text-zinc-500 text-lg font-medium tracking-tight">The technical foundation of everything I build.</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {values.map((value, i) => {
-              const Icon = value.icon;
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            {corePillars.map((pillar, i) => {
+              const Icon = pillar.icon;
               return (
-                <div key={i} className="bg-white p-10 rounded-[40px] border border-zinc-100 shadow-sm space-y-6 hover:shadow-xl transition-all hover:-translate-y-2">
-                   <div className={`p-4 rounded-2xl w-fit ${value.color}`}>
-                      <Icon className="h-8 w-8" />
+                <div key={i} className="group p-12 rounded-[48px] bg-zinc-900 border border-white/5 shadow-sm hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-2">
+                   <div className={`p-5 rounded-2xl w-fit mb-8 ${pillar.color} transition-transform group-hover:scale-110`}>
+                      <Icon className="h-10 w-10" />
                    </div>
-                   <h3 className="text-xl font-bold text-zinc-900">{value.title}</h3>
-                   <p className="text-zinc-500 leading-relaxed text-sm">{value.description}</p>
+                   <h3 className="text-2xl font-black text-white font-heading mb-4 tracking-tight">{pillar.title}</h3>
+                   <p className="text-zinc-500 leading-relaxed font-medium">{pillar.description}</p>
                 </div>
               );
             })}

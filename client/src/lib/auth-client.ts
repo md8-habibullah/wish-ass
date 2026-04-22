@@ -1,13 +1,12 @@
 import { createAuthClient } from "better-auth/react";
 import { API_BASE_URL } from "./api-config";
 
-// Fix potential typo from environment variables (e.g., 'ttps://' instead of 'https://')
-const cleanApiUrl = API_BASE_URL.replace(/^ttps:\/\//, 'https://');
-
-// Use relative URL if possible on client, or construct absolute
+// Better Auth Client configuration
+// On the client, we use the proxied /backend-api path to avoid CORS issues
+// On the server, we use the raw internal URL
 const authBaseURL = typeof window !== "undefined" 
-  ? `${window.location.origin}${cleanApiUrl.startsWith('/') ? cleanApiUrl : new URL(cleanApiUrl, window.location.origin).pathname}/api/auth`
-  : (cleanApiUrl.startsWith('/') ? `https://medi-server.habibullah.dev/api/auth` : `${cleanApiUrl}/api/auth`);
+  ? `${window.location.origin}/backend-api/api/auth`
+  : `${API_BASE_URL}/api/auth`;
 
 export const authClient = createAuthClient({
     baseURL: authBaseURL,

@@ -49,14 +49,14 @@ function VerifyEmailContent() {
   }, [token, router]);
 
   return (
-    <div className="flex min-h-[calc(100vh-64px)] flex-col items-center justify-center bg-zinc-50 px-4">
-      <div className="w-full max-w-md rounded-[48px] bg-white p-12 shadow-2xl shadow-zinc-200 text-center space-y-8 border border-zinc-100">
+    <div className="flex min-h-[calc(100vh-64px)] flex-col items-center justify-center bg-background px-4">
+      <div className="w-full max-w-md rounded-[48px] bg-card p-12 shadow-2xl shadow-zinc-200 text-center space-y-8 border border-white/5">
         <div className="flex justify-center">
           {status === "loading" && (
             <div className="relative">
-              <div className="absolute inset-0 animate-ping rounded-full bg-teal-100 opacity-75" />
-              <div className="relative h-20 w-20 rounded-full bg-teal-50 flex items-center justify-center">
-                <Loader2 className="h-10 w-10 animate-spin text-teal-600" />
+              <div className="absolute inset-0 animate-ping rounded-full bg-primary/10 opacity-75" />
+              <div className="relative h-20 w-20 rounded-full bg-primary/10 flex items-center justify-center">
+                <Loader2 className="h-10 w-10 animate-spin text-primary" />
               </div>
             </div>
           )}
@@ -73,13 +73,13 @@ function VerifyEmailContent() {
         </div>
 
         <div className="space-y-3">
-          <h1 className="text-3xl font-black tracking-tight text-zinc-900 font-heading">
+          <h1 className="text-3xl font-black tracking-tight text-white font-heading">
             {status === "loading" ? "Verifying Email..." : 
              status === "success" ? "Verification Successful!" : "Verification Failed"}
           </h1>
           <p className="text-zinc-500 font-medium leading-relaxed">
             {status === "loading" ? "Please wait while we validate your credentials with our secure server." :
-             status === "success" ? "Your email has been confirmed. You now have full access to MediStore features." :
+             status === "success" ? "Your email has been confirmed. You now have full access to MediSync features." :
              message}
           </p>
         </div>
@@ -99,7 +99,7 @@ function VerifyEmailContent() {
                    Back to Registration
                  </Button>
                </Link>
-               <Button variant="ghost" className="text-teal-600 font-bold hover:bg-teal-50 rounded-xl" onClick={() => router.refresh()}>
+               <Button variant="ghost" className="text-primary font-bold hover:bg-primary/10 rounded-xl" onClick={() => router.refresh()}>
                  Try Again
                </Button>
             </div>
@@ -108,7 +108,7 @@ function VerifyEmailContent() {
 
         <div className="flex items-center justify-center gap-2 text-zinc-400">
            <Mail className="h-4 w-4" />
-           <span className="text-[10px] font-bold uppercase tracking-widest">MediStore Secure Auth</span>
+           <span className="text-[10px] font-bold uppercase tracking-widest">MediSync Secure Auth</span>
         </div>
       </div>
     </div>
@@ -119,7 +119,7 @@ export default function VerifyEmailPage() {
   return (
     <Suspense fallback={
       <div className="flex min-h-[calc(100vh-64px)] items-center justify-center">
-        <Loader2 className="h-10 w-10 animate-spin text-teal-600" />
+        <Loader2 className="h-10 w-10 animate-spin text-primary" />
       </div>
     }>
       <VerifyEmailContent />
