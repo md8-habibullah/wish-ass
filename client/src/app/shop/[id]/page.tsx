@@ -27,7 +27,7 @@ import { Card } from "@/components/ui/card";
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useCartStore } from "@/lib/cart-store";
+import { useRequisitionStore } from "@/lib/cart-store";
 import { toast } from "sonner";
 import { API_BASE_URL } from "@/lib/api-config";
 import { useSession } from "@/lib/auth-client";
@@ -35,7 +35,7 @@ import { useSession } from "@/lib/auth-client";
 export default function MedicineDetailsPage() {
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
-  const addItem = useCartStore((state) => state.addItem);
+  const addItem = useRequisitionStore((state) => state.addItem);
 
   const { data: medicine, isLoading } = useQuery({
     queryKey: ["medicine", id],
@@ -86,7 +86,7 @@ export default function MedicineDetailsPage() {
     }
   };
 
-  const addToCart = () => {
+  const addToRequisition = () => {
     if (medicine) {
       addItem({
         id: medicine.id,
@@ -96,7 +96,7 @@ export default function MedicineDetailsPage() {
         stock: medicine.stock,
         quantity: quantity
       });
-      toast.success(`${medicine.name} added to cart!`);
+      toast.success(`${medicine.name} added to requisition!`);
     }
   };
 
@@ -112,7 +112,7 @@ export default function MedicineDetailsPage() {
     return (
       <div className="container px-4 py-20 text-center">
         <h2 className="text-2xl font-bold font-heading">Medicine not found</h2>
-        <Link href="/shop" className="text-teal-600 hover:underline mt-4 inline-block">Return to shop</Link>
+        <Link href="/shop" className="text-teal-600 hover:underline mt-4 inline-block">Return to inventory</Link>
       </div>
     );
   }
@@ -123,7 +123,7 @@ export default function MedicineDetailsPage() {
       <div className="flex items-center gap-2 text-sm text-zinc-500 mb-12">
         <Link href="/" className="hover:text-teal-600 transition-colors">Home</Link>
         <ChevronRight className="h-4 w-4" />
-        <Link href="/shop" className="hover:text-teal-600 transition-colors">Shop</Link>
+        <Link href="/shop" className="hover:text-teal-600 transition-colors">Inventory</Link>
         <ChevronRight className="h-4 w-4" />
         <span className="text-zinc-900 font-bold">{medicine.name}</span>
       </div>
@@ -232,11 +232,11 @@ export default function MedicineDetailsPage() {
             <div className="flex gap-4">
               <Button 
                 className="flex-1 h-16 rounded-3xl bg-teal-600 hover:bg-teal-700 font-extrabold text-lg shadow-xl shadow-teal-500/20 transition-all active:scale-95"
-                onClick={addToCart}
+                onClick={addToRequisition}
                 disabled={medicine.stock === 0}
               >
-                <ShoppingBag className="mr-3 h-6 w-6" />
-                {medicine.stock > 0 ? "Add to Cart" : "Out of Stock"}
+                <PlusSquare className="mr-3 h-6 w-6" />
+                {medicine.stock > 0 ? "Add to Requisition" : "Out of Stock"}
               </Button>
             </div>
           </div>

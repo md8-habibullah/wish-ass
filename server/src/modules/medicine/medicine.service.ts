@@ -117,8 +117,13 @@ const getAllMedicine = async (search: (string), filerTags: string[], isStock: nu
 
     let end = Date.now();
 
+    const resultsWithAlerts = results.map(med => ({
+        ...med,
+        stockStatus: med.stock <= med.minStockAlert ? "CRITICAL_STOCK" : "NORMAL"
+    }));
+
     return {
-        data: results,
+        data: resultsWithAlerts,
         meta: {
             timeTaken: `${end - start} ms`,
             totalItem: metaPagination,
@@ -169,8 +174,14 @@ const getMedicineByID = async (id: string) => {
     })
     // console.log(result);
     let end = Date.now();
+    
+    const resultWithAlert = {
+        ...result,
+        stockStatus: result.stock <= result.minStockAlert ? "CRITICAL_STOCK" : "NORMAL"
+    };
+
     return {
-        data: result,
+        data: resultWithAlert,
         meta: {
             timeNow: end,
             timeTaken: `${end - start} ms`

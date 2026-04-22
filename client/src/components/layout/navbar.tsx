@@ -3,13 +3,13 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useSession, signOut } from "@/lib/auth-client";
-import { useCartStore } from "@/lib/cart-store";
+import { useRequisitionStore } from "@/lib/cart-store";
 import { Button } from "@/components/ui/button";
 import { usePathname, useRouter } from "next/navigation";
 import { 
   Pill, 
-  ShoppingCart, 
-  ShoppingBag,
+  ClipboardList, 
+  PlusSquare,
   User, 
   LogOut, 
   LayoutDashboard,
@@ -34,7 +34,7 @@ import { Badge } from "@/components/ui/badge";
 
 export function Navbar() {
   const { data: session } = useSession();
-  const items = useCartStore((state) => state.items);
+  const items = useRequisitionStore((state) => state.items);
   const pathname = usePathname();
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
@@ -74,7 +74,7 @@ export function Navbar() {
 
   const navLinks = [
     { name: "Home", href: "/" },
-    { name: "Shop", href: "/shop" },
+    { name: "Central Inventory", href: "/shop" },
     { name: "Categories", href: "/categories" },
     { name: "About", href: "/about" },
   ];
@@ -90,7 +90,7 @@ export function Navbar() {
               <Pill className="h-6 w-6" />
             </div>
             <span className="text-2xl font-black tracking-tighter text-zinc-900 font-heading">
-              Medi<span className="text-teal-600">Store.</span>
+              Medi<span className="text-teal-600">Sync.</span>
             </span>
           </Link>
 
@@ -158,14 +158,14 @@ export function Navbar() {
             <Button className="rounded-2xl h-12 px-3 sm:px-6 bg-zinc-950 hover:bg-zinc-800 text-white shadow-xl shadow-zinc-200 transition-all hover:scale-105 active:scale-95 group">
               <div className="flex items-center gap-2.5">
                 <div className="relative">
-                  <ShoppingBag className="h-5 w-5" />
+                  <ClipboardList className="h-5 w-5" />
                   {cartItemCount > 0 && (
                     <span className="absolute -top-2 -right-2 h-4 w-4 rounded-full bg-teal-500 text-[10px] font-bold flex items-center justify-center border-2 border-zinc-950">
                       {cartItemCount}
                     </span>
                   )}
                 </div>
-                <span className="font-extrabold text-sm hidden sm:inline">Cart</span>
+                <span className="font-extrabold text-sm hidden sm:inline">Requisition</span>
               </div>
             </Button>
           </Link>
@@ -208,8 +208,8 @@ export function Navbar() {
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
                       <Link href="/orders" className="rounded-xl h-12 cursor-pointer transition-all hover:bg-teal-50 hover:text-teal-700">
-                        <ShoppingCart className="mr-3 h-4 w-4" />
-                        <span className="font-bold text-sm">My Order History</span>
+                        <PlusSquare className="mr-3 h-4 w-4" />
+                        <span className="font-bold text-sm">Procurement History</span>
                       </Link>
                     </DropdownMenuItem>
                     

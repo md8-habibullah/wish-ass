@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-export interface CartItem {
+export interface RequisitionItem {
   id: string;
   name: string;
   price: number;
@@ -11,17 +11,17 @@ export interface CartItem {
   stock: number;
 }
 
-interface CartStore {
-  items: CartItem[];
-  addItem: (item: CartItem) => void;
+interface RequisitionStore {
+  items: RequisitionItem[];
+  addItem: (item: RequisitionItem) => void;
   removeItem: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
-  clearCart: () => void;
+  clearRequisition: () => void;
   getTotal: () => number;
   getItemCount: () => number;
 }
 
-export const useCartStore = create<CartStore>()(
+export const useRequisitionStore = create<RequisitionStore>()(
   persist(
     (set, get) => ({
       items: [],
@@ -54,7 +54,7 @@ export const useCartStore = create<CartStore>()(
           });
         }
       },
-      clearCart: () => set({ items: [] }),
+      clearRequisition: () => set({ items: [] }),
       getTotal: () => {
         return get().items.reduce((total, item) => total + item.price * item.quantity, 0);
       },
@@ -63,7 +63,7 @@ export const useCartStore = create<CartStore>()(
       },
     }),
     {
-      name: "medistore-cart",
+      name: "medisync-requisition",
     }
   )
 );

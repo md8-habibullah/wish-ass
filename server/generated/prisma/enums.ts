@@ -19,6 +19,15 @@ export const Status = {
 export type Status = (typeof Status)[keyof typeof Status]
 
 
+export const Priority = {
+  LOW: 'LOW',
+  MEDIUM: 'MEDIUM',
+  EMERGENCY: 'EMERGENCY'
+} as const
+
+export type Priority = (typeof Priority)[keyof typeof Priority]
+
+
 export const Role = {
   CUSTOMER: 'CUSTOMER',
   SELLER: 'SELLER',

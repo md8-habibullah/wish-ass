@@ -38,6 +38,7 @@ export type OrderMinAggregateOutputType = {
   id: string | null
   totalPrice: bigint | null
   status: $Enums.Status | null
+  priority: $Enums.Priority | null
   userId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -47,6 +48,7 @@ export type OrderMaxAggregateOutputType = {
   id: string | null
   totalPrice: bigint | null
   status: $Enums.Status | null
+  priority: $Enums.Priority | null
   userId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -56,6 +58,7 @@ export type OrderCountAggregateOutputType = {
   id: number
   totalPrice: number
   status: number
+  priority: number
   userId: number
   createdAt: number
   updatedAt: number
@@ -75,6 +78,7 @@ export type OrderMinAggregateInputType = {
   id?: true
   totalPrice?: true
   status?: true
+  priority?: true
   userId?: true
   createdAt?: true
   updatedAt?: true
@@ -84,6 +88,7 @@ export type OrderMaxAggregateInputType = {
   id?: true
   totalPrice?: true
   status?: true
+  priority?: true
   userId?: true
   createdAt?: true
   updatedAt?: true
@@ -93,6 +98,7 @@ export type OrderCountAggregateInputType = {
   id?: true
   totalPrice?: true
   status?: true
+  priority?: true
   userId?: true
   createdAt?: true
   updatedAt?: true
@@ -189,6 +195,7 @@ export type OrderGroupByOutputType = {
   id: string
   totalPrice: bigint
   status: $Enums.Status
+  priority: $Enums.Priority
   userId: string
   createdAt: Date
   updatedAt: Date
@@ -221,6 +228,7 @@ export type OrderWhereInput = {
   id?: Prisma.StringFilter<"Order"> | string
   totalPrice?: Prisma.BigIntFilter<"Order"> | bigint | number
   status?: Prisma.EnumStatusFilter<"Order"> | $Enums.Status
+  priority?: Prisma.EnumPriorityFilter<"Order"> | $Enums.Priority
   userId?: Prisma.StringFilter<"Order"> | string
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Order"> | Date | string
@@ -232,6 +240,7 @@ export type OrderOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  priority?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -246,6 +255,7 @@ export type OrderWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.OrderWhereInput | Prisma.OrderWhereInput[]
   totalPrice?: Prisma.BigIntFilter<"Order"> | bigint | number
   status?: Prisma.EnumStatusFilter<"Order"> | $Enums.Status
+  priority?: Prisma.EnumPriorityFilter<"Order"> | $Enums.Priority
   userId?: Prisma.StringFilter<"Order"> | string
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Order"> | Date | string
@@ -257,6 +267,7 @@ export type OrderOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  priority?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -274,6 +285,7 @@ export type OrderScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Order"> | string
   totalPrice?: Prisma.BigIntWithAggregatesFilter<"Order"> | bigint | number
   status?: Prisma.EnumStatusWithAggregatesFilter<"Order"> | $Enums.Status
+  priority?: Prisma.EnumPriorityWithAggregatesFilter<"Order"> | $Enums.Priority
   userId?: Prisma.StringWithAggregatesFilter<"Order"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Order"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Order"> | Date | string
@@ -283,6 +295,7 @@ export type OrderCreateInput = {
   id?: string
   totalPrice: bigint | number
   status: $Enums.Status
+  priority?: $Enums.Priority
   createdAt?: Date | string
   updatedAt?: Date | string
   orderItems?: Prisma.OrderItemCreateNestedManyWithoutOrderInput
@@ -293,6 +306,7 @@ export type OrderUncheckedCreateInput = {
   id?: string
   totalPrice: bigint | number
   status: $Enums.Status
+  priority?: $Enums.Priority
   userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -303,6 +317,7 @@ export type OrderUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
+  priority?: Prisma.EnumPriorityFieldUpdateOperationsInput | $Enums.Priority
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orderItems?: Prisma.OrderItemUpdateManyWithoutOrderNestedInput
@@ -313,6 +328,7 @@ export type OrderUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
+  priority?: Prisma.EnumPriorityFieldUpdateOperationsInput | $Enums.Priority
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -323,6 +339,7 @@ export type OrderCreateManyInput = {
   id?: string
   totalPrice: bigint | number
   status: $Enums.Status
+  priority?: $Enums.Priority
   userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -332,6 +349,7 @@ export type OrderUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
+  priority?: Prisma.EnumPriorityFieldUpdateOperationsInput | $Enums.Priority
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -340,6 +358,7 @@ export type OrderUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
+  priority?: Prisma.EnumPriorityFieldUpdateOperationsInput | $Enums.Priority
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -349,6 +368,7 @@ export type OrderCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  priority?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -362,6 +382,7 @@ export type OrderMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  priority?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -371,6 +392,7 @@ export type OrderMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  priority?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -405,6 +427,10 @@ export type BigIntFieldUpdateOperationsInput = {
 
 export type EnumStatusFieldUpdateOperationsInput = {
   set?: $Enums.Status
+}
+
+export type EnumPriorityFieldUpdateOperationsInput = {
+  set?: $Enums.Priority
 }
 
 export type OrderCreateNestedOneWithoutOrderItemsInput = {
@@ -467,6 +493,7 @@ export type OrderCreateWithoutOrderItemsInput = {
   id?: string
   totalPrice: bigint | number
   status: $Enums.Status
+  priority?: $Enums.Priority
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutOrdersInput
@@ -476,6 +503,7 @@ export type OrderUncheckedCreateWithoutOrderItemsInput = {
   id?: string
   totalPrice: bigint | number
   status: $Enums.Status
+  priority?: $Enums.Priority
   userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -501,6 +529,7 @@ export type OrderUpdateWithoutOrderItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
+  priority?: Prisma.EnumPriorityFieldUpdateOperationsInput | $Enums.Priority
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutOrdersNestedInput
@@ -510,6 +539,7 @@ export type OrderUncheckedUpdateWithoutOrderItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
+  priority?: Prisma.EnumPriorityFieldUpdateOperationsInput | $Enums.Priority
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -519,6 +549,7 @@ export type OrderCreateWithoutUserInput = {
   id?: string
   totalPrice: bigint | number
   status: $Enums.Status
+  priority?: $Enums.Priority
   createdAt?: Date | string
   updatedAt?: Date | string
   orderItems?: Prisma.OrderItemCreateNestedManyWithoutOrderInput
@@ -528,6 +559,7 @@ export type OrderUncheckedCreateWithoutUserInput = {
   id?: string
   totalPrice: bigint | number
   status: $Enums.Status
+  priority?: $Enums.Priority
   createdAt?: Date | string
   updatedAt?: Date | string
   orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutOrderInput
@@ -566,6 +598,7 @@ export type OrderScalarWhereInput = {
   id?: Prisma.StringFilter<"Order"> | string
   totalPrice?: Prisma.BigIntFilter<"Order"> | bigint | number
   status?: Prisma.EnumStatusFilter<"Order"> | $Enums.Status
+  priority?: Prisma.EnumPriorityFilter<"Order"> | $Enums.Priority
   userId?: Prisma.StringFilter<"Order"> | string
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Order"> | Date | string
@@ -575,6 +608,7 @@ export type OrderCreateManyUserInput = {
   id?: string
   totalPrice: bigint | number
   status: $Enums.Status
+  priority?: $Enums.Priority
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -583,6 +617,7 @@ export type OrderUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
+  priority?: Prisma.EnumPriorityFieldUpdateOperationsInput | $Enums.Priority
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orderItems?: Prisma.OrderItemUpdateManyWithoutOrderNestedInput
@@ -592,6 +627,7 @@ export type OrderUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
+  priority?: Prisma.EnumPriorityFieldUpdateOperationsInput | $Enums.Priority
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutOrderNestedInput
@@ -601,6 +637,7 @@ export type OrderUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
+  priority?: Prisma.EnumPriorityFieldUpdateOperationsInput | $Enums.Priority
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -640,6 +677,7 @@ export type OrderSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   id?: boolean
   totalPrice?: boolean
   status?: boolean
+  priority?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -652,6 +690,7 @@ export type OrderSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   id?: boolean
   totalPrice?: boolean
   status?: boolean
+  priority?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -662,6 +701,7 @@ export type OrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   id?: boolean
   totalPrice?: boolean
   status?: boolean
+  priority?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -672,12 +712,13 @@ export type OrderSelectScalar = {
   id?: boolean
   totalPrice?: boolean
   status?: boolean
+  priority?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type OrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "totalPrice" | "status" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
+export type OrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "totalPrice" | "status" | "priority" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
 export type OrderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   orderItems?: boolean | Prisma.Order$orderItemsArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -700,6 +741,7 @@ export type $OrderPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     id: string
     totalPrice: bigint
     status: $Enums.Status
+    priority: $Enums.Priority
     userId: string
     createdAt: Date
     updatedAt: Date
@@ -1131,6 +1173,7 @@ export interface OrderFieldRefs {
   readonly id: Prisma.FieldRef<"Order", 'String'>
   readonly totalPrice: Prisma.FieldRef<"Order", 'BigInt'>
   readonly status: Prisma.FieldRef<"Order", 'Status'>
+  readonly priority: Prisma.FieldRef<"Order", 'Priority'>
   readonly userId: Prisma.FieldRef<"Order", 'String'>
   readonly createdAt: Prisma.FieldRef<"Order", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Order", 'DateTime'>

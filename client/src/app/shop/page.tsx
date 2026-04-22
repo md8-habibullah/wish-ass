@@ -36,7 +36,7 @@ import {
 } from "@/components/ui/select";
 import Link from "next/link";
 import Image from "next/image";
-import { useCartStore } from "@/lib/cart-store";
+import { useRequisitionStore } from "@/lib/cart-store";
 import { toast } from "sonner";
 import { API_BASE_URL } from "@/lib/api-config";
 import { useEffect } from "react";
@@ -70,7 +70,7 @@ function ShopPageContent() {
   const [manufacturer, setManufacturer] = useState(initialManufacturer);
   const [selectedTags, setSelectedTags] = useState<string[]>(initialTags);
   
-  const addItem = useCartStore((state) => state.addItem);
+  const addItem = useRequisitionStore((state) => state.addItem);
 
   // Sync state to URL
   useEffect(() => {
@@ -135,7 +135,7 @@ function ShopPageContent() {
       <div className="flex items-center gap-2 text-sm text-zinc-500 mb-8">
         <Link href="/" className="hover:text-teal-600 transition-colors">Home</Link>
         <ChevronRight className="h-4 w-4" />
-        <span className="text-zinc-900 font-bold">Shop</span>
+        <span className="text-zinc-900 font-bold">Inventory</span>
       </div>
 
       <div className="flex flex-col lg:flex-row gap-12">
@@ -392,7 +392,7 @@ function ShopPageContent() {
                               stock: med.stock,
                               quantity: 1
                             });
-                            toast.success(`${med.name} added to cart!`);
+                            toast.success(`${med.name} added to requisition!`);
                           }}
                         >
                           <Plus className="h-6 w-6" />

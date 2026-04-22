@@ -1,6 +1,6 @@
 "use client";
 
-import { useCartStore } from "@/lib/cart-store";
+import { useRequisitionStore } from "@/lib/cart-store";
 import { useSession } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -14,7 +14,9 @@ import {
   ArrowLeft,
   MapPin,
   Phone,
-  Wallet
+  Wallet,
+  Building2,
+  AlertCircle
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -26,6 +28,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -36,15 +45,14 @@ import axios from "axios";
 import { API_BASE_URL } from "@/lib/api-config";
 
 const formSchema = z.object({
-  fullName: z.string().min(2, "Full name is required"),
-  phone: z.string().min(10, "Valid phone number is required"),
-  address: z.string().min(10, "Full delivery address is required"),
-  city: z.string().min(2, "City is required"),
-  zipCode: z.string().min(4, "Valid zip code is required"),
+  fullName: z.string().min(2, "Staff name is required"),
+  phone: z.string().min(10, "Valid contact number is required"),
+  departmentName: z.string().min(2, "Department/Ward name is required"),
+  priority: z.string().default("LOW"),
 });
 
 export default function CheckoutPage() {
-  const { items, getTotal, clearCart } = useCartStore();
+  const { items, getTotal, clearRequisition } = useRequisitionStore();
   const { data: session, isPending: sessionLoading } = useSession();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -65,9 +73,8 @@ export default function CheckoutPage() {
     defaultValues: {
       fullName: session?.user.name || "",
       phone: "",
-      address: "",
-      city: "",
-      zipCode: "",
+      departmentName: "",
+      priority: "LOW",
     },
   });
 
@@ -91,15 +98,16 @@ export default function CheckoutPage() {
         items: items.map(item => ({
           medicineId: item.id,
           quantity: item.quantity
-        }))
+        })),
+        priority: values.priority
       };
 
       await axios.post(`${API_BASE_URL}/orders`, orderData, {
         withCredentials: true
       });
 
-      toast.success("Order placed successfully!");
-      clearCart();
+      toast.success("Requisition submitted successfully!");
+      clearRequisition();
       router.push("/orders");
     } catch (err: any) {
       console.error("Order error:", err);
@@ -115,10 +123,10 @@ export default function CheckoutPage() {
         <Link href="/cart">
           <Button variant="ghost" size="sm" className="rounded-full">
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Cart
+            Back to Queue
           </Button>
         </Link>
-        <h1 className="text-3xl font-bold text-zinc-900 font-heading">Checkout</h1>
+        <h1 className="text-3xl font-bold text-zinc-900 font-heading">Submit Requisition</h1>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
@@ -128,8 +136,8 @@ export default function CheckoutPage() {
               <Card className="rounded-3xl border-zinc-100 shadow-sm overflow-hidden">
                 <CardHeader className="bg-zinc-50/50 border-b border-zinc-100">
                   <CardTitle className="text-lg flex items-center gap-2 font-heading">
-                    <MapPin className="h-5 w-5 text-teal-600" />
-                    Delivery Information
+                    <Building2 className="h-5 w-5 text-teal-600" />
+                    Internal Allocation Details
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="p-8 space-y-6">
@@ -139,9 +147,9 @@ export default function CheckoutPage() {
                       name="fullName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Full Name</FormLabel>
+                          <FormLabel>Staff Name</FormLabel>
                           <FormControl>
-                            <Input placeholder="John Doe" {...field} />
+                            <Input placeholder="Dr. Smith / Nurse Joy" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -152,11 +160,11 @@ export default function CheckoutPage() {
                       name="phone"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Phone Number</FormLabel>
+                          <FormLabel>Extension / Contact</FormLabel>
                           <FormControl>
                             <div className="relative">
                               <Phone className="absolute left-3 top-2.5 h-4 w-4 text-zinc-400" />
-                              <Input placeholder="+1 234 567 890" className="pl-10" {...field} />
+                              <Input placeholder="Ext 402" className="pl-10" {...field} />
                             </div>
                           </FormControl>
                           <FormMessage />
@@ -164,28 +172,15 @@ export default function CheckoutPage() {
                       )}
                     />
                   </div>
-                  <FormField
-                    control={form.control}
-                    name="address"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Full Address</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Street name, Building No, Apartment" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <FormField
                       control={form.control}
-                      name="city"
+                      name="departmentName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>City</FormLabel>
+                          <FormLabel>Department / Ward Name</FormLabel>
                           <FormControl>
-                            <Input placeholder="Health City" {...field} />
+                            <Input placeholder="ICU / Emergency Ward" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -193,13 +188,22 @@ export default function CheckoutPage() {
                     />
                     <FormField
                       control={form.control}
-                      name="zipCode"
+                      name="priority"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Zip Code</FormLabel>
-                          <FormControl>
-                            <Input placeholder="12345" {...field} />
-                          </FormControl>
+                          <FormLabel>Urgency Priority</FormLabel>
+                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <FormControl>
+                              <SelectTrigger className="h-12 rounded-xl">
+                                <SelectValue placeholder="Select priority" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="LOW">Low (Standard)</SelectItem>
+                              <SelectItem value="MEDIUM">Medium (Urgent)</SelectItem>
+                              <SelectItem value="EMERGENCY">Emergency (Immediate)</SelectItem>
+                            </SelectContent>
+                          </Select>
                           <FormMessage />
                         </FormItem>
                       )}
@@ -211,8 +215,8 @@ export default function CheckoutPage() {
               <Card className="rounded-3xl border-zinc-100 shadow-sm overflow-hidden">
                 <CardHeader className="bg-zinc-50/50 border-b border-zinc-100">
                   <CardTitle className="text-lg flex items-center gap-2 font-heading">
-                    <Wallet className="h-5 w-5 text-teal-600" />
-                    Payment Method
+                    <AlertCircle className="h-5 w-5 text-teal-600" />
+                    Allocation Protocol
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="p-8">
@@ -221,8 +225,8 @@ export default function CheckoutPage() {
                       <Truck className="h-6 w-6" />
                     </div>
                     <div className="flex-1">
-                      <p className="font-bold text-teal-900">Cash on Delivery</p>
-                      <p className="text-xs text-teal-700">Pay when you receive your medicines.</p>
+                      <p className="font-bold text-teal-900">Internal Hospital Courier</p>
+                      <p className="text-xs text-teal-700">Supplies will be delivered to your department within 15-30 mins.</p>
                     </div>
                     <CheckCircle2 className="h-6 w-6 text-teal-600" />
                   </div>
@@ -235,7 +239,7 @@ export default function CheckoutPage() {
         <div className="space-y-6">
           <Card className="rounded-3xl border-teal-50 shadow-xl shadow-teal-50/50 overflow-hidden sticky top-24">
             <CardHeader className="border-b border-zinc-50 p-8">
-              <CardTitle className="text-xl font-heading">Order Summary</CardTitle>
+              <CardTitle className="text-xl font-heading">Requisition Summary</CardTitle>
             </CardHeader>
             <CardContent className="p-8 space-y-6">
               <div className="max-h-[300px] overflow-y-auto pr-2 space-y-4">
@@ -253,15 +257,15 @@ export default function CheckoutPage() {
               
               <div className="space-y-3">
                 <div className="flex justify-between text-zinc-600 text-sm">
-                  <span>Subtotal</span>
+                  <span>Resource Subtotal</span>
                   <span>${subtotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-zinc-600 text-sm">
-                  <span>Shipping Fee</span>
+                  <span>Internal Logistics Fee</span>
                   <span>${shipping.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-xl font-extrabold text-teal-900 pt-3 font-heading border-t border-zinc-100">
-                  <span>Total</span>
+                  <span>Total Value</span>
                   <span>${total.toFixed(2)}</span>
                 </div>
               </div>
@@ -275,7 +279,7 @@ export default function CheckoutPage() {
                   <Loader2 className="mr-2 h-5 w-5 animate-spin" />
                 ) : (
                   <>
-                    Confirm Order
+                    Submit Requisition
                     <CheckCircle2 className="ml-2 h-5 w-5" />
                   </>
                 )}

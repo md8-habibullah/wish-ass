@@ -16,7 +16,7 @@ import { JSONStringify } from "json-with-bigint";
 const createOrder = async (req: Request, res: Response) => {
     try {
         const userId = req.user?.id;
-        const { items } = req.body;
+        const { items, priority } = req.body;
 
         if (!userId) {
             return res.status(401).json({
@@ -34,7 +34,7 @@ const createOrder = async (req: Request, res: Response) => {
             });
         }
         // Important Line here - Call the service layer to create the order
-        const result = await orderService.createOrder(userId, items);
+        const result = await orderService.createOrder(userId, items, priority);
 
         // console.log("RESULT FROM ME", result);
 

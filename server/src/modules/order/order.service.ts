@@ -2,7 +2,7 @@ import { prisma } from "../../../lib/prisma";
 // import { Status } from "../../../generated/prisma/client"; // Import Status Enum
 
 // 1. Create Order (Customer)
-const createOrder = async (userId: string, items: { medicineId: string; quantity: number }[]) => {
+const createOrder = async (userId: string, items: { medicineId: string; quantity: number }[], priority: any = "LOW") => {
 
     // Start a transaction (All or Nothing)
     return await prisma.$transaction(async (tx: any) => {
@@ -43,6 +43,7 @@ const createOrder = async (userId: string, items: { medicineId: string; quantity
                 // totalPrice: BigInt(totalPrice), // Schema uses BigInt
                 totalPrice: BigInt(Math.round(totalPrice * 100)), // Store as cents in BigInt for precision
                 status: "PENDING", // Default status
+                priority: priority,
                 orderItems: {
                     create: orderItemsData.map(item => ({
                         medicineId: item.id,
@@ -57,7 +58,14 @@ const createOrder = async (userId: string, items: { medicineId: string; quantity
             } // Return the items with the order
         });
 
-        return newOrder;
+        const processingNote = priority === "EMERGENCY" 
+            ? "EMERGENCY REQUISITION: Bypassing standard queue. Instant processing initiated."
+            : "Standard requisition queued for processing.";
+
+        return {
+            ...newOrder,
+            processingNote
+        };
     });
 };
 

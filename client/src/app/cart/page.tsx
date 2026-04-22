@@ -1,12 +1,12 @@
 "use client";
 
-import { useCartStore } from "@/lib/cart-store";
+import { useRequisitionStore } from "@/lib/cart-store";
 import { Button } from "@/components/ui/button";
 import { 
-  Trash2, 
-  Plus, 
+  ClipboardList, 
+  PlusSquare, 
   Minus, 
-  ShoppingBag, 
+  ClipboardCheck, 
   ArrowRight,
   ShieldCheck,
   PackageCheck,
@@ -24,7 +24,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 
 export default function CartPage() {
-  const { items, removeItem, updateQuantity, getTotal, getItemCount } = useCartStore();
+  const { items, removeItem, updateQuantity, getTotal, getItemCount } = useRequisitionStore();
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -41,16 +41,16 @@ export default function CartPage() {
     return (
       <div className="container px-4 py-32 flex flex-col items-center justify-center text-center max-w-2xl mx-auto">
         <div className="bg-zinc-50 p-10 rounded-[60px] mb-8 relative">
-          <ShoppingBag className="h-20 w-20 text-zinc-200" />
+          <ClipboardList className="h-20 w-20 text-zinc-200" />
           <div className="absolute -top-2 -right-2 h-8 w-8 rounded-full bg-teal-500 animate-pulse" />
         </div>
-        <h1 className="text-4xl font-extrabold text-zinc-900 font-heading tracking-tight">Your cart feels light</h1>
+        <h1 className="text-4xl font-extrabold text-zinc-900 font-heading tracking-tight">Requisition Queue Empty</h1>
         <p className="text-zinc-500 mt-4 text-lg leading-relaxed">
-          Looks like you haven&apos;t added any essential medicines yet. We have 5,000+ items ready for delivery.
+          Your current requisition queue is empty. Access the central inventory to request supplies.
         </p>
         <Link href="/shop" className="mt-10">
           <Button size="lg" className="bg-teal-600 hover:bg-teal-700 h-16 px-12 rounded-full font-extrabold text-lg shadow-2xl shadow-teal-500/20 group">
-            Browse Pharmacy
+            Access Inventory
             <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-2" />
           </Button>
         </Link>
@@ -64,14 +64,14 @@ export default function CartPage() {
       <div className="flex items-center gap-2 text-sm text-zinc-500 mb-10">
         <Link href="/" className="hover:text-teal-600 transition-colors">Home</Link>
         <ChevronRight className="h-4 w-4" />
-        <span className="text-zinc-900 font-bold">Shopping Cart</span>
+        <span className="text-zinc-900 font-bold">Requisition Queue</span>
       </div>
 
       <div className="flex flex-col lg:flex-row gap-16">
         <div className="flex-1 space-y-10">
           <div className="space-y-2">
-             <h1 className="text-4xl font-extrabold text-zinc-900 font-heading tracking-tight">Shopping Bag.</h1>
-             <p className="text-zinc-500">You have <span className="text-zinc-900 font-bold">{getItemCount()} items</span> in your healthcare collection.</p>
+             <h1 className="text-4xl font-extrabold text-zinc-900 font-heading tracking-tight">Requisition Queue.</h1>
+             <p className="text-zinc-500">You have <span className="text-zinc-900 font-bold">{getItemCount()} items</span> pending in your requisition queue.</p>
           </div>
 
           <div className="space-y-6">
@@ -137,8 +137,8 @@ export default function CartPage() {
                       className="text-zinc-400 hover:text-red-500 font-bold gap-2 rounded-xl h-11 px-4 hover:bg-red-50"
                       onClick={() => removeItem(item.id)}
                     >
-                      <Trash2 className="h-4 w-4" />
-                      REMOVE ITEM
+                      <PlusSquare className="h-4 w-4" />
+                      REMOVE FROM QUEUE
                     </Button>
                   </div>
                 </div>
@@ -173,17 +173,17 @@ export default function CartPage() {
           <Card className="rounded-[48px] border-zinc-100 shadow-2xl shadow-zinc-200/50 overflow-hidden sticky top-32">
             <CardContent className="p-10 space-y-10">
               <div className="space-y-2">
-                 <h2 className="text-2xl font-bold text-zinc-900 font-heading tracking-tight">Order Insight</h2>
-                 <p className="text-sm text-zinc-500">Review your final pricing before checkout.</p>
+                 <h2 className="text-2xl font-bold text-zinc-900 font-heading tracking-tight">Allocation Insight</h2>
+                 <p className="text-sm text-zinc-500">Review the resources requested for your department.</p>
               </div>
               
               <div className="space-y-6">
                 <div className="flex justify-between items-center text-zinc-500 font-bold text-sm tracking-widest uppercase">
-                  <span>Bag Subtotal</span>
+                  <span>Resource Subtotal</span>
                   <span className="text-zinc-900 text-lg font-heading tracking-normal">${subtotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between items-center text-zinc-500 font-bold text-sm tracking-widest uppercase">
-                  <span>Global Shipping</span>
+                  <span>Logistics Allocation</span>
                   <span className="text-zinc-900 text-lg font-heading tracking-normal">${shipping.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between items-center text-zinc-500 font-bold text-sm tracking-widest uppercase">
@@ -194,7 +194,7 @@ export default function CartPage() {
                 <div className="relative pt-6">
                    <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-100 to-transparent" />
                    <div className="flex justify-between items-center pt-2">
-                      <span className="text-zinc-900 font-black text-xl font-heading tracking-tight uppercase">Order Total</span>
+                      <span className="text-zinc-900 font-black text-xl font-heading tracking-tight uppercase">Total Requisition Value</span>
                       <span className="text-teal-600 font-black text-4xl font-heading">${total.toFixed(2)}</span>
                    </div>
                 </div>
@@ -203,7 +203,7 @@ export default function CartPage() {
               <div className="space-y-4">
                  <Link href="/checkout" className="block w-full">
                    <Button className="w-full bg-teal-600 hover:bg-teal-700 h-20 rounded-[32px] text-xl font-extrabold shadow-2xl shadow-teal-500/30 group transition-all active:scale-95">
-                     Checkout Now
+                     Proceed to Submit
                      <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-2" />
                    </Button>
                  </Link>

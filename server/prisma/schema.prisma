@@ -5,8 +5,7 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -45,6 +44,7 @@ model Medicine {
   category     String      @default("others")
   price        Float
   stock        Int
+  minStockAlert Int         @default(10)
   manufacturer String
   sellerID     String
   createdAt    DateTime    @default(now())
@@ -65,10 +65,17 @@ enum Status {
   CANCELLED
 }
 
+enum Priority {
+  LOW
+  MEDIUM
+  EMERGENCY
+}
+
 model Order {
   id         String   @id @default(uuid())
   totalPrice BigInt
   status     Status
+  priority   Priority @default(LOW)
   userId     String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt

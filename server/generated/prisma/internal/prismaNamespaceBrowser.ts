@@ -93,6 +93,7 @@ export const MedicineScalarFieldEnum = {
   category: 'category',
   price: 'price',
   stock: 'stock',
+  minStockAlert: 'minStockAlert',
   manufacturer: 'manufacturer',
   sellerID: 'sellerID',
   createdAt: 'createdAt',
@@ -106,6 +107,7 @@ export const OrderScalarFieldEnum = {
   id: 'id',
   totalPrice: 'totalPrice',
   status: 'status',
+  priority: 'priority',
   userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

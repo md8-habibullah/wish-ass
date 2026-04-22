@@ -1132,6 +1132,7 @@ export const MedicineScalarFieldEnum = {
   category: 'category',
   price: 'price',
   stock: 'stock',
+  minStockAlert: 'minStockAlert',
   manufacturer: 'manufacturer',
   sellerID: 'sellerID',
   createdAt: 'createdAt',
@@ -1145,6 +1146,7 @@ export const OrderScalarFieldEnum = {
   id: 'id',
   totalPrice: 'totalPrice',
   status: 'status',
+  priority: 'priority',
   userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -1351,6 +1353,20 @@ export type EnumStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
  * Reference to a field of type 'Status[]'
  */
 export type ListEnumStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Status[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Priority'
+ */
+export type EnumPriorityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Priority'>
+    
+
+
+/**
+ * Reference to a field of type 'Priority[]'
+ */
+export type ListEnumPriorityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Priority[]'>
     
 
 

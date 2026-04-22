@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ShoppingBag, HeartPulse } from "lucide-react";
+import { ArrowRight, ClipboardList, HeartPulse } from "lucide-react";
 
 export default function Home() {
   return (
@@ -24,7 +24,7 @@ export default function Home() {
             </div>
             <Link href="/shop" className="w-full md:w-auto">
               <Button size="lg" className="w-full md:w-auto bg-white text-zinc-900 hover:bg-zinc-100 h-14 md:h-16 px-8 md:px-10 rounded-full font-bold text-lg shadow-xl shadow-white/5">
-                Browse Full Catalog
+                Access Central Inventory
               </Button>
             </Link>
           </div>
@@ -59,7 +59,7 @@ export default function Home() {
                         <span className="text-white font-bold text-2xl font-heading">$12.50</span>
                       </div>
                       <Button size="icon" className="bg-teal-600 hover:bg-teal-500 rounded-2xl h-12 w-12 shadow-lg shadow-teal-500/20">
-                         <ShoppingBag className="h-5 w-5" />
+                         <ClipboardList className="h-5 w-5" />
                       </Button>
                     </div>
                  </div>
@@ -78,16 +78,16 @@ export default function Home() {
         <div className="bg-teal-600 rounded-[40px] md:rounded-[60px] p-6 py-12 md:p-20 relative overflow-hidden flex flex-col md:flex-row items-center gap-12">
           <div className="relative z-10 max-w-2xl space-y-8 text-center md:text-left">
             <h2 className="text-4xl md:text-6xl font-bold text-white font-heading leading-tight">
-              Empower Your <br />
-              <span className="text-teal-200 italic font-serif">Pharmacy.</span>
+              Manage Hospital <br />
+              <span className="text-teal-200 italic font-serif">Inventory.</span>
             </h2>
             <p className="text-teal-50 text-xl leading-relaxed opacity-90">
-              Join our nationwide network of verified sellers. Scale your medical business with advanced inventory tools and 24/7 order management.
+              Join the central supply network as a Pharmacist Controller. Manage resource allocation, track ward requests, and maintain clinical stock levels.
             </p>
             <div className="flex flex-wrap gap-4 justify-center md:justify-start w-full">
               <Link href="/register?role=SELLER" className="w-full md:w-auto">
                 <Button size="lg" className="w-full md:w-auto bg-white text-teal-700 hover:bg-teal-50 shadow-2xl border-none h-14 md:h-16 px-8 md:px-12 rounded-full font-bold text-lg md:text-xl transition-all hover:scale-105">
-                  Register as Seller
+                  Register as Controller
                   <ArrowRight className="ml-3 h-5 w-5 md:h-6 md:w-6" />
                 </Button>
               </Link>

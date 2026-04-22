@@ -9,13 +9,13 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardFooter } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
-import { useCartStore } from "@/lib/cart-store";
+import { useRequisitionStore } from "@/lib/cart-store";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
 export default function FeaturedPage() {
   const router = useRouter();
-  const addItem = useCartStore((state) => state.addItem);
+  const addItem = useRequisitionStore((state) => state.addItem);
 
   const { data: medicines, isLoading } = useQuery({
     queryKey: ["featured-medicines"],
@@ -33,7 +33,7 @@ export default function FeaturedPage() {
           <Star className="h-3 w-3 fill-current" />
           Editor&apos;s Choice
         </div>
-        <h1 className="text-4xl md:text-6xl font-extrabold text-zinc-900 font-heading">Featured <span className="text-teal-600">Collection.</span></h1>
+        <h1 className="text-4xl md:text-6xl font-extrabold text-zinc-900 font-heading">Essential <span className="text-teal-600">Collection.</span></h1>
         <p className="text-lg text-zinc-500 leading-relaxed">
           Our hand-picked selection of top-rated healthcare products, verified by our medical experts for quality and efficacy.
         </p>
@@ -94,7 +94,7 @@ export default function FeaturedPage() {
                         stock: med.stock,
                         quantity: 1
                       });
-                      toast.success(`${med.name} added to cart!`);
+                      toast.success(`${med.name} added to requisition!`);
                     }}
                   >
                     <Plus className="h-6 w-6" />
