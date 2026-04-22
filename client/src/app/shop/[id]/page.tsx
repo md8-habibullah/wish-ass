@@ -5,7 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { 
   ShoppingBag, 
-  Plus, 
+  Plus,
+  PlusSquare,
   Minus, 
   Star, 
   ShieldCheck, 

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { 
   ClipboardList, 
   PlusSquare, 
+  Plus,
   Minus, 
   ClipboardCheck, 
   ArrowRight,
@@ -210,7 +211,7 @@ export default function CartPage() {
                  <div className="flex items-center justify-center gap-6 text-zinc-300">
                     <CreditCard className="h-6 w-6" />
                     <div className="h-4 w-px bg-zinc-100" />
-                    <ShoppingBag className="h-6 w-6" />
+                    <ClipboardCheck className="h-6 w-6" />
                     <div className="h-4 w-px bg-zinc-100" />
                     <ShieldCheck className="h-6 w-6" />
                  </div>

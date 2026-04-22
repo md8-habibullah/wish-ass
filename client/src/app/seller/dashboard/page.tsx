@@ -41,7 +41,7 @@ export default function SellerDashboard() {
   const router = useRouter();
 
   useEffect(() => {
-    const role = (session?.user as any).role;
+    const role = (session?.user as any)?.role;
     if (!sessionLoading && (!session || (role !== "SELLER" && role !== "ADMIN"))) {
       router.push("/");
     }
