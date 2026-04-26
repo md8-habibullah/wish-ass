@@ -14,7 +14,7 @@ export const auth = betterAuth({
         "https://wish-ass-client.vercel.app", 
         "https://medisync-client.vercel.app"
     ].filter(Boolean),
-    baseURL: process.env.BETTER_AUTH_URL,
+    baseURL: process.env.BETTER_AUTH_URL || "https://wish-ass-server.vercel.app",
     user: {
         additionalFields: {
             role: {

@@ -3,24 +3,17 @@ import app from "./app";
 
 const port = process.env.PORT ?? 5050;
 
-const main = async () => {
-    try {
-        await prisma.$connect();
-        console.log('Database connected successfully.');
-        // if (process.env.NODE_ENV !== 'production') {
-        app.listen(port, () => {
-            console.log('Wish Ass Backend Protocol Active on port :', port);
-        });
-        // } else {
-        //     console.log('Running in production mode. Server is not started.');
-        // }
+// Connect to database
+prisma.$connect()
+    .then(() => console.log('Database connected successfully.'))
+    .catch((error) => console.error('Error connecting to database:', error));
 
-    } catch (error) {
-        console.error('Error starting the server:', error);
-        await prisma.$disconnect();
-        process.exit(1);
-    }
+// Export app for Vercel
+export default app;
 
-};
-
-main();
+// Only listen if not running on Vercel
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+    app.listen(port, () => {
+        console.log('Wish Ass Backend Protocol Active on port :', port);
+    });
+}
