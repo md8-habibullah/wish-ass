@@ -22,10 +22,10 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "MediSync | Engineered by habibullah.dev",
-  description: "A premium hospital procurement and resource management system, architected by Habibullah.",
+  title: "Wish Ass | Future of Medical Procurement",
+  description: "A premium medical procurement and resource management system, architected for efficiency.",
   authors: [{ name: "Habibullah", url: "https://habibullah.dev" }],
-  keywords: ["Medical Supply Chain", "Hospital Inventory", "DevOps", "Habibullah", "Healthcare IT"],
+  keywords: ["Medical Supply Chain", "Hospital Inventory", "Wish Ass", "Healthcare IT"],
 };
 
 export default function RootLayout({

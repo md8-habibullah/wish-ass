@@ -11,7 +11,6 @@ import {
   Phone,
   ArrowRight,
   ShieldCheck,
-  Award,
   Lock
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -131,7 +130,7 @@ export function Footer() {
         <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="flex items-center gap-6">
             <p className="text-zinc-600 text-xs font-medium">
-              &copy; {currentYear} MediSync. Engineered with &hearts; by <Link href="https://habibullah.dev" className="text-zinc-400 hover:text-primary transition-colors">Habibullah</Link>.
+              &copy; {currentYear} Wish Ass. Engineered with &hearts; by <Link href="https://habibullah.dev" className="text-zinc-400 hover:text-primary transition-colors">Habibullah</Link>.
             </p>
           </div>
           

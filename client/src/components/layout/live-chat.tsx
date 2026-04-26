@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { MessageCircle, X, Send, User, Bot, Loader2, Minus } from "lucide-react";
+import { MessageCircle, X, Send, Bot, Loader2, Minus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSession } from "@/lib/auth-client";
+import axios from "axios";
+import { API_BASE_URL } from "@/lib/api-config";
 
 interface Message {
   id: string;
@@ -14,14 +16,14 @@ interface Message {
 }
 
 export function LiveChat() {
-  const { data: session } = useSession();
+  useSession();
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "initial",
       role: "agent",
-      content: "Hello! Welcome to MediSync Clinical Support. How can we assist you with your procurement today?",
+      content: "Hello! Welcome to Wish Ass Clinical Support. How can we assist you with your procurement today?",
       timestamp: new Date(),
     },
   ]);
@@ -35,7 +37,7 @@ export function LiveChat() {
     }
   }, [messages, isTyping]);
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (!input.trim()) return;
 
     const userMsg: Message = {
@@ -49,17 +51,34 @@ export function LiveChat() {
     setInput("");
     setIsTyping(true);
 
-    // Mock agent response
-    setTimeout(() => {
+    try {
+      const response = await axios.post(`${API_BASE_URL}/ai/chat`, {
+        message: input,
+        history: messages.map(m => ({
+          role: m.role === "user" ? "user" : "assistant",
+          content: m.content
+        }))
+      });
+
       const agentMsg: Message = {
-        id: (Date.now() + 1).toString(),
+        id: Date.now().toString(),
         role: "agent",
-        content: `Understood${session?.user.name ? `, ${session.user.name}` : ""}. I'm connecting you with a medical logistics officer. Please hold for a moment while we verify your department credentials.`,
+        content: response.data.data,
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, agentMsg]);
+    } catch (error) {
+      console.error("AI Chat Error:", error);
+      const errorMsg: Message = {
+        id: Date.now().toString(),
+        role: "agent",
+        content: "I'm sorry, I encountered an error connecting to the clinical intelligence node. Please try again later.",
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, errorMsg]);
+    } finally {
       setIsTyping(false);
-    }, 2000);
+    }
   };
 
   return (
@@ -166,7 +185,7 @@ export function LiveChat() {
                       <Send className="h-4 w-4" />
                     </Button>
                   </div>
-                  <p className="text-[9px] text-zinc-600 mt-3 text-center uppercase font-bold tracking-widest">Powered by MediSync AI & Engineering</p>
+                  <p className="text-[9px] text-zinc-600 mt-3 text-center uppercase font-bold tracking-widest">Powered by Wish Ass AI & Engineering</p>
                 </div>
               </>
             )}

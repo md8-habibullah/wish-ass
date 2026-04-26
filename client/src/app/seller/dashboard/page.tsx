@@ -7,17 +7,11 @@ import {
   Package, 
   ShoppingBag, 
   TrendingUp, 
-  Users,
-  AlertCircle,
   Loader2,
   Settings,
   Pill,
-  ArrowUpRight,
   ChevronRight,
   Clock,
-  CheckCircle2,
-  MoreVertical,
-  LayoutDashboard,
   Store
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -41,7 +35,7 @@ export default function SellerDashboard() {
   const router = useRouter();
 
   useEffect(() => {
-    const role = (session?.user as any)?.role;
+    const role = (session?.user as unknown as { role: string })?.role;
     if (!sessionLoading && (!session || (role !== "SELLER" && role !== "ADMIN"))) {
       router.push("/");
     }
@@ -50,7 +44,7 @@ export default function SellerDashboard() {
   const { data: stats, isLoading: statsLoading } = useQuery({
     queryKey: ["seller-stats"],
     queryFn: async () => {
-       const isSeller = (session?.user as any)?.role === "SELLER";
+       const isSeller = (session?.user as unknown as { role: string })?.role === "SELLER";
        const [ordersRes, medicinesRes] = await Promise.all([
          axios.get(`${API_BASE_URL}/orders/seller-orders`, { withCredentials: true }),
          axios.get(isSeller ? `${API_BASE_URL}/medicine?sellerID=${session?.user.id}` : `${API_BASE_URL}/medicine`, { withCredentials: true })
@@ -62,8 +56,8 @@ export default function SellerDashboard() {
        return {
          totalOrders: orders.length,
          activeMedicines: medicines.length || 0, 
-         totalSales: orders.reduce((acc: number, curr: any) => acc + Number(curr.totalPrice), 0),
-         pendingOrders: orders.filter((o: any) => o.status === "PENDING").length,
+         totalSales: orders.reduce((acc: number, curr: { totalPrice: string | number }) => acc + Number(curr.totalPrice), 0),
+         pendingOrders: orders.filter((o: { status: string }) => o.status === "PENDING").length,
          rawOrders: orders
        };
     },
@@ -95,12 +89,12 @@ export default function SellerDashboard() {
                  <Store className="h-6 w-6" />
               </div>
               <Badge className="bg-primary/20 text-primary border-primary/30 font-bold px-3 py-0.5 rounded-full text-[10px] tracking-widest uppercase">
-                 {(session?.user as any)?.role === "ADMIN" ? "Admin Hub" : "Seller Hub"}
+                 {(session?.user as unknown as { role: string })?.role === "ADMIN" ? "Admin Hub" : "Seller Hub"}
               </Badge>
            </div>
            <div className="space-y-1">
               <h1 className="text-4xl md:text-5xl font-extrabold font-heading">Dashboard Overview</h1>
-              <p className="text-zinc-400 text-lg">Welcome back, <span className="text-white font-bold">{session?.user.name}</span>. Here&apos;s the {(session?.user as any)?.role === "ADMIN" ? "platform" : "pharmacy"} status.</p>
+              <p className="text-zinc-400 text-lg">Welcome back, <span className="text-white font-bold">{session?.user.name}</span>. Here&apos;s the {(session?.user as unknown as { role: string })?.role === "ADMIN" ? "platform" : "pharmacy"} status.</p>
            </div>
         </div>
         <div className="relative z-10 flex gap-4">
@@ -121,7 +115,7 @@ export default function SellerDashboard() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        {statCards.map((stat, i) => {
+        {statCards.map((stat) => {
           const content = (
             <Card className="group h-full rounded-[48px] border-white/5 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden cursor-pointer bg-card">
               <CardContent className="p-10 space-y-8">
@@ -172,7 +166,7 @@ export default function SellerDashboard() {
           <CardContent className="p-0">
              <div className="divide-y divide-background">
                 {(() => {
-                   const pendingOrders = stats?.rawOrders?.filter((o: any) => o.status !== "DELIVERED" && o.status !== "CANCELLED").slice(0, 5) || [];
+                   const pendingOrders = stats?.rawOrders?.filter((o: { status: string }) => o.status !== "DELIVERED" && o.status !== "CANCELLED").slice(0, 5) || [];
                    
                    if (pendingOrders.length === 0) {
                       return (
@@ -188,7 +182,7 @@ export default function SellerDashboard() {
                       );
                    }
 
-                   return pendingOrders.map((order: any) => (
+                   return pendingOrders.map((order: { id: string; createdAt: string; totalPrice: string | number; status: string; user?: { name: string } }) => (
                       <div key={order.id} className="p-6 hover:bg-background/50 transition-colors flex items-center justify-between group">
                          <div className="flex items-center gap-4">
                             <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center">

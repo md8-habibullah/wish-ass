@@ -8,7 +8,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import axios from "axios";
 import { 
-  Pill, 
   ArrowLeft, 
   Loader2, 
   Save, 
@@ -61,6 +60,7 @@ export default function MedicineFormPage() {
   const [isFetching, setIsFetching] = useState(isEdit);
 
   const form = useForm<z.infer<typeof formSchema>>({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     resolver: zodResolver(formSchema) as any,
     defaultValues: {
       name: "",
@@ -74,7 +74,7 @@ export default function MedicineFormPage() {
   });
 
   useEffect(() => {
-    if (!sessionLoading && (!session || ((session.user as any).role !== "SELLER" && (session.user as any).role !== "ADMIN"))) {
+    if (!sessionLoading && (!session || ((session.user as unknown as { role: string }).role !== "SELLER" && (session.user as unknown as { role: string }).role !== "ADMIN"))) {
       router.push("/");
     }
 
@@ -121,9 +121,10 @@ export default function MedicineFormPage() {
         toast.success("Medicine added to inventory");
       }
       router.push("/seller/medicines");
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Medicine save error:", err);
-      toast.error(err.response?.data?.message || err.message || "Something went wrong while saving");
+      const message = axios.isAxiosError(err) ? err.response?.data?.message : (err instanceof Error ? err.message : "Something went wrong while saving");
+      toast.error(message || "Something went wrong while saving");
     } finally {
       setIsLoading(false);
     }
@@ -207,7 +208,7 @@ export default function MedicineFormPage() {
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              {categories?.map((cat: any) => (
+                              {categories?.map((cat: { name: string }) => (
                                 <SelectItem key={cat.name} value={cat.name}>
                                   {cat.name}
                                 </SelectItem>

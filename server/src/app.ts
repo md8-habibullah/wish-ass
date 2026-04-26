@@ -8,6 +8,7 @@ import { reviewRouter } from './modules/review/review.router';
 import { userRouter } from './modules/user/user.router';
 import { categoryRouter } from './modules/category/category.router';
 import { announcementRouter } from './modules/announcement/announcement.router';
+import { aiRouter } from './modules/ai/ai.router';
 
 const app: Application = express();
 
@@ -30,7 +31,7 @@ app.use(express.json());
 app.get('/', (req, res) => {
     res.status(200).json({
         success: true,
-        message: "MediSync API | Central Control System Active",
+        message: "Wish Ass API | Central Control System Active",
         engineer: "Habibullah",
         status: "Online"
     });
@@ -44,6 +45,7 @@ app.use("/reviews", reviewRouter);
 app.use("/users", userRouter);
 app.use("/categories", categoryRouter);
 app.use("/announcements", announcementRouter);
+app.use("/ai", aiRouter);
 
 
 export default app;

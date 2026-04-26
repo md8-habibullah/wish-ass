@@ -75,9 +75,9 @@
   --card-foreground: oklch(0.98 0.01 220);
   --popover: oklch(0.1 0.02 240);
   --popover-foreground: oklch(0.98 0.01 220);
-  --primary: oklch(0.75 0.18 190); /* Neon Cyan */
+  --primary: oklch(0.8 0.2 195); /* Vibrant Cyan */
   --primary-foreground: oklch(0.1 0.02 240);
-  --secondary: oklch(0.6 0.25 280); /* Electric Indigo */
+  --secondary: oklch(0.65 0.3 300); /* Vibrant Violet */
   --secondary-foreground: oklch(0.98 0.01 220);
   --muted: oklch(0.18 0.02 240);
   --muted-foreground: oklch(0.6 0.03 240);
@@ -86,21 +86,21 @@
   --destructive: oklch(0.55 0.18 25);
   --border: oklch(0.18 0.02 240);
   --input: oklch(0.18 0.02 240);
-  --ring: oklch(0.75 0.18 190);
-  --chart-1: oklch(0.75 0.18 190);
-  --chart-2: oklch(0.6 0.25 280);
+  --ring: oklch(0.8 0.2 195);
+  --chart-1: oklch(0.8 0.2 195);
+  --chart-2: oklch(0.65 0.3 300);
 }
 
 .dark {
-  --background: oklch(0.05 0.01 240);
+  --background: oklch(0.04 0.01 240);
   --foreground: oklch(0.98 0.01 220);
-  --card: oklch(0.08 0.02 240);
+  --card: oklch(0.06 0.02 240);
   --card-foreground: oklch(0.98 0.01 220);
-  --popover: oklch(0.08 0.02 240);
+  --popover: oklch(0.06 0.02 240);
   --popover-foreground: oklch(0.98 0.01 220);
-  --primary: oklch(0.75 0.18 190);
+  --primary: oklch(0.8 0.2 195);
   --primary-foreground: oklch(0.1 0.02 240);
-  --secondary: oklch(0.6 0.25 280);
+  --secondary: oklch(0.65 0.3 300);
   --secondary-foreground: oklch(0.98 0.01 220);
   --muted: oklch(0.15 0.02 240);
   --muted-foreground: oklch(0.6 0.03 240);

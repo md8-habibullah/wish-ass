@@ -3,12 +3,11 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { API_BASE_URL } from "@/lib/api-config";
-import { Sparkles, ShoppingBag, Plus, Star, Loader2 } from "lucide-react";
+import { Sparkles, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardFooter } from "@/components/ui/card";
 import Image from "next/image";
-import Link from "next/link";
 import { useRequisitionStore } from "@/lib/cart-store";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
@@ -46,7 +45,7 @@ export default function NewArrivalsPage() {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {medicines?.map((med: any) => (
+          {medicines?.map((med: { id: string; name: string; price: number; category: string; stock: number }) => (
             <Card 
               key={med.id} 
               className="group rounded-[40px] border-white/5 shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden cursor-pointer"

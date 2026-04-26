@@ -1,0 +1,103 @@
+
+> medistore_client@0.1.0 lint /home/dev/cccoding/wish-ass/client
+> eslint
+
+
+/home/dev/cccoding/wish-ass/client/src/app/about/page.tsx
+  3:23  warning  'Cpu' is defined but never used     @typescript-eslint/no-unused-vars
+  3:60  warning  'Github' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/dev/cccoding/wish-ass/client/src/app/categories/page.tsx
+  18:44  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/dev/cccoding/wish-ass/client/src/app/error.tsx
+  19:7  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/home/dev/cccoding/wish-ass/client/src/app/error.tsx:19:7
+  17 |   useEffect(() => {
+  18 |     if (!refId) {
+> 19 |       setRefId(Math.random().toString(36).substring(7).toUpperCase());
+     |       ^^^^^^^^ Avoid calling setState() directly within an effect
+  20 |     }
+  21 |     // Log the error to an error reporting service
+  22 |     console.error(error);  react-hooks/set-state-in-effect
+
+/home/dev/cccoding/wish-ass/client/src/app/orders/page.tsx
+   26:59   error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   93:122  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  133:27   warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/home/dev/cccoding/wish-ass/client/src/app/privacy/page.tsx
+  3:18  warning  'Lock' is defined but never used      @typescript-eslint/no-unused-vars
+  3:29  warning  'FileText' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/dev/cccoding/wish-ass/client/src/app/profile/page.tsx
+  218:22  error  'MapPin' is not defined  react/jsx-no-undef
+
+/home/dev/cccoding/wish-ass/client/src/app/reset-password/page.tsx
+  28:9  warning  'searchParams' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/dev/cccoding/wish-ass/client/src/app/seller/dashboard/page.tsx
+  118:31  warning  'i' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/dev/cccoding/wish-ass/client/src/app/seller/medicines/page.tsx
+  144:25  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/home/dev/cccoding/wish-ass/client/src/app/seller/orders/page.tsx
+   20:41   warning  'CardTitle' is defined but never used     @typescript-eslint/no-unused-vars
+   37:59   error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  129:195  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/dev/cccoding/wish-ass/client/src/app/shipping/page.tsx
+  3:52  warning  'ChevronRight' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/dev/cccoding/wish-ass/client/src/app/shop/[id]/page.tsx
+  422:29  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  422:41  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+/home/dev/cccoding/wish-ass/client/src/app/shop/page.tsx
+   8:3  warning  'Filter' is defined but never used       @typescript-eslint/no-unused-vars
+  10:3  warning  'ShoppingBag' is defined but never used  @typescript-eslint/no-unused-vars
+  24:3  warning  'CardContent' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/dev/cccoding/wish-ass/client/src/app/terms/page.tsx
+  3:10  warning  'FileText' is defined but never used  @typescript-eslint/no-unused-vars
+  3:20  warning  'Scale' is defined but never used     @typescript-eslint/no-unused-vars
+  3:27  warning  'Gavel' is defined but never used     @typescript-eslint/no-unused-vars
+
+/home/dev/cccoding/wish-ass/client/src/components/home/categories.tsx
+  13:3  warning  'ShieldCheck' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/dev/cccoding/wish-ass/client/src/components/home/hero.tsx
+  7:10  warning  'Badge' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/dev/cccoding/wish-ass/client/src/components/home/trust-section.tsx
+  3:55  warning  'Clock' is defined but never used     @typescript-eslint/no-unused-vars
+  3:62  warning  'Sparkles' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/dev/cccoding/wish-ass/client/src/components/layout/footer.tsx
+  14:3  warning  'Award' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/dev/cccoding/wish-ass/client/src/components/layout/live-chat.tsx
+   4:34  warning  'User' is defined but never used              @typescript-eslint/no-unused-vars
+  19:17  warning  'session' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/dev/cccoding/wish-ass/client/src/components/layout/navbar.tsx
+  29:10  warning  'Badge' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/dev/cccoding/wish-ass/client/src/components/layout/verification-warning.tsx
+   3:23  warning  'ArrowRight' is defined but never used    @typescript-eslint/no-unused-vars
+  24:19  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/dev/cccoding/wish-ass/client/src/components/providers/client-logic.tsx
+  4:10  warning  'toast' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 36 problems (10 errors, 26 warnings)
+
+ ELIFECYCLE  Command failed with exit code 1.

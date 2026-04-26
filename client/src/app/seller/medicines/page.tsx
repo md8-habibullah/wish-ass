@@ -2,6 +2,7 @@
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import Image from "next/image";
 import { 
   Plus, 
   Search, 
@@ -9,7 +10,6 @@ import {
   Edit, 
   Trash2, 
   Loader2,
-  Pill,
   Package,
   ChevronRight
 } from "lucide-react";
@@ -46,7 +46,7 @@ export default function SellerMedicinesPage() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    const role = (session?.user as any)?.role;
+    const role = (session?.user as unknown as { role: string })?.role;
     if (!sessionLoading && (!session || (role !== "SELLER" && role !== "ADMIN"))) {
       router.push("/");
     }
@@ -55,7 +55,7 @@ export default function SellerMedicinesPage() {
   const { data: medicines, isLoading } = useQuery({
     queryKey: ["seller-medicines"],
     queryFn: async () => {
-      const isSeller = (session?.user as any)?.role === "SELLER";
+      const isSeller = (session?.user as unknown as { role: string })?.role === "SELLER";
       const url = isSeller 
         ? `${API_BASE_URL}/medicine?sellerID=${session?.user.id}`
         : `${API_BASE_URL}/medicine`;
@@ -86,7 +86,7 @@ export default function SellerMedicinesPage() {
     );
   }
 
-  const filteredMedicines = medicines?.filter((med: any) => 
+  const filteredMedicines = medicines?.filter((med: { name: string; category: string }) => 
     med.name.toLowerCase().includes(search.toLowerCase()) || 
     med.category.toLowerCase().includes(search.toLowerCase())
   );
@@ -137,14 +137,17 @@ export default function SellerMedicinesPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filteredMedicines?.map((med: any) => (
+              {filteredMedicines?.map((med: { id: string; name: string; manufacturer: string; category: string; price: number; stock: number }) => (
                 <TableRow key={med.id} className="hover:bg-background/50 transition-colors">
                   <TableCell>
                     <div className="flex items-center gap-3">
                       <div className="h-10 w-10 rounded-lg bg-white/5 flex items-center justify-center border border-white/5 overflow-hidden">
-                        <img 
+                        <Image 
                           src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&q=80&w=100" 
                           className="w-full h-full object-cover"
+                          alt={med.name}
+                          width={40}
+                          height={40}
                         />
                       </div>
                       <div className="flex flex-col">

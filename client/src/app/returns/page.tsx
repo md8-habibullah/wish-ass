@@ -68,7 +68,7 @@ export default function ReturnsPage() {
                  </div>
                  <div className="pb-8">
                     <p className="font-bold text-white">Initiate Request</p>
-                    <p className="text-sm text-zinc-500">Go to your order history and select 'Return Item' next to the product.</p>
+                    <p className="text-sm text-zinc-500">Go to your order history and select &apos;Return Item&apos; next to the product.</p>
                  </div>
               </div>
               <div className="flex gap-6 relative z-10">

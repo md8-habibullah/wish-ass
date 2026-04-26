@@ -12,12 +12,9 @@ import {
   Filter, 
   MoreVertical, 
   Loader2,
-  Settings,
   Pill,
-  LayoutDashboard,
   Shield,
   ArrowUpRight,
-  Ban,
   Mail,
   UserCheck,
   Bell
@@ -53,7 +50,7 @@ export default function AdminDashboard() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    if (!sessionLoading && (!session || (session.user as any).role !== "ADMIN")) {
+    if (!sessionLoading && (!session || (session.user as unknown as { role: string }).role !== "ADMIN")) {
       router.push("/");
     }
   }, [session, sessionLoading, router]);
@@ -75,8 +72,9 @@ export default function AdminDashboard() {
       queryClient.invalidateQueries({ queryKey: ["admin-users"] });
       toast.success(res.data.message || "User role updated successfully");
     },
-    onError: (err: any) => {
-      toast.error(err.response?.data?.message || "Failed to update user role");
+    onError: (err: unknown) => {
+      const message = axios.isAxiosError(err) ? err.response?.data?.message : "Failed to update user role";
+      toast.error(message || "Failed to update user role");
     }
   });
 
@@ -93,7 +91,7 @@ export default function AdminDashboard() {
 
        return {
          totalOrders: orders.length,
-         totalRevenue: orders.reduce((acc: number, curr: any) => acc + Number(curr.totalPrice), 0),
+         totalRevenue: orders.reduce((acc: number, curr: { totalPrice: string | number }) => acc + Number(curr.totalPrice), 0),
          totalMedicines: medicines.length || 0,
        };
     },
@@ -115,7 +113,7 @@ export default function AdminDashboard() {
     { title: "Medicines", value: platformStats?.totalMedicines || 0, icon: Pill, color: "text-purple-600", bg: "bg-purple-50" },
   ];
 
-  const filteredUsers = users?.filter((user: any) => 
+  const filteredUsers = users?.filter((user: { name: string; email: string }) => 
     user.name.toLowerCase().includes(search.toLowerCase()) || 
     user.email.toLowerCase().includes(search.toLowerCase())
   );
@@ -180,7 +178,7 @@ export default function AdminDashboard() {
         <CardHeader className="p-10 border-b border-background flex flex-col md:flex-row md:items-center justify-between gap-8">
           <div className="space-y-1">
             <CardTitle className="text-3xl font-bold font-heading">User Directory</CardTitle>
-            <p className="text-zinc-500">Monitor and manage all accounts registered on MediSync</p>
+            <p className="text-zinc-500">Monitor and manage all accounts registered on Wish Ass</p>
           </div>
           <div className="flex flex-wrap items-center gap-4">
              <div className="relative w-full md:w-80">
@@ -210,7 +208,7 @@ export default function AdminDashboard() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {filteredUsers?.map((user: any) => (
+                {filteredUsers?.map((user: { id: string; name: string; email: string; role: string; banned?: boolean; createdAt: string }) => (
                   <TableRow key={user.id} className="border-background hover:bg-background/50 transition-colors">
                     <TableCell className="p-8">
                       <div className="flex items-center gap-4">

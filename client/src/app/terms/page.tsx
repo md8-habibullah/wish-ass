@@ -1,6 +1,6 @@
 "use client";
 
-import { FileText, Scale, Gavel, CheckCircle2, ArrowLeft } from "lucide-react";
+import { CheckCircle2, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -24,21 +24,21 @@ export default function TermsPage() {
               Acceptance of Terms
            </h2>
            <p>
-              By accessing the MediSync platform, you agree to be bound by these Terms of Service and all applicable health regulations in your jurisdiction.
+              By accessing the Wish Ass platform, you agree to be bound by these Terms of Service and all applicable health regulations in your jurisdiction.
            </p>
         </section>
 
         <section className="space-y-4">
            <h2 className="text-2xl font-bold text-white font-heading">1. Authorized Use Only</h2>
            <p>
-              MediSync is intended for use by licensed medical professionals and authorized hospital staff. Unauthorized access or impersonation of clinical staff is a violation of international healthcare laws.
+              Wish Ass is intended for use by licensed medical professionals and authorized hospital staff. Unauthorized access or impersonation of clinical staff is a violation of international healthcare laws.
            </p>
         </section>
 
         <section className="space-y-4">
            <h2 className="text-2xl font-bold text-white font-heading">2. Resource Allocation</h2>
            <p>
-              Users are responsible for the accuracy of requisition orders. MediSync is not liable for clinical outcomes resulting from incorrect resource requests or inventory mismanagement at the department level.
+              Users are responsible for the accuracy of requisition orders. Wish Ass is not liable for clinical outcomes resulting from incorrect resource requests or inventory mismanagement at the department level.
            </p>
         </section>
 

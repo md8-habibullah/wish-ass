@@ -71,13 +71,13 @@ function RegisterForm() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
     try {
-      const { data, error } = await signUp.email({
+      const { error } = await signUp.email({
         email: values.email,
         password: values.password,
         name: values.name,
         role: values.role, 
         callbackURL: "/login",
-      } as any);
+      } as Parameters<typeof signUp.email>[0]);
 
       if (error) {
         console.error("Registration error:", error);
@@ -87,9 +87,10 @@ function RegisterForm() {
 
       toast.success("Account created! Verify your email to continue.");
       router.push("/login");
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Unexpected registration error:", err);
-      toast.error(err.message || "An unexpected error occurred during registration");
+      const message = err instanceof Error ? err.message : "An unexpected error occurred during registration";
+      toast.error(message);
     } finally {
       setIsLoading(false);
     }
@@ -116,7 +117,7 @@ function RegisterForm() {
               Create Identity
             </CardTitle>
             <CardDescription className="text-zinc-400 text-lg font-medium">
-              Join the MediSync central network.
+              Join the Wish Ass central network.
             </CardDescription>
           </div>
         </CardHeader>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Shield, Lock, Eye, FileText, ArrowLeft } from "lucide-react";
+import { Shield, Eye, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -42,7 +42,7 @@ export default function PrivacyPage() {
         <section className="space-y-4">
            <h2 className="text-2xl font-bold text-white font-heading">1. Data Collection</h2>
            <p>
-              MediSync collects minimal data necessary for hospital operations: Staff identity, department allocation, and supply requisition logs. We do not track personal health information (PHI) of patients directly.
+              Wish Ass collects minimal data necessary for hospital operations: Staff identity, department allocation, and supply requisition logs. We do not track personal health information (PHI) of patients directly.
            </p>
         </section>
 

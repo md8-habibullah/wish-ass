@@ -18,7 +18,7 @@ export default function ForgotPasswordPage() {
     e.preventDefault();
     setIsLoading(true);
 
-    const { error } = await (authClient as any).forgetPassword({
+    const { error } = await (authClient as unknown as { forgetPassword: (options: { email: string, redirectTo: string }) => Promise<{ error: { message?: string } }> }).forgetPassword({
       email,
       redirectTo: "/reset-password",
     });
@@ -42,7 +42,7 @@ export default function ForgotPasswordPage() {
           </div>
           <CardTitle className="text-3xl font-bold font-heading">Forgot Password?</CardTitle>
           <CardDescription className="text-zinc-500 text-base">
-            No worries, we'll send you reset instructions.
+            No worries, we&apos;ll send you reset instructions.
           </CardDescription>
         </CardHeader>
         <CardContent className="p-10 pt-0">
@@ -78,7 +78,7 @@ export default function ForgotPasswordPage() {
               <div className="space-y-2">
                  <h4 className="font-bold text-white">Check your email</h4>
                  <p className="text-sm text-zinc-500 leading-relaxed">
-                   We've sent a password reset link to <span className="font-bold text-white">{email}</span>.
+                   We&apos;ve sent a password reset link to <span className="font-bold text-white">{email}</span>.
                  </p>
               </div>
               <Button 

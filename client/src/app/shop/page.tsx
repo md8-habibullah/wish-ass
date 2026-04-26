@@ -5,24 +5,20 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { 
   Search, 
-  Filter, 
   SlidersHorizontal, 
-  ShoppingBag,
   Plus,
   Star,
   Loader2,
   ChevronRight,
   LayoutGrid,
   List,
-  Info,
-  ArrowLeft
+  Info
 } from "lucide-react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   Card,
-  CardContent,
   CardFooter,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -116,7 +112,7 @@ function ShopPageContent() {
       try {
         const response = await axios.get(`${API_BASE_URL}/categories`);
         if (response.data && Array.isArray(response.data.data)) {
-          const names = response.data.data.map((c: any) => c.name);
+          const names = response.data.data.map((c: { name: string }) => c.name);
           setCategories(["All", ...names]);
         }
       } catch (error) {
@@ -264,7 +260,7 @@ function ShopPageContent() {
               ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" 
               : "flex flex-col gap-6"
             }>
-              {medicines?.map((med: any) => (
+              {medicines?.map((med: { id: string; name: string; category: string; price: number; stock: number }) => (
                 <Card 
                   key={med.id} 
                   className={`group rounded-[40px] border-white/5 shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden cursor-pointer ${
@@ -352,7 +348,20 @@ function FilterContent({
   stockOnly, setStockOnly, 
   manufacturer, setManufacturer, manufacturers,
   selectedTags, setSelectedTags, commonTags
-}: any) {
+}: {
+  category: string;
+  setCategory: (c: string) => void;
+  loadingCats: boolean;
+  categories: string[];
+  stockOnly: boolean;
+  setStockOnly: (s: boolean) => void;
+  manufacturer: string;
+  setManufacturer: (m: string) => void;
+  manufacturers: string[];
+  selectedTags: string[];
+  setSelectedTags: (t: string[]) => void;
+  commonTags: string[];
+}) {
   return (
     <div className="space-y-10">
       <div className="space-y-6">
@@ -363,7 +372,7 @@ function FilterContent({
               <div key={i} className="h-10 rounded-xl bg-background animate-pulse" />
             ))
           ) : (
-            categories.map((cat: any) => (
+            categories.map((cat: string) => (
               <button
                 key={cat}
                 onClick={() => setCategory(cat.toLowerCase())}
@@ -408,7 +417,7 @@ function FilterContent({
             <SelectValue placeholder="Select manufacturer" />
           </SelectTrigger>
           <SelectContent className="rounded-2xl">
-            {manufacturers.map((m: any) => (
+            {manufacturers.map((m: string) => (
               <SelectItem key={m} value={m.toLowerCase()}>{m}</SelectItem>
             ))}
           </SelectContent>
@@ -420,14 +429,14 @@ function FilterContent({
       <div className="space-y-6">
         <h3 className="text-xl font-bold text-white font-heading">Popular Tags</h3>
         <div className="flex flex-wrap gap-2">
-          {commonTags.map((tag: any) => {
+          {commonTags.map((tag: string) => {
             const isSelected = selectedTags.includes(tag.toLowerCase());
             return (
               <button
                 key={tag}
                 onClick={() => {
                   if (isSelected) {
-                    setSelectedTags(selectedTags.filter((t: any) => t !== tag.toLowerCase()));
+                    setSelectedTags(selectedTags.filter((t: string) => t !== tag.toLowerCase()));
                   } else {
                     setSelectedTags([...selectedTags, tag.toLowerCase()]);
                   }

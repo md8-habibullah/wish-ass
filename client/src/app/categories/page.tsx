@@ -2,15 +2,13 @@
 
 import { 
   Thermometer, 
-  Droplet, 
-  Baby, 
   Sparkles, 
   Heart, 
   Activity,
   ArrowRight,
   Pill,
-  ShieldCheck,
-  Stethoscope
+  Stethoscope,
+  type LucideIcon
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -18,7 +16,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { API_BASE_URL } from "@/lib/api-config";
 
-const categoryMeta: Record<string, any> = {
+const categoryMeta: Record<string, { icon: LucideIcon, color: string, description: string }> = {
   "prescription": { 
     icon: Stethoscope, 
     color: "bg-red-50 text-red-600", 
@@ -52,7 +50,7 @@ const categoryMeta: Record<string, any> = {
 };
 
 export default function CategoriesPage() {
-  const [categories, setCategories] = useState<any[]>([]);
+  const [categories, setCategories] = useState<{ name: string; medicines?: { name: string; price: number }[] }[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

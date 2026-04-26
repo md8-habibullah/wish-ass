@@ -60,7 +60,7 @@ function LoginForm() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
     try {
-      const { data, error } = await signIn.email({
+      const { error } = await signIn.email({
         email: values.email,
         password: values.password,
         callbackURL: callbackUrl,
@@ -75,9 +75,10 @@ function LoginForm() {
       toast.success("Welcome back!");
       router.push(callbackUrl);
       router.refresh();
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Unexpected login error:", err);
-      toast.error(err.message || "An unexpected error occurred during login");
+      const message = err instanceof Error ? err.message : "An unexpected error occurred during login";
+      toast.error(message);
     } finally {
       setIsLoading(false);
     }

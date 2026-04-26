@@ -1,6 +1,6 @@
 "use client";
 
-import { ShieldCheck, Cpu, Code, Zap, Monitor, ArrowRight, Github, Terminal } from "lucide-react";
+import { ShieldCheck, Code, Zap, Monitor, ArrowRight, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
@@ -48,7 +48,7 @@ export default function AboutPage() {
               <span className="text-primary italic">Excellence.</span>
             </h1>
             <p className="text-zinc-400 text-xl md:text-2xl leading-relaxed max-w-2xl font-medium">
-              MediSync is more than a procurement system. It&apos;s a showcase of modern full-stack architecture and DevOps mastery, engineered by <span className="text-white font-bold underline decoration-primary underline-offset-4">Habibullah</span>.
+              Wish Ass is more than a procurement system. It&apos;s a showcase of modern full-stack architecture and DevOps mastery, engineered by <span className="text-white font-bold underline decoration-primary underline-offset-4">Habibullah</span>.
             </p>
           </div>
         </div>
@@ -78,12 +78,12 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
             <div className="space-y-10">
                <div className="space-y-4">
-                  <h2 className="text-4xl md:text-5xl font-black text-white font-heading tracking-tight">The Vision of MediSync</h2>
+                  <h2 className="text-4xl md:text-5xl font-black text-white font-heading tracking-tight">The Vision of Wish Ass</h2>
                   <div className="h-1 w-20 bg-primary rounded-full" />
                </div>
                <div className="space-y-6 text-zinc-400 leading-relaxed text-lg">
                  <p>
-                   MediSync was conceptualized to solve the critical inefficiency in hospital resource allocation. By combining real-time inventory tracking with emergency priority logic, we&apos;ve created a system that literally saves time when time is most valuable.
+                   Wish Ass was conceptualized to solve the critical inefficiency in hospital resource allocation. By combining real-time inventory tracking with emergency priority logic, we&apos;ve created a system that literally saves time when time is most valuable.
                  </p>
                  <p>
                    As a Senior Full-Stack & DevOps Engineer, I architected this platform to be resilient, secure, and blazing fast. Every endpoint, database index, and UI component has been optimized for the highest production standards.

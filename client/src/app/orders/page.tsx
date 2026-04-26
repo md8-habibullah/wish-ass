@@ -15,16 +15,16 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Link from "next/link";
 import { useSession } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { useEffect } from "react";
 
 import { API_BASE_URL } from "@/lib/api-config";
 
-const statusConfig: any = {
+const statusConfig: Record<string, { color: string, icon: React.ElementType, text: string }> = {
   PENDING: { color: "bg-orange-100 text-orange-700", icon: Clock, text: "Pending" },
   PROCESSING: { color: "bg-blue-100 text-blue-700", icon: Package, text: "Processing" },
   SHIPPED: { color: "bg-purple-100 text-purple-700", icon: Truck, text: "Shipped" },
@@ -91,7 +91,7 @@ export default function OrdersPage() {
         </div>
       ) : (
         <div className="space-y-6">
-          {orders.map((order: any) => (
+          {orders.map((order: { id: string; createdAt: string; totalPrice: number | string; status: string; orderItems?: { id: string; medicineId: string; quantity: number; price: number; medicine?: { name: string } }[] }) => (
             <Card key={order.id} className="rounded-3xl border-white/5 shadow-sm overflow-hidden hover:border-teal-200 transition-colors">
               <CardHeader className="bg-background/50 p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/5">
                 <div className="flex flex-wrap items-center gap-4 md:gap-8">
@@ -127,13 +127,16 @@ export default function OrdersPage() {
               
               <CardContent className="p-0">
                 <div className="divide-y divide-background">
-                  {order.orderItems?.map((item: any) => (
+                  {order.orderItems?.map((item: { id: string; medicineId: string; quantity: number; price: number; medicine?: { name: string } }) => (
                     <div key={item.id} className="p-6 md:px-8 flex items-center justify-between">
                       <div className="flex items-center gap-4">
                         <div className="h-12 w-12 bg-background rounded-lg flex items-center justify-center border border-white/5 overflow-hidden">
-                          <img 
+                          <Image 
                             src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&q=80&w=100" 
                             className="w-full h-full object-cover"
+                            alt={item.medicine?.name || "Medicine"}
+                            width={48}
+                            height={48}
                           />
                         </div>
                         <div>

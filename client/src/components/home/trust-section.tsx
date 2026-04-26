@@ -1,6 +1,6 @@
 "use client";
 
-import { ShieldCheck, Truck, ShoppingBag, HeartPulse, Clock, Sparkles } from "lucide-react";
+import { ShieldCheck, Truck, ShoppingBag, HeartPulse } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 const features = [

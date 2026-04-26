@@ -4,20 +4,17 @@ import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { 
-  ShoppingBag, 
   Plus,
   PlusSquare,
   Minus, 
   Star, 
   ShieldCheck, 
   Truck, 
-  Undo2,
   Clock,
   ChevronRight,
   Share2,
   Heart,
   Loader2,
-  Info,
   MessageSquare
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -80,8 +77,9 @@ export default function MedicineDetailsPage() {
       toast.success("Review posted successfully!");
       setComment("");
       refetchReviews();
-    } catch (err: any) {
-      toast.error(err.response?.data?.message || "Failed to post review");
+    } catch (err: unknown) {
+      const message = axios.isAxiosError(err) ? err.response?.data?.message : "Failed to post review";
+      toast.error(message || "Failed to post review");
     } finally {
       setIsSubmittingReview(false);
     }
@@ -346,11 +344,11 @@ export default function MedicineDetailsPage() {
                 <div className="lg:col-span-4 space-y-8">
                    <div className="p-10 rounded-[48px] bg-background border border-white/5 text-center space-y-4">
                       <h2 className="text-6xl font-extrabold text-white font-heading">
-                        {(reviews?.reduce((acc: number, r: any) => acc + r.rating, 0) / (reviews?.length || 1)).toFixed(1)}
+                        {(reviews?.reduce((acc: number, r: { rating: number }) => acc + r.rating, 0) / (reviews?.length || 1)).toFixed(1)}
                       </h2>
                       <div className="flex justify-center gap-1">
                         {[1, 2, 3, 4, 5].map(s => (
-                          <Star key={s} className={`h-6 w-6 ${s <= (reviews?.reduce((acc: number, r: any) => acc + r.rating, 0) / (reviews?.length || 1)) ? "fill-orange-400 text-orange-400" : "text-zinc-200"}`} />
+                          <Star key={s} className={`h-6 w-6 ${s <= (reviews?.reduce((acc: number, r: { rating: number }) => acc + r.rating, 0) / (reviews?.length || 1)) ? "fill-orange-400 text-orange-400" : "text-zinc-200"}`} />
                         ))}
                       </div>
                       <p className="text-sm font-bold text-zinc-500 uppercase tracking-widest">Based on {reviews?.length || 0} Reviews</p>
@@ -402,7 +400,7 @@ export default function MedicineDetailsPage() {
                         <p>No reviews yet. Be the first to review!</p>
                      </div>
                    ) : (
-                     reviews.map((r: any) => (
+                     reviews.map((r: { id: string; user?: { name: string }; createdAt: string; rating: number; comment: string }) => (
                       <div key={r.id} className="p-8 rounded-[40px] bg-card border border-white/5 shadow-sm space-y-6">
                          <div className="flex items-center justify-between">
                             <div className="flex items-center gap-4">
@@ -421,7 +419,7 @@ export default function MedicineDetailsPage() {
                             </div>
                          </div>
                          <p className="text-zinc-400 leading-relaxed">
-                            "{r.comment}"
+                            &quot;{r.comment}&quot;
                          </p>
                       </div>
                      ))

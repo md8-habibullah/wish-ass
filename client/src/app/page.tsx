@@ -8,13 +8,9 @@ import {
   Activity, 
   Database, 
   Cpu,
-  Monitor,
-  CheckCircle2,
   Lock,
-  ArrowUpRight,
   Stethoscope,
   Truck,
-  Heart,
   Globe,
   Users,
   BarChart3
@@ -53,11 +49,11 @@ export default function HomePage() {
             className="space-y-4"
           >
             <h1 className="text-7xl md:text-9xl lg:text-[11rem] font-black font-heading tracking-tighter text-white leading-[0.8] mb-4">
-              HEALTHCARE <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-cyan-400 to-secondary italic">REDEFINED.</span>
+              CLINICAL <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-cyan-400 to-secondary italic">INTELLIGENCE.</span>
             </h1>
             <p className="max-w-3xl mx-auto text-zinc-500 text-lg md:text-2xl font-medium leading-relaxed">
-              MediSync is the world's most advanced hospital inventory platform. Engineered for clinics that demand zero errors and absolute reliability.
+              Wish Ass is the absolute pinnacle of medical procurement. Engineered by Habibullah for clinics that demand zero latency and absolute reliability.
             </p>
           </motion.div>
           
@@ -107,7 +103,7 @@ export default function HomePage() {
       <section className="py-32 relative">
         <div className="container mx-auto px-4 md:px-8">
            <div className="text-center mb-24 space-y-4">
-              <h2 className="text-4xl md:text-6xl font-black text-white font-heading tracking-tighter uppercase">Why MediSync?</h2>
+              <h2 className="text-4xl md:text-6xl font-black text-white font-heading tracking-tighter uppercase">Why Wish Ass?</h2>
               <p className="text-zinc-500 max-w-xl mx-auto font-medium">Built by clinicians, for clinicians. We solved the inventory nightmare.</p>
            </div>
            
@@ -180,9 +176,9 @@ export default function HomePage() {
                        <Badge className="bg-primary/10 text-primary border-none">ARCHITECTURE v4.0</Badge>
                     </div>
                     <div className="space-y-6">
-                       <h3 className="text-3xl font-black text-white font-heading italic">"Zero Lag. Zero Errors."</h3>
+                       <h3 className="text-3xl font-black text-white font-heading italic">&quot;Zero Lag. Zero Errors.&quot;</h3>
                        <p className="text-zinc-500 text-lg font-medium leading-relaxed">
-                          We don't just build software; we engineer medical lifelines. MediSync's backend is optimized for sub-50ms response times globally.
+                          We don&apos;t just build software; we engineer medical lifelines. Wish Ass&apos;s backend is optimized for sub-50ms response times globally.
                        </p>
                     </div>
                     <div className="flex items-center gap-6">
@@ -204,7 +200,7 @@ export default function HomePage() {
                    <span className="text-zinc-600">MISSION CRITICAL.</span>
                  </h2>
                  <p className="text-zinc-500 text-xl font-medium max-w-xl">
-                   Built using the most stable enterprise stack available. MediSync ensures your hospital operations never stop.
+                   Built using the most stable enterprise stack available. Wish Ass ensures your hospital operations never stop.
                  </p>
                  <div className="flex gap-4">
                     <Link href="https://habibullah.dev" target="_blank">
@@ -228,7 +224,7 @@ export default function HomePage() {
                     <span className="text-primary italic">Clinical Leaders.</span>
                  </h2>
                  <p className="text-zinc-500 text-lg font-medium max-w-md">
-                    MediSync is more than software. It's a partner in patient care, ensuring resources are where they need to be, exactly when they're needed.
+                    Wish Ass is more than software. It&apos;s a partner in patient care, ensuring resources are where they need to be, exactly when they&apos;re needed.
                  </p>
                  <div className="flex gap-4 pt-4">
                     <div className="h-px w-20 bg-primary self-center" />
@@ -237,7 +233,7 @@ export default function HomePage() {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                  {[
-                    { quote: "MediSync reduced our procurement latency by 40%. It's a game changer.", author: "Dr. Sarah Chen", role: "Chief of Surgery" },
+                    { quote: "Wish Ass reduced our procurement latency by 40%. It's a game changer.", author: "Dr. Sarah Chen", role: "Chief of Surgery" },
                     { quote: "The most intuitive inventory system I've used in 20 years of nursing.", author: "Marcus Thorne", role: "Head Nurse" }
                  ].map((t, i) => (
                     <motion.div 
@@ -245,7 +241,7 @@ export default function HomePage() {
                       whileHover={{ scale: 1.05, y: -5 }}
                       className="p-8 rounded-[40px] bg-white/5 border border-white/5 space-y-6 shadow-2xl"
                     >
-                       <p className="text-zinc-300 font-medium italic">"{t.quote}"</p>
+                       <p className="text-zinc-300 font-medium italic">&quot;{t.quote}&quot;</p>
                        <div>
                           <p className="text-white font-bold text-sm">{t.author}</p>
                           <p className="text-primary text-[10px] font-bold uppercase tracking-widest">{t.role}</p>

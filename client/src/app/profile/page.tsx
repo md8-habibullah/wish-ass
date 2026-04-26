@@ -8,10 +8,10 @@ import {
   ShoppingBag, 
   LogOut, 
   Settings, 
-  MapPin, 
   ChevronRight,
   Loader2,
-  Calendar
+  Calendar,
+  MapPin
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -49,8 +49,9 @@ export default function ProfilePage() {
       toast.success("Profile updated successfully");
       setIsEditing(false);
       router.refresh();
-    } catch (err: any) {
-      toast.error(err.response?.data?.message || "Failed to update profile");
+    } catch (err: unknown) {
+      const message = axios.isAxiosError(err) ? err.response?.data?.message : "Failed to update profile";
+      toast.error(message || "Failed to update profile");
     } finally {
       setIsUpdating(false);
     }
@@ -85,11 +86,11 @@ export default function ProfilePage() {
                 <p className="text-sm text-zinc-500">{session.user.email}</p>
               </div>
               <Badge className={`rounded-full px-4 py-1 font-bold text-[10px] ${
-                (session.user as any).role === "ADMIN" ? "bg-purple-100 text-purple-700" :
-                (session.user as any).role === "SELLER" ? "bg-primary/10 text-primary" :
+                (session.user as unknown as { role: string }).role === "ADMIN" ? "bg-purple-100 text-purple-700" :
+                (session.user as unknown as { role: string }).role === "SELLER" ? "bg-primary/10 text-primary" :
                 "bg-blue-100 text-blue-700"
               } border-none`}>
-                {(session.user as any).role}
+                {(session.user as unknown as { role: string }).role}
               </Badge>
             </CardContent>
           </Card>
@@ -186,7 +187,7 @@ export default function ProfilePage() {
                       <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Account Role</p>
                       <div className="flex items-center gap-2 text-white font-bold">
                          <Shield className="h-4 w-4 text-primary" />
-                         {(session.user as any).role}
+                         {(session.user as unknown as { role: string }).role}
                       </div>
                    </div>
                 </div>

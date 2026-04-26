@@ -9,7 +9,7 @@ const main = async () => {
         console.log('Database connected successfully.');
         // if (process.env.NODE_ENV !== 'production') {
         app.listen(port, () => {
-            console.log('MediSync Backend Protocol Active on port :', port);
+            console.log('Wish Ass Backend Protocol Active on port :', port);
         });
         // } else {
         //     console.log('Running in production mode. Server is not started.');

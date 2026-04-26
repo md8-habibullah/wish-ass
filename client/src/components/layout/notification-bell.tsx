@@ -30,6 +30,7 @@ export function NotificationBell() {
 
   useEffect(() => {
     const saved = localStorage.getItem("lastViewedAnnouncement");
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (saved) setLastViewed(parseInt(saved));
   }, []);
 
@@ -46,6 +47,7 @@ export function NotificationBell() {
     if (announcements && announcements.length > 0) {
       const newest = new Date(announcements[0].createdAt).getTime();
       if (newest > lastViewed) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setHasNew(true);
       }
     }

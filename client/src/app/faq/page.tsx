@@ -6,8 +6,7 @@ import {
   AccordionItem, 
   AccordionTrigger 
 } from "@/components/ui/accordion";
-import { HelpCircle, Mail, MessageCircle, Phone } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Mail, MessageCircle, Phone } from "lucide-react";
 
 export default function FAQPage() {
   const faqs = [
@@ -45,7 +44,7 @@ export default function FAQPage() {
         </div>
         <h1 className="text-4xl md:text-6xl font-extrabold text-white font-heading">Frequently Asked <span className="text-primary">Questions.</span></h1>
         <p className="text-zinc-500 text-lg max-w-xl mx-auto">
-          Everything you need to know about MediSync. Can't find what you're looking for? Reach out to our team.
+          Everything you need to know about Wish Ass. Can&apos;t find what you&apos;re looking for? Reach out to our team.
         </p>
       </div>
 

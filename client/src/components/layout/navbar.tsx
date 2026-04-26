@@ -9,17 +9,12 @@ import { usePathname, useRouter } from "next/navigation";
 import { 
   Zap,
   ClipboardList, 
-  PlusSquare,
   User, 
   LogOut, 
   LayoutDashboard,
   Search,
   Menu,
-  X,
-  Bell,
-  Heart,
-  Shield,
-  Monitor
+  X
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -31,7 +26,7 @@ import {
   DropdownMenuGroup
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
+
 import { NotificationBell } from "./notification-bell";
 
 export function Navbar() {
@@ -65,6 +60,7 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -207,7 +203,7 @@ export function Navbar() {
                       <span className="font-bold text-xs">Profile</span>
                     </Link>
                   </DropdownMenuItem>
-                  {((session.user as any).role === "SELLER" || (session.user as any).role === "ADMIN") && (
+                  {((session.user as unknown as { role: string }).role === "SELLER" || (session.user as unknown as { role: string }).role === "ADMIN") && (
                     <DropdownMenuItem asChild>
                       <Link href="/seller/dashboard" className="rounded-lg h-10 cursor-pointer bg-primary/10 text-primary mt-1 hover:bg-primary/20">
                         <LayoutDashboard className="mr-3 h-4 w-4" />

@@ -17,6 +17,7 @@ function VerifyEmailContent() {
 
   useEffect(() => {
     if (!token) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setStatus("error");
       setMessage("Verification token is missing. Please check your email link again.");
       return;
@@ -24,7 +25,7 @@ function VerifyEmailContent() {
 
     const verify = async () => {
       try {
-        const { data, error } = await authClient.verifyEmail({
+        const { error } = await authClient.verifyEmail({
           query: { token },
         });
 
@@ -79,7 +80,7 @@ function VerifyEmailContent() {
           </h1>
           <p className="text-zinc-500 font-medium leading-relaxed">
             {status === "loading" ? "Please wait while we validate your credentials with our secure server." :
-             status === "success" ? "Your email has been confirmed. You now have full access to MediSync features." :
+             status === "success" ? "Your email has been confirmed. You now have full access to Wish Ass features." :
              message}
           </p>
         </div>
@@ -108,7 +109,7 @@ function VerifyEmailContent() {
 
         <div className="flex items-center justify-center gap-2 text-zinc-400">
            <Mail className="h-4 w-4" />
-           <span className="text-[10px] font-bold uppercase tracking-widest">MediSync Secure Auth</span>
+           <span className="text-[10px] font-bold uppercase tracking-widest">Wish Ass Secure Auth</span>
         </div>
       </div>
     </div>

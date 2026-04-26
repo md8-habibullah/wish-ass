@@ -11,9 +11,7 @@ import {
   AlertTriangle, 
   Info, 
   Zap, 
-  Loader2,
-  CheckCircle2,
-  XCircle
+  Loader2
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -51,7 +49,7 @@ export default function AdminAnnouncementsPage() {
   });
 
   const createMutation = useMutation({
-    mutationFn: async (newAnn: any) => {
+    mutationFn: async (newAnn: { title: string; content: string; type: string }) => {
       return axios.post(`${API_BASE_URL}/announcements`, newAnn, { withCredentials: true });
     },
     onSuccess: () => {
@@ -122,7 +120,7 @@ export default function AdminAnnouncementsPage() {
                     </div>
                     <div className="space-y-2">
                        <label className="text-[10px] font-bold uppercase tracking-widest text-zinc-500 ml-1">Priority Level</label>
-                       <Select value={newType} onValueChange={(v: any) => setNewType(v)}>
+                       <Select value={newType} onValueChange={(v: "info" | "warning" | "urgent") => setNewType(v)}>
                           <SelectTrigger className="h-12 rounded-2xl bg-zinc-950/50 border-white/5">
                              <SelectValue />
                           </SelectTrigger>

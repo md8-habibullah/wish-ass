@@ -12,7 +12,6 @@ import {
   Loader2, 
   ArrowLeft,
   Building2,
-  AlertCircle,
   Phone,
   Shield,
   Activity,
@@ -108,9 +107,10 @@ export default function CheckoutPage() {
       toast.success("Requisition Initialized Successfully!");
       clearRequisition();
       router.push("/orders");
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Requisition error:", err);
-      toast.error(err.response?.data?.message || "Protocol failure. Please re-submit.");
+      const message = axios.isAxiosError(err) ? err.response?.data?.message : "Protocol failure. Please re-submit.";
+      toast.error(message || "Protocol failure. Please re-submit.");
     } finally {
       setIsLoading(false);
     }

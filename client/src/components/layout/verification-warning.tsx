@@ -1,6 +1,6 @@
 "use client";
 
-import { AlertCircle, ArrowRight, Mail } from "lucide-react";
+import { AlertCircle, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useSession, authClient } from "@/lib/auth-client";
 import { useState } from "react";
@@ -21,8 +21,8 @@ export function VerificationWarning() {
       });
       if (error) throw error;
       toast.success("Verification email sent! Check your inbox.");
-    } catch (err: any) {
-      toast.error(err.message || "Failed to send verification email.");
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : "Failed to send verification email.");
     } finally {
       setIsLoading(false);
     }

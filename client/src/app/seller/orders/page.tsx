@@ -13,12 +13,11 @@ import {
   MoreVertical,
   Filter,
   Search,
-  User,
-  ArrowLeft
+  User
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { 
   DropdownMenu,
   DropdownMenuContent,
@@ -35,7 +34,7 @@ import { toast } from "sonner";
 import { API_BASE_URL } from "@/lib/api-config";
 import Link from "next/link";
 
-const statusConfig: any = {
+const statusConfig: Record<string, { color: string, icon: React.ElementType, text: string }> = {
   PENDING: { color: "bg-orange-100 text-orange-700", icon: Clock, text: "Pending" },
   PROCESSING: { color: "bg-blue-100 text-blue-700", icon: Package, text: "Processing" },
   SHIPPED: { color: "bg-purple-100 text-purple-700", icon: Truck, text: "Shipped" },
@@ -50,7 +49,7 @@ export default function SellerOrdersPage() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    const role = (session?.user as any)?.role;
+    const role = (session?.user as unknown as { role: string })?.role;
     if (!sessionLoading && (!session || (role !== "SELLER" && role !== "ADMIN"))) {
       router.push("/");
     }
@@ -86,7 +85,7 @@ export default function SellerOrdersPage() {
     );
   }
 
-  const filteredOrders = orders?.filter((order: any) => 
+  const filteredOrders = orders?.filter((order: { id: string; user?: { name: string } }) => 
     order.id.toLowerCase().includes(search.toLowerCase()) || 
     order.user?.name?.toLowerCase().includes(search.toLowerCase())
   );
@@ -127,7 +126,7 @@ export default function SellerOrdersPage() {
              <p className="text-sm font-medium">No orders found</p>
            </div>
         ) : (
-          filteredOrders.map((order: any) => (
+          filteredOrders.map((order: { id: string; user?: { name: string; email: string }; createdAt: string; totalPrice: number | string; status: string; shippingAddress?: string; orderItems?: { id: string; quantity: number; medicine?: { name: string } }[] }) => (
             <Card key={order.id} className="rounded-3xl border-white/5 shadow-sm overflow-hidden hover:border-teal-200 transition-all">
               <CardHeader className="bg-background/50 p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-white/5">
                 <div className="flex flex-wrap items-center gap-6 md:gap-10">
@@ -206,7 +205,7 @@ export default function SellerOrdersPage() {
                    <div className="space-y-4">
                       <p className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Order Items</p>
                       <div className="space-y-3">
-                         {order.orderItems?.map((item: any) => (
+                         {order.orderItems?.map((item: { id: string; quantity: number; medicine?: { name: string } }) => (
                            <div key={item.id} className="flex items-center justify-between p-3 rounded-xl bg-background border border-white/5">
                              <div className="flex items-center gap-3">
                                <div className="h-8 w-8 bg-card rounded-lg border border-white/5" />

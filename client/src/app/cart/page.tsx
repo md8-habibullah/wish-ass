@@ -10,14 +10,12 @@ import {
   ClipboardCheck, 
   ArrowRight,
   ShieldCheck,
-  PackageCheck,
   ChevronRight,
   Info,
   Clock,
   CreditCard
 } from "lucide-react";
 import Link from "next/link";
-import { Separator } from "@/components/ui/separator";
 import { Card, CardContent } from "@/components/ui/card";
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -29,6 +27,7 @@ export default function CartPage() {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMounted(true);
   }, []);
 

@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
-import { AlertCircle, RotateCcw, Home, ShieldAlert } from "lucide-react";
+import { useState, useEffect } from "react";
+import { RotateCcw, Home, ShieldAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -12,10 +12,16 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  const [refId, setRefId] = useState<string | undefined>(error.digest);
+
   useEffect(() => {
+    if (!refId) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setRefId(Math.random().toString(36).substring(7).toUpperCase());
+    }
     // Log the error to an error reporting service
     console.error(error);
-  }, [error]);
+  }, [error, refId]);
 
   return (
     <div className="flex min-h-[calc(100vh-64px)] flex-col items-center justify-center bg-background px-4">
@@ -65,7 +71,7 @@ export default function Error({
         </div>
 
         <p className="text-xs text-zinc-400 font-medium">
-           Ref ID: {error.digest || Math.random().toString(36).substring(7).toUpperCase()}
+           Ref ID: {refId}
         </p>
       </div>
     </div>

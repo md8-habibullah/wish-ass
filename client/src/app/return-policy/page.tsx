@@ -1,6 +1,6 @@
 "use client";
 
-import { Undo2, ShieldAlert, CheckCircle2, ArrowLeft, PackageCheck } from "lucide-react";
+import { ShieldAlert, CheckCircle2, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -58,7 +58,7 @@ export default function ReturnPolicyPage() {
               <div className="relative">
                  <div className="absolute -left-[41px] top-0 h-4 w-4 rounded-full bg-primary shadow-[0_0_10px_rgba(34,211,238,0.5)]" />
                  <p className="font-bold text-white">1. Raise Request</p>
-                 <p className="text-sm">Initiate return via the "Order History" panel within 48 hours.</p>
+                 <p className="text-sm">Initiate return via the &quot;Order History&quot; panel within 48 hours.</p>
               </div>
               <div className="relative">
                  <div className="absolute -left-[41px] top-0 h-4 w-4 rounded-full bg-zinc-700" />

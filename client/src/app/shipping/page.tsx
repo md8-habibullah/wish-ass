@@ -1,6 +1,6 @@
 "use client";
 
-import { Truck, Clock, ShieldCheck, Globe, MapPin, ChevronRight } from "lucide-react";
+import { Truck, Clock, ShieldCheck, Globe, MapPin } from "lucide-react";
 
 export default function ShippingPage() {
   const deliveryOptions = [
