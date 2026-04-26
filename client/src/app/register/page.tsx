@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Zap, User, Mail, Lock, Shield, Loader2, ArrowRight } from "lucide-react";
+import { Zap, User, Mail, Lock, Loader2, ArrowRight } from "lucide-react";
 import { signUp, signIn } from "@/lib/auth-client";
 import { toast } from "sonner";
 
@@ -27,19 +27,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
   password: z.string().min(6, "Password must be at least 6 characters"),
-  role: z.enum(["CUSTOMER", "SELLER"]),
 });
 
 import { Suspense } from "react";
@@ -55,8 +47,6 @@ export default function RegisterPage() {
 function RegisterForm() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const defaultRole = (searchParams.get("role")?.toUpperCase() as "CUSTOMER" | "SELLER") || "CUSTOMER";
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -64,32 +54,24 @@ function RegisterForm() {
       name: "",
       email: "",
       password: "",
-      role: defaultRole,
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
     try {
-      const { error } = await signUp.email({
+      await signUp.email({
         email: values.email,
         password: values.password,
         name: values.name,
-        role: values.role, 
         callbackURL: "/login",
-      } as Parameters<typeof signUp.email>[0]);
+      });
 
-      if (error) {
-        console.error("Registration error:", error);
-        toast.error(error.message || "Registration failed. This email might already be in use.");
-        return;
-      }
-
-      toast.success("Account created! Verify your email to continue.");
+      toast.success("Account created! Redirecting to login...");
       router.push("/login");
     } catch (err: unknown) {
       console.error("Unexpected registration error:", err);
-      const message = err instanceof Error ? err.message : "An unexpected error occurred during registration";
+      const message = err instanceof Error ? err.message : "Registration failed. This email might already be in use.";
       toast.error(message);
     } finally {
       setIsLoading(false);
@@ -100,7 +82,7 @@ function RegisterForm() {
     <div className="min-h-[calc(100vh-64px)] flex items-center justify-center px-4 bg-background relative overflow-hidden py-24">
       {/* Tech Grid Background */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
-      
+
       {/* Glows */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] -translate-y-1/2" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-emerald-500/5 rounded-full blur-[120px] translate-y-1/2" />
@@ -172,37 +154,6 @@ function RegisterForm() {
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="role"
-                render={({ field }) => (
-                  <FormItem className="space-y-2">
-                    <FormLabel className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-500 ml-1">System Role</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger className="h-12 rounded-2xl bg-zinc-950/50 border-white/5 text-zinc-400 focus:ring-2 focus:ring-primary/20">
-                          <SelectValue placeholder="Select role" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent className="rounded-2xl bg-zinc-900 border-white/5 text-white shadow-2xl">
-                        <SelectItem value="CUSTOMER" className="rounded-xl h-12 cursor-pointer focus:bg-primary/10 focus:text-primary">
-                          <div className="flex items-center gap-3">
-                             <User className="h-4 w-4" />
-                             <span className="font-bold text-xs uppercase tracking-widest">Medical Staff (Nurse)</span>
-                          </div>
-                        </SelectItem>
-                        <SelectItem value="SELLER" className="rounded-xl h-12 cursor-pointer focus:bg-primary/10 focus:text-primary">
-                          <div className="flex items-center gap-3">
-                             <Shield className="h-4 w-4" />
-                             <span className="font-bold text-xs uppercase tracking-widest">Pharmacist Controller</span>
-                          </div>
-                        </SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
               <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground mt-4 h-16 rounded-[32px] font-black text-xl shadow-xl shadow-primary/20 transition-all active:scale-95 group" disabled={isLoading}>
                 {isLoading ? (
                   <Loader2 className="h-6 w-6 animate-spin" />
@@ -225,10 +176,10 @@ function RegisterForm() {
             </div>
           </div>
 
-          <Button 
-            variant="outline" 
-            className="w-full h-14 rounded-2xl border-white/5 bg-white/5 text-white hover:bg-white/10 transition-all font-bold" 
-            type="button" 
+          <Button
+            variant="outline"
+            className="w-full h-14 rounded-2xl border-white/5 bg-white/5 text-white hover:bg-white/10 transition-all font-bold"
+            type="button"
             disabled={isLoading}
             onClick={() => signIn.social({ provider: "google" })}
           >
