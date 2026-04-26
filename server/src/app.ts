@@ -11,8 +11,15 @@ import { announcementRouter } from './modules/announcement/announcement.router';
 
 const app: Application = express();
 
+const allowedOrigins = [
+    process.env.FRONTEND_APP_URL,
+    'http://localhost:3000',
+    'https://wish-ass-client.vercel.app',
+    'https://medisync-client.vercel.app'
+].filter(Boolean) as string[];
+
 app.use(cors({
-    origin: process.env.FRONTEND_APP_URL || 'http://localhost:3000',
+    origin: allowedOrigins,
     credentials: true,
 }));
 // mount the auth router to handle all authentication-related routes

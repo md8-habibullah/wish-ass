@@ -8,7 +8,12 @@ export const auth = betterAuth({
     database: prismaAdapter(prisma, {
         provider: "postgresql",
     }),
-    trustedOrigins: [process.env.FRONTEND_APP_URL!, "http://localhost:3000"],
+    trustedOrigins: [
+        process.env.FRONTEND_APP_URL!, 
+        "http://localhost:3000", 
+        "https://wish-ass-client.vercel.app", 
+        "https://medisync-client.vercel.app"
+    ].filter(Boolean),
     baseURL: process.env.BETTER_AUTH_URL,
     user: {
         additionalFields: {
