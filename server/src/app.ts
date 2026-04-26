@@ -37,6 +37,35 @@ app.get('/', (req, res) => {
     });
 });
 
+// Temporary route to seed test users - DELETE AFTER USE
+app.get('/seed-test-users', async (req, res) => {
+    const { auth } = await import('../lib/auth');
+    const users = [
+        { email: "admin@mail.com", password: "password", name: "System Admin", role: "ADMIN" },
+        { email: "seller@mail.com", password: "password", name: "Pharmacist Controller", role: "SELLER" },
+        { email: "customer@mail.com", password: "password", name: "Medical Staff", role: "CUSTOMER" }
+    ];
+
+    const results = [];
+    for (const user of users) {
+        try {
+            const newUser = await auth.api.signUpEmail({
+                body: { email: user.email, password: user.password, name: user.name }
+            });
+            // Better Auth doesn't allow setting role via signUpEmail, so we update it via Prisma
+            const { prisma } = await import('../lib/prisma');
+            await prisma.user.update({
+                where: { email: user.email },
+                data: { role: user.role as any, emailVerified: true }
+            });
+            results.push({ email: user.email, status: "Created" });
+        } catch (error: any) {
+            results.push({ email: user.email, status: "Error", message: error.message });
+        }
+    }
+    res.json({ success: true, results });
+});
+
 app.use("/medicine", medicineRouter);
 app.use("/orders", orderRouter);
 
