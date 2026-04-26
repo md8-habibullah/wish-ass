@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "pnpm prisma generate && pnpm tsup src/server.ts --format esm --clean --minify --outDir api",
+    "build": "pnpm prisma generate && pnpm tsup src/server.ts --format esm --clean --minify --outDir api --no-splitting",
     "start": "node api/server.js",
     "seed": "node lib/seed.js",
     "postinstall": "prisma generate"
