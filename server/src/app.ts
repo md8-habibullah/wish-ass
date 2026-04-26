@@ -47,5 +47,14 @@ app.use("/categories", categoryRouter);
 app.use("/announcements", announcementRouter);
 app.use("/ai", aiRouter);
 
+// Global error handler
+app.use((err: any, req: any, res: any, next: any) => {
+    console.error("Global Error Handler:", err);
+    res.status(500).json({
+        success: false,
+        message: "Internal Server Error",
+        error: process.env.NODE_ENV === 'development' ? err.message : undefined
+    });
+});
 
 export default app;
