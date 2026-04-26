@@ -19,7 +19,8 @@ import {
   ArrowUpRight,
   Ban,
   Mail,
-  UserCheck
+  UserCheck,
+  Bell
 } from "lucide-react";
 import { 
   Table, 

@@ -48,7 +48,7 @@ const formSchema = z.object({
   fullName: z.string().min(2, "Staff name is required"),
   phone: z.string().min(1, "Contact extension is required"),
   departmentName: z.string().min(2, "Department/Ward name is required"),
-  priority: z.string().default("LOW"),
+  priority: z.enum(["LOW", "MEDIUM", "HIGH", "URGENT"]),
 });
 
 export default function CheckoutPage() {
