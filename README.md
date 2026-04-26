@@ -1,282 +1,120 @@
-![Assignment-2](https://t4.ftcdn.net/jpg/03/06/88/29/360_F_306882952_XYkVbLIWubBrEyg5vvjcKisffe8CsuZG.jpg)
+# 🚀 Wish Ass: Clinical Procurement & Logistics Intelligence
 
-<h1 align="center">🚀 Assignment 5</h1>
-<p align="center"><strong>Batch - 6</strong></p>
+[![Project Status: Active](https://img.shields.io/badge/Project%20Status-Active-brightgreen)](https://wish-ass-client.vercel.app)
+[![Tech Stack: Next.js + Node.js](https://img.shields.io/badge/Stack-Next.js%20%7C%20Node.js-blue)](https://wish-ass-client.vercel.app)
+[![Powered by Gemini](https://img.shields.io/badge/AI-Gemini%201.5%20Flash-orange)](https://wish-ass-client.vercel.app)
 
----
-
-# 📌 Project Overview
-
-This assignment focuses on building a **full-stack web application** using modern technologies such as **Next.js, Node.js, Express, Prisma, and PostgreSQL**.
-Students are expected to implement **authentication, CRUD functionality, role-based access control, and a professional UI/UX design**.
-
-The goal of this assignment is to demonstrate your ability to:
-
-* Build a **production-style full-stack application**
-* Maintain **clean project structure**
-* Follow **best development practices**
-* Deliver a **fully functional deployed application**
+**Wish Ass** is a high-performance, clinical-grade medical procurement platform designed to streamline pharmaceutical logistics for hospitals, pharmacies, and medical logistics officers. Formerly known as MediSync, it has been re-engineered for "Zero Lag, Zero Errors" with an integrated AI Clinical Intelligence.
 
 ---
 
+## 🌐 Live Deployments
 
-# 🛠️ Technology Stack
-
-## Frontend
-
-* **Next.js** - Server-side rendering and static site generation
-* **Tailwind CSS** - Utility-first CSS framework
-
-## Backend
-
-* **Node.js**
-* **Express.js** - REST API development
-* **Prisma** - Database ORM
-
-## Database
-
-* **PostgreSQL** - Relational database system
-
-## Authentication
-
-You may implement authentication using:
-
-* **JWT**
-* **Better-Auth**
-* **Passport-Auth**
-
-## Payment Integration
-
-* **Stripe**
-* **SSLCommerz**
-* Or any other payment gateway
-
-## Deployment
-
-You may deploy your project using:
-
-* **Vercel**
-* **Render**
-* **Railway**
-
-## Package Management
-
-You are free to use any **npm packages** necessary for your project.
-
-## Additional Technologies
-
-You may integrate additional tools or technologies if they improve your application.
+- **Frontend Application**: [wish-ass-client.vercel.app](https://wish-ass-client.vercel.app)
+- **Backend API**: [wish-ass-server.vercel.app](https://wish-ass-server.vercel.app)
 
 ---
 
-# 📊 Assignment Evaluation Criteria
+## ✨ Key Features
 
-| Criteria           | Marks |
-| ------------------ | ----- |
-| Homepage Design    | 20%   |
-| UI/UX Quality      | 20%   |
-| Commit History     | 10%   |
-| Error Handling     | 10%   |
-| Core Functionality | 30%   |
-| Video Explanation  | 10%   |
+### 🧠 WACI: Clinical Intelligence
+Integrated with **Google Gemini 1.5 Flash**, the Wish Ass Clinical Intelligence (WACI) assistant helps logistics officers navigate inventory, understand procurement best practices, and optimize supply chains with professional, medical-grade precision.
 
----
+### 🔐 Multi-Tier RBAC (Role-Based Access Control)
+- **Medical Staff (Customer)**: Browse inventory, place standard or emergency requisitions, and review clinical supplies.
+- **Pharmacist Controller (Seller)**: Manage medicine inventory, process orders, and track sales metrics.
+- **System Admin**: Complete oversight of users, roles, categories, and system-wide announcements.
 
-# 1️⃣ Homepage Design (20%)
+### 📦 Smart Procurement System
+- **Dynamic Inventory**: Real-time stock tracking with "CRITICAL STOCK" alerts.
+- **Priority Requisitions**: Support for **EMERGENCY** and **STANDARD** order priorities with specialized processing queues.
+- **Clinical Reviews**: Authenticated review system for medical professionals to share feedback on supplies.
 
-Your homepage must contain:
-
-* Minimum **4 sections**
-* **Navbar**
-* **Footer**
-
-Example sections could include:
-
-* Hero Section
-* Feature Section
-* Testimonials
-* Pricing
-* Call-to-action
+### 🎨 Premium User Experience
+- **Futuristic UI**: Built with a sleek dark-mode aesthetic using Glassmorphism, tailored HSL color palettes, and Framer Motion animations.
+- **Responsive Engineering**: Fully optimized for desktops, tablets, and mobile devices.
+- **Secure Authentication**: Powered by **Better Auth** with support for Google Social login and email verification.
 
 ---
 
-# 2️⃣ UI/UX Quality (20%)
+## 🛠️ Technology Stack
 
-The application must demonstrate:
+### Frontend Core
+- **Next.js 15+** (App Router)
+- **Tailwind CSS** (Advanced styling & animations)
+- **Framer Motion** (Micro-interactions)
+- **TanStack Query** (State management & data fetching)
+- **Lucide React** (Clinical iconography)
 
-* Fully **responsive design**
-* **Consistent UI styling**
-* Clean and intuitive **user experience**
+### Backend Infrastructure
+- **Node.js & Express**
+- **TypeScript** (Strict type safety)
+- **Prisma ORM** (Data modeling & PostgreSQL adapter)
+- **Better Auth** (Session-based authentication)
+- **Nodemailer (Brevo)** (Reliable clinical email dispatch)
+
+### Database & Intelligence
+- **PostgreSQL**: Robust relational data storage.
+- **Google Gemini 1.5 Flash**: Powering the WACI intelligence module.
 
 ---
 
-# 3️⃣ Commit History (10%)
+## 🚀 Getting Started
 
-* Minimum **30 meaningful commits**
-* Avoid committing large chunks of code at once
-* Follow a **clean commit structure**
+### Prerequisites
+- Node.js (v18+)
+- pnpm (Recommended)
+- PostgreSQL Database
 
-Example:
+### Installation
 
-```
-feat: implement authentication system
-fix: resolve login validation bug
-style: improve homepage UI
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/md8-habibullah/wish-ass.git
+   cd wish-ass
+   ```
+
+2. **Setup Backend**:
+   ```bash
+   cd server
+   pnpm install
+   # Configure .env based on .env.example
+   pnpm build
+   pnpm run seed # To initialize admin and categories
+   pnpm start
+   ```
+
+3. **Setup Frontend**:
+   ```bash
+   cd client
+   pnpm install
+   # Configure .env based on .env.example
+   pnpm run dev
+   ```
+
+---
+
+## 📁 Project Structure
+
+```text
+wish-ass/
+├── client/           # Next.js frontend application
+│   ├── src/app/      # App router pages
+│   ├── src/lib/      # Auth client & API utilities
+│   └── src/components/ # Shadcn & Custom UI components
+└── server/           # Express backend API
+    ├── src/modules/  # Feature-based modular logic
+    ├── lib/          # Database & Auth initialization
+    ├── prisma/       # Schema & Migrations
+    └── api/          # Production-ready built code
 ```
 
 ---
 
-# 4️⃣ Error Handling (10%)
-
-Your application should properly handle errors, including:
-
-* **Input validation**
-* **Loading states**
-* Proper **error messages**
-
-Examples:
-
-* Invalid login credentials
-* Failed API requests
-* Missing required fields
+## 👨‍💻 Engineering
+Built with 💙 by **Habibullah** as a production-grade full-stack engineering project.
 
 ---
 
-# 5️⃣ Core Functionality (30%)
-
-Your project must implement the following:
-
-### Authentication
-
-* User Registration
-* User Login
-* Secure authentication
-
-### CRUD Operations
-
-Create, Read, Update, Delete functionality.
-
-### Role-Based Access Control (RBAC)
-
-Example roles:
-
-* **Admin**
-* **User**
-
-Admins may manage data while users have limited permissions.
-
----
-
-# 6️⃣ Video Explanation (10%)
-
-Submit a **5–10 minute video** explaining:
-
-* Project overview
-* Key features
-* Code structure
-* Live demo of the application
-
-The video should clearly demonstrate that your application works.
-
----
-
-# 📤 Submission Guidelines
-
-Please ensure the following before submitting your assignment:
-
-* Your code is **well structured and documented**
-* A **professional README file** is included
-* The application is **fully deployed**
-
-Your README should include:
-
-* Project name
-* Project description
-* Live URLs
-* Features
-* Technologies used
-* Setup instructions
-
----
-
-# 🎥 Recording the Demo Video
-
-You may use one of the following tools:
-
-## OBS Studio / Loom
-
-1. Record the project demo
-2. Upload it to **Google Drive**
-3. Share the link
-
-Make sure access is set to:
-
-```
-Anyone with the link
-```
-
----
-
-# 📦 What to Submit
-
-| Item                       | Required |
-| -------------------------- | :------: |
-| Frontend GitHub Repository |     ✅    |
-| Backend GitHub Repository  |     ✅    |
-| Frontend Live URL          |     ✅    |
-| Backend Live URL           |     ✅    |
-| Demo Video (5-10 min)      |     ✅    |
-| Admin Credentials          |     ✅    |
-
----
-
-# 🧾 Example Submission Format
-
-```
-Frontend Repo    : https://github.com/your-username/project-frontend
-Backend Repo     : https://github.com/your-username/project-backend
-
-Frontend Live    : https://project-frontend.vercel.app
-Backend Live     : https://project-backend.vercel.app
-
-Demo Video       : https://drive.google.com/file/d/abc/view
-
-Admin Email      : admin@project.com
-Admin Password   : admin123
-```
-
----
-
-# ⏰ Deadline
-
-| Marks        | Deadline                  |
-| ------------ | ------------------------- |
-| **60 Marks** | March 31, 2026 – 11:59 PM |
-| **50 Marks** | May 01, 2026 – 11:59 PM   |
-| **30 Marks** | After May 01, 2026      |
-
----
-
-# 🚫 Important Notice
-
-⚠️ **Plagiarism will not be tolerated.**
-
-All submitted code must be **your own work**.
-
-Any instance of plagiarism will result in:
-
-```
-0 Marks
-```
-
----
-
-# 🎯 Final Note
-
-Follow the instructions carefully and focus on:
-
-* Writing clean code
-* Maintaining a professional project structure
-* Delivering a fully working application
-
-Good luck with **Assignment 5! 🍀**
+## ⚖️ License
+This project is licensed under the ISC License.
