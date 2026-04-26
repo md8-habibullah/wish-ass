@@ -21,7 +21,7 @@ export const auth = betterAuth({
                 type: "string",
                 required: false,
                 defaultValue: "CUSTOMER",
-                input: false
+                input: true // Allow users to select CUSTOMER or SELLER role during signup
             },
             banned: {
                 type: "boolean",
