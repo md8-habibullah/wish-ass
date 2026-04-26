@@ -32,6 +32,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { NotificationBell } from "./notification-bell";
 
 export function Navbar() {
   const { data: session } = useSession();
@@ -165,6 +166,7 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-4">
+          <NotificationBell />
           <Link href="/cart">
             <Button variant="ghost" className="relative rounded-xl h-11 w-11 p-0 hover:bg-white/5 text-zinc-400 hover:text-primary transition-colors">
               <ClipboardList className="h-5 w-5" />

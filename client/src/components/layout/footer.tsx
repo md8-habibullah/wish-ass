@@ -70,6 +70,7 @@ export function Footer() {
                 { name: "Central Inventory", href: "/shop" },
                 { name: "Requisition Queue", href: "/cart" },
                 { name: "Order History", href: "/orders" },
+                { name: "Return Policy", href: "/return-policy" },
                 { name: "Staff Support", href: "/faq" }
               ].map((item) => (
                 <li key={item.name}>
@@ -85,11 +86,17 @@ export function Footer() {
           <div>
             <h4 className="text-white font-bold text-sm uppercase tracking-[0.2em] mb-8">Engineering</h4>
             <ul className="space-y-4">
-              {["System Architecture", "DevOps Pipeline", "Security Audit", "API Documentation"].map((item) => (
-                <li key={item}>
-                  <Link href="#" className="text-zinc-500 hover:text-primary text-sm transition-colors flex items-center group">
+              {[
+                { name: "System Architecture", href: "/about" },
+                { name: "Privacy Protocol", href: "/privacy" },
+                { name: "Terms of Service", href: "/terms" },
+                { name: "Security Audit", href: "#" },
+                { name: "API Documentation", href: "#" }
+              ].map((item) => (
+                <li key={item.name}>
+                  <Link href={item.href} className="text-zinc-500 hover:text-primary text-sm transition-colors flex items-center group">
                     <ArrowRight className="h-3 w-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                    {item}
+                    {item.name}
                   </Link>
                 </li>
               ))}

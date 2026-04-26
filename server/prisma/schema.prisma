@@ -199,3 +199,15 @@ model Verification {
   @@index([identifier])
   @@map("verification")
 }
+
+model Announcement {
+  id        String   @id @default(uuid())
+  title     String
+  content   String
+  type      String   @default("info") // info, warning, urgent
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("announcements")
+}

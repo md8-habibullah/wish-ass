@@ -7,6 +7,7 @@ import { auth } from '../lib/auth';
 import { reviewRouter } from './modules/review/review.router';
 import { userRouter } from './modules/user/user.router';
 import { categoryRouter } from './modules/category/category.router';
+import { announcementRouter } from './modules/announcement/announcement.router';
 
 const app: Application = express();
 
@@ -35,6 +36,7 @@ app.use("/orders", orderRouter);
 app.use("/reviews", reviewRouter);
 app.use("/users", userRouter);
 app.use("/categories", categoryRouter);
+app.use("/announcements", announcementRouter);
 
 
 export default app;

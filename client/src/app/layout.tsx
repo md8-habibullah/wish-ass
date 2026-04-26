@@ -2,10 +2,13 @@ import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
+import { VerificationWarning } from "@/components/layout/verification-warning";
+import { LiveChat } from "@/components/layout/live-chat";
 import { Footer } from "@/components/layout/footer";
 import { PageTransition } from "@/components/layout/page-transition";
 import { Toaster } from "@/components/ui/sonner";
 import QueryProvider from "@/providers/query-provider";
+import { GlobalErrorBoundary } from "@/components/error-boundary";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -29,20 +32,34 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  useEffect(() => {
+    const handleRejection = (event: PromiseRejectionEvent) => {
+      console.error("Unhandled promise rejection:", event.reason);
+      // toast.error("Network or system failure. Check console for details.");
+    };
+
+    window.addEventListener("unhandledrejection", handleRejection);
+    return () => window.removeEventListener("unhandledrejection", handleRejection);
+  }, []);
+
   return (
     <html lang="en" className="dark">
       <body className={`${inter.variable} ${outfit.variable} antialiased font-sans bg-background text-foreground`}>
         <QueryProvider>
-          <div className="relative flex min-h-screen flex-col">
-            <Navbar />
-            <main className="flex-1">
-              <PageTransition>
-                {children}
-              </PageTransition>
-            </main>
-            <Footer />
-          </div>
-          <Toaster position="top-right" richColors closeButton />
+          <GlobalErrorBoundary>
+            <div className="relative flex min-h-screen flex-col">
+              <VerificationWarning />
+              <Navbar />
+              <main className="flex-1">
+                <PageTransition>
+                  {children}
+                </PageTransition>
+              </main>
+              <Footer />
+              <LiveChat />
+            </div>
+            <Toaster position="top-right" richColors closeButton />
+          </GlobalErrorBoundary>
         </QueryProvider>
       </body>
     </html>

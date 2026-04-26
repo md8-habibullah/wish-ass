@@ -139,14 +139,14 @@ export default function AdminDashboard() {
         </div>
         
         {/* Stats Summary in Header */}
-        <div className="relative z-10 flex flex-wrap gap-8">
-           <div className="flex flex-col gap-1">
-              <span className="text-zinc-500 text-xs font-bold uppercase tracking-widest">Global Status</span>
-              <div className="flex items-center gap-2 text-emerald-500 font-bold">
-                 <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                 All Systems Normal
-              </div>
-           </div>
+         <div className="relative z-10 flex flex-wrap gap-4">
+           <Button 
+            onClick={() => router.push("/admin/dashboard/announcements")}
+            className="bg-primary text-black hover:bg-cyan-400 h-16 px-10 rounded-3xl font-extrabold text-lg shadow-xl transition-all hover:scale-105 active:scale-95 flex items-center gap-3"
+           >
+              <Bell className="h-6 w-6" />
+              Broadcast Center
+           </Button>
            <Button className="bg-card text-zinc-950 hover:bg-zinc-200 h-16 px-10 rounded-3xl font-extrabold text-lg shadow-xl transition-all hover:scale-105 active:scale-95">
               System Settings
            </Button>

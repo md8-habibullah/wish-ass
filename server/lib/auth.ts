@@ -2,7 +2,7 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "./prisma";
 import { sendVerificationEmail } from "./service/email";
-
+import { admin } from "better-auth/plugins";
 
 export const auth = betterAuth({
     database: prismaAdapter(prisma, {
@@ -17,45 +17,48 @@ export const auth = betterAuth({
                 required: false,
                 defaultValue: "CUSTOMER",
                 input: false
-
             },
+            banned: {
+                type: "boolean",
+                required: false,
+                defaultValue: false,
+                input: false
+            },
+            banReason: {
+                type: "string",
+                required: false,
+                input: false
+            },
+            banExpires: {
+                type: "date",
+                required: false,
+                input: false
+            }
         },
     },
     emailAndPassword: {
         enabled: true,
         autoSignIn: false,
         minPasswordLength: 3,
-        requireEmailVerification: true,
+        requireEmailVerification: false,
     },
-
     emailVerification: {
         sendOnSignUp: true,
         autoSignInAfterVerification: true,
         sendVerificationEmail: async ({ user, url, token }, request) => {
-            // Callback URL override
             url = `${process.env.FRONTEND_APP_URL}/verify-email?token=${token}`;
             sendVerificationEmail(user.email, url, token);
-            // console.log(`Send verification email to ${user.email} with url: ${url} and token: ${token}`);
-            // to: user.email,
-            // subject: "Verify your email address",
-            // text: `Click the link to verify your email: ${url}`,
         },
     },
     socialProviders: {
-
         google: {
             clientId: process.env.GOOGLE_CLIENT_ID as string,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
             accessType: "offline",
             prompt: "select_account consent",
-
         },
     },
-
     plugins: [
-        // admin({
-        //     adminRoles: ["ADMIN"],
-        // }),
+        admin()
     ]
-
 });

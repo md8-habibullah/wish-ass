@@ -129,6 +129,29 @@ async function main() {
     { name: 'Women\'s One Daily', description: 'Complete multivitamin for women.', category: 'Vitamins & Supplements', price: 28.50, stock: 150, manufacturer: 'New Chapter', tags: ['vitamins', 'women'] },
     { name: 'Omega-3 Fish Oil', description: 'High potency heart and brain support.', category: 'Vitamins & Supplements', price: 22.00, stock: 200, manufacturer: 'Nordic Naturals', tags: ['supplements', 'heart'] },
     { name: 'Probiotic 50 Billion', description: 'Digestive and immune system support.', category: 'Vitamins & Supplements', price: 32.99, stock: 90, manufacturer: 'Renew Life', tags: ['supplements', 'probiotic'] },
+    
+    // Additional Bulk Data
+    { name: 'Advil PM', description: 'Pain reliever and nighttime sleep aid.', category: 'otc', price: 11.99, stock: 200, manufacturer: 'Pfizer', tags: ['pain', 'sleep'] },
+    { name: 'Tylenol Extra Strength', description: 'Acetaminophen 500mg for tough pain.', category: 'otc', price: 10.50, stock: 400, manufacturer: 'McNeil', tags: ['pain', 'fever'] },
+    { name: 'Pepto Kid Chewables', description: 'Bubblegum flavor for little bellies.', category: "Children's Medicine", price: 6.50, stock: 180, manufacturer: 'P&G', tags: ['children', 'stomach'] },
+    { name: 'Loperamide 2mg', description: 'Generic anti-diarrheal caplets.', category: 'Digestive Health', price: 5.99, stock: 300, manufacturer: 'Generic', tags: ['stomach', 'diarrhea'] },
+    { name: 'Hydrocortisone 1%', description: 'Relieves itch and skin irritation.', category: 'Skin Care', price: 4.99, stock: 250, manufacturer: 'Major', tags: ['skin', 'itch'] },
+    { name: 'Digital BP Machine X7', description: 'Advanced Bluetooth blood pressure monitor.', category: 'device', price: 75.00, stock: 30, manufacturer: 'Omron', tags: ['health', 'bluetooth'] },
+    { name: 'Surgical Masks 50pk', description: '3-ply breathable protective masks.', category: 'First Aid', price: 9.99, stock: 1000, manufacturer: 'Safeway', tags: ['protection', 'masks'] },
+    { name: 'Hand Sanitizer 500ml', description: '70% alcohol moisturizing gel.', category: 'First Aid', price: 5.49, stock: 600, manufacturer: 'Purell', tags: ['hygiene', 'sanitizer'] },
+    { name: 'Vitamin C 1000mg', description: 'High dose immune support tablets.', category: 'supplement', price: 9.99, stock: 500, manufacturer: 'Nature Made', tags: ['vitamins', 'immune'] },
+    { name: 'Melatonin 5mg', description: 'Natural sleep aid gummies.', category: 'supplement', price: 11.00, stock: 300, manufacturer: 'Natrol', tags: ['sleep', 'natural'] },
+    { name: 'Metformin SR 500mg', description: 'Sustained release for diabetes (RX).', category: 'prescription', price: 18.00, stock: 100, manufacturer: 'Generic', tags: ['diabetes', 'rx'] },
+    { name: 'Losartan 50mg', description: 'Hypertension control (RX).', category: 'prescription', price: 14.00, stock: 120, manufacturer: 'Generic', tags: ['bp', 'rx'] },
+    { name: 'CeraVe Foaming Cleanser', description: 'For normal to oily skin.', category: 'Skin Care', price: 16.50, stock: 180, manufacturer: 'L\'Oreal', tags: ['skincare', 'oily-skin'] },
+    { name: 'Gold Bond Powder', description: 'Medicated body powder for cooling.', category: 'Skin Care', price: 7.99, stock: 150, manufacturer: 'Sanofi', tags: ['skincare', 'cooling'] },
+    { name: 'Sudafed Congestion', description: 'Maximum strength sinus pressure relief.', category: 'Cold & Flu', price: 12.99, stock: 200, manufacturer: 'Kenvue', tags: ['cold', 'sinus'] },
+    { name: 'Airborne Immune Support', description: 'Effervescent tablets with Vitamin C.', category: 'Cold & Flu', price: 8.99, stock: 250, manufacturer: 'Reckitt', tags: ['immune', 'cold'] },
+    { name: 'Gaviscon Advance', description: 'Long-lasting relief from acid reflux.', category: 'Digestive Health', price: 14.50, stock: 120, manufacturer: 'Reckitt', tags: ['heartburn', 'reflux'] },
+    { name: 'Eucerin Daily Hydration', description: 'Lightweight SPF 15 body lotion.', category: 'cosmetic', price: 11.99, stock: 100, manufacturer: 'Beiersdorf', tags: ['lotion', 'spf'] },
+    { name: 'Differin Gel 0.1%', description: 'Retinoid acne treatment.', category: 'Skin Care', price: 15.49, stock: 80, manufacturer: 'Galderma', tags: ['acne', 'skincare'] },
+    { name: 'Iron 65mg', description: 'Vital for red blood cell production.', category: 'supplement', price: 6.99, stock: 400, manufacturer: 'Nature Made', tags: ['minerals', 'iron'] },
+    { name: 'Biotin 10000mcg', description: 'Supports hair, skin and nails.', category: 'supplement', price: 14.00, stock: 220, manufacturer: 'Solgar', tags: ['vitamins', 'beauty'] },
   ];
 
   for (const med of medicinesData) {

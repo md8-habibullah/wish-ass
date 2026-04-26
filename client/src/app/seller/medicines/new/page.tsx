@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useRouter, useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -95,6 +96,14 @@ export default function MedicineFormPage() {
         .finally(() => setIsFetching(false));
     }
   }, [id, isEdit, session, sessionLoading, router, form]);
+
+  const { data: categories } = useQuery({
+    queryKey: ["categories"],
+    queryFn: async () => {
+      const res = await axios.get(`${API_BASE_URL}/categories`);
+      return res.data.data || [];
+    }
+  });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
@@ -198,12 +207,14 @@ export default function MedicineFormPage() {
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="others">Others</SelectItem>
-                              <SelectItem value="Pain Relief">Pain Relief</SelectItem>
-                              <SelectItem value="Cold & Flu">Cold & Flu</SelectItem>
-                              <SelectItem value="Digestive Health">Digestive Health</SelectItem>
-                              <SelectItem value="Skin Care">Skin Care</SelectItem>
-                              <SelectItem value="Vitamins & Supplements">Vitamins</SelectItem>
+                              {categories?.map((cat: any) => (
+                                <SelectItem key={cat.name} value={cat.name}>
+                                  {cat.name}
+                                </SelectItem>
+                              ))}
+                              {!categories?.length && (
+                                <SelectItem value="others">Others</SelectItem>
+                              )}
                             </SelectContent>
                           </Select>
                           <FormMessage />
