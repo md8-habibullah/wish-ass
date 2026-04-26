@@ -8,7 +8,8 @@
     "dev": "tsx watch src/server.ts",
     "build": "pnpm prisma generate && pnpm tsup src/server.ts --format esm --clean --minify --outDir api",
     "start": "node api/server.js",
-    "seed": "node lib/seed.js"
+    "seed": "node lib/seed.js",
+    "postinstall": "prisma generate"
   },
   "keywords": [],
   "author": "",
