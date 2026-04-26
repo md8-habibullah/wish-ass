@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
+import { GlobalClientLogic } from "@/components/providers/client-logic";
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { VerificationWarning } from "@/components/layout/verification-warning";
@@ -32,20 +33,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  useEffect(() => {
-    const handleRejection = (event: PromiseRejectionEvent) => {
-      console.error("Unhandled promise rejection:", event.reason);
-      // toast.error("Network or system failure. Check console for details.");
-    };
 
-    window.addEventListener("unhandledrejection", handleRejection);
-    return () => window.removeEventListener("unhandledrejection", handleRejection);
-  }, []);
 
   return (
     <html lang="en" className="dark">
       <body className={`${inter.variable} ${outfit.variable} antialiased font-sans bg-background text-foreground`}>
         <QueryProvider>
+          <GlobalClientLogic />
           <GlobalErrorBoundary>
             <div className="relative flex min-h-screen flex-col">
               <VerificationWarning />
